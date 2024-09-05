@@ -35,6 +35,11 @@ ul a.active, ul a:hover {
     background: #4a4a4a;
     transition: .5s;
 }
+.restricted:hover {
+    background: #ff0000;
+    text-decoration: line-through 5px;
+    transition: .5s;
+}
 .checkbtn {
     font-size: 30px;
     color: white;
