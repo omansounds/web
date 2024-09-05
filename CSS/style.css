@@ -16,14 +16,11 @@ body img{
     z-index: 1;
     padding: 0.5%;
 }
-
 canvas {
     position: fixed;
     top: 0;
     left: 0;
 }
-
-
 .list-group {
     position: absolute;
 }
