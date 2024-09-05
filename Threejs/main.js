@@ -42,7 +42,7 @@ const loader = new OBJLoader();
 // Load a resource
 loader.load(
     // Resource URL
-    "WEB_O_FINAL.obj",
+    "./Threejs/WEB_O_FINAL.obj",
     // Called when resource is loaded
     function (object) {
         // Apply the custom shader material to the loaded object
