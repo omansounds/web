@@ -1,0 +1,99 @@
+/* Global Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+body img{
+    z-index: 1;
+    padding: 0.5%;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+.list-group {
+    position: absolute;
+}
+
+.list-group a{
+    text-decoration: none;
+    overflow: none;
+}
+
+.list-group a button, .menu {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    color: #b7babd;
+    padding: 0vh 1vw;
+    text-decoration: none;
+    border-left: .278vw solid #8ed19c;
+    background: unset;
+    font-size: 4.96vw;
+    text-decoration: none;
+    overflow: none;
+}
+
+.menu:hover {
+    color: rgb(152, 255, 152);
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+}
+.restricted:hover {
+    color: #ff0000;
+    text-decoration: line-through #ff0000 5px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: auto;
+    justify-content: center;
+    z-index: 1;
+    padding: 1%;
+}
+.icons{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 700px) {
+    .list-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .list-group a button, .menu {
+        padding: 4vh  4vw;
+        border-left: 1vw solid #8ed19c;
+        background: unset;
+        line-height: 4.4vw;
+        font-size: 10vw;
+    }
+
+    .icons{
+        gap: 10px;
+    }
+
+}
