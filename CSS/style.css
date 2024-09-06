@@ -5,31 +5,107 @@
     box-sizing: border-box;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-
-
 body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-}
-body img{
-    z-index: 1;
-    padding: 0.5%;
 }
 canvas {
     position: fixed;
     top: 0;
     left: 0;
 }
-.list-group {
-    position: absolute;
-}
 
+
+
+
+
+/* Nav Bar */
+nav{
+    background-color: rgba(103, 103, 103, 0.9);
+    height: 80px;
+    width: 100%;
+}
+label.check {
+    float: right;
+}
+nav ul {
+    display: inline-block;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 10px;
+}
+nav ul li a{
+    color:white;
+    text-decoration: none;
+    font-size: 17px;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 5px;
+}
+ul a.active, ul a:hover {
+    background: #4a4a4a;
+    transition: .5s;
+    z-index: 1;
+}
+.nav-restricted:hover {
+    background: #ff0000;
+    text-decoration: line-through 5px;
+    transition: .5s;
+}
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+#check {
+    display: none;
+}
+/* End Nav Bar */
+
+
+
+
+
+
+/* Title */
+.header {
+    padding: 0.5%;
+}
+h1 { 
+    font-size: 100px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700;
+    color: #b7babd;
+    border-left: .3vw solid #8ed19c;
+} 
+/* END TITLE */ 
+
+
+
+
+
+
+
+
+/* Home Page */
+.list-group {
+    display:flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+}
 .list-group a{
     text-decoration: none;
     overflow: none;
 }
-
 .list-group a button, .menu {
     display: flex;
     flex-direction: column;
@@ -43,7 +119,6 @@ canvas {
     text-decoration: none;
     overflow: none;
 }
-
 .menu:hover {
     color: rgb(152, 255, 152);
     text-decoration: none;
@@ -58,29 +133,277 @@ canvas {
     cursor: pointer;
     transition: .5s;
 }
+/* End Home Page */
 
-/* Footer Styles */
-footer {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: auto;
-    justify-content: center;
-    z-index: 1;
-    padding: 1%;
+
+
+
+
+/* OMAN SOUNDS PAGE */
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
 }
-.icons{
+section {
+    height: 100%;
+    width:100%
+}
+/* END OMAN SOUNDS PAGE */
+
+
+
+
+
+
+/* PAZANGS PAGE */
+.pazang-container {
+    display: flex;
+    flex-direction: column;
+}
+#bg2 {
+    position: fixed; /* Fixed position to act as background */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    z-index: -1; /* Behind other content */
+}
+.music-icons {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
+.pazang-gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 2% 5%;
+    padding-bottom: 5%;
+}
+/* End Pazang Page */
+
+
+
+
+
+
+/* ART PAGE */
+.art-gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 2% 5%;
+    padding-bottom: 5%;
+}
+.art-gallery img{
+    width: 100%;
+}
+/*
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+.art-gallery img {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}*/
+/* End Art Page */
+
+
+
+
+
+
+/* Contact Page */
+.reach-out h2 {
+    display: flex;
+    color: #7a7a7a; 
+    justify-content: center;
+    padding-bottom: 2%;;
+    font-size: 20px;
+    text-decoration: underline #8ed19c;
+}
+.contact-container {
+    display: flex;
+    justify-content: space-evenly;
+
+    padding: 2%;;
+}
+.text-dings {
+    display: flex;
+    flex-direction: column;
+    line-height: 200%;
+    /*line-height: 2.0vw; */
+    color: #7a7a7a; 
+    font-style: normal; 
+    font-variant: normal; 
+}
+.text-dings h2 {
+    font-size: 24px; 
+}
+.text-dings h3 {
+    font-size: 18px; 
+}
+.text-dings p {
+    font-size: 15px; 
+}
+form {
+    background-color: #bebebe;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 4vw;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    max-height: 600px;
+}
+form h3 {
+    color:#fff;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+form input, form textarea {
+    border: 0;
+    margin: 10px 0;
+    padding: 20px;
+    outline: none;
+    background: #fff;
+    font-size: 16px;
+    border-radius: 7px;
+    max-width: 600px;
+    resize: vertical;
+}
+form button {
+    padding: 15px;
+    background: #2e2e2e;
+    color: #fff;
+    font-size: 18px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 150px;
+    margin: 20px auto 0;
+}
+/* End Form */
+
+
+
+/* Footer Styles */
+footer {
+    background-color: rgba(103, 103, 103, 0.9);
+    width: 100%;
+    display: flex;
+    flex-wrap: auto;
+    margin-top: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5%;
+    z-index: 1;
+}
+footer p {
+    font-size: 15px;
+    font-style:italic; 
+    font-variant: normal; 
+    font-weight: 500;
+    color: #e8e8e8;
+}
+footer .icons img {
+    margin: 0 10px;
+}
+.contact {
+    padding: 15px;
+    background: #2e2e2e;
+    color: #fff;
+    font-size: 18px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 150px;
+    margin: 2px auto 0;
+}
+.contact:hover {
+    background: #4a4a4a;
+    transition: all .5s;
+}
+/* End Footer */
 
 /* Responsive Styles */
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 952px) {
+
+
+    .header {
+        padding: 0%;
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+        border-left: none;
+    }
+
+
+
+    /* Nav Bar */
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #4a4a4a;
+        top: 80px;
+        left: -100%;
+        transition: all 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    ul a:hover, ul a.active {
+        background-color: none;
+        color:rgb(30, 255, 169);
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+    .checkbtn {
+        display: block;  
+    }
+    nav ul li a {
+        font-size: 40px;
+    }
+    /* Nav Bar End */
+
+
+
+
+
+    /* Home Page */
     .list-group {
         display: flex;
         flex-direction: column;
     }
-
     .list-group a button, .menu {
         padding: 4vh  4vw;
         border-left: 1vw solid #8ed19c;
@@ -88,9 +411,152 @@ footer {
         line-height: 4.4vw;
         font-size: 10vw;
     }
+    /* End Home Page */
 
-    .icons{
-        gap: 10px;
+
+
+
+
+    /* Pazangs stuff??? */
+    .music-icons {
+        padding: 5%;
+    }
+    .gallery{
+        padding: 2% 10%;
+    }
+    /* End Pazang Stuff */
+
+
+
+
+    /* Art Page */
+    .art-gallery{
+        flex-direction: column;
+        margin: 50px;
+        display: flex;
     }
 
+
+    /* Contact Page */
+    .reach-out h2 {
+        text-align: center;
+        padding: 5%;;
+        font-size: 15px;
+        text-decoration: underline #8ed19c;
+    }
+    .contact-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10%;
+        gap: 20px;
+    }
+    form {
+        padding: 2vw 4vw;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+    .text-dings {
+        padding: 2vw 4vw;
+    }
+    /* End Contact Page */
+
+
+
+
+
+    /* Footer */
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5%;
+        gap: 20px;
+    }
+    footer p {
+        display: none;
+    }
+    /* Footer End */
+}
+
+
+
+@media only screen and (max-width: 650px) {
+
+ 
+    h1 { 
+        font-size: 80px; 
+    } 
+
+
+
+    /* Nav Bar */
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #4a4a4a;
+        top: 80px;
+        left: -100%;
+        transition: all 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 15px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    ul a:hover, ul a.active {
+        background-color: none;
+        color:rgb(30, 255, 169);
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+    .checkbtn {
+        display: block;  
+    }
+    nav ul li a {
+        font-size: 20px;
+    }
+    /* Nav Bar End */
+
+
+
+
+
+    /* Pazangs Page */
+    .music-icons {
+        gap: 15px;
+    }
+    /* End Pazangs  Page*/
+
+
+
+
+    /* Footer */
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5%;
+        gap: 10px;
+    }
+    footer p {
+        display: none;
+    }
+    .icons{
+        display: flex;
+        justify-content: center;
+    }
+    footer .icons img {
+        margin: 0 2px;
+    }
+    /* End Footer */
 }

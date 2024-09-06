@@ -68,12 +68,9 @@ h1 {
 } 
 
 /* Main Content */
-.container {
+.pazang-container {
     display: flex;
     flex-direction: column;
-}
-body {
-    margin: 0;
 }
 #bg2 {
     position: fixed; /* Fixed position to act as background */
