@@ -17,6 +17,7 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 0;
 }
 :root {
     --off-white: #edf0f1;
@@ -320,7 +321,7 @@ footer {
     padding: 1.5%;
     backdrop-filter: blur(20px);
     margin-top: auto; /* Ensure footer is at the bottom */
-    z-index: 100;
+    z-index: 1;
 }
 
 footer p {
@@ -493,6 +494,7 @@ footer .icons a img {
         justify-content: center;
         align-items: center;
         padding: 5%;
+        z-index: 1;
     }
     footer p {
         display: none;
@@ -563,6 +565,8 @@ footer .icons a img {
 
 
     /* Footer */
-
+    footer {
+        z-index: 1;
+    }
     /* End Footer */
 }
