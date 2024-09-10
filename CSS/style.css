@@ -25,7 +25,6 @@ canvas {
 
 
 
-
 /* Nav Bar */
 nav{
     background-color: rgba(103, 103, 103, 0.8);
@@ -147,8 +146,9 @@ h1 {
 
 /* OMAN SOUNDS PAGE */
 .os-content {
-    flex: 1; /* Allow content to grow and take available space */
+    display: flex;
     position: relative; /* Allows the video to be positioned correctly */
+    height: 100vh;
 }
 
 video {
@@ -434,6 +434,8 @@ footer .icons a img {
     /* End Home Page */
 
 
+
+    /* Oman Sounds Page*/
     .os-content {
         min-height: 100vh;
     }
@@ -453,9 +455,9 @@ footer .icons a img {
 
     /* Art Page */
     .art-gallery{
+        display: flex;
         flex-direction: column;
         margin: 50px;
-        display: flex;
     }
 
 
@@ -549,6 +551,11 @@ footer .icons a img {
     /* Nav Bar End */
 
 
+     /* Oman Sounds Page*/
+     .os-content {
+        min-height: 100vh;
+        min-width: 10vw;
+    }
 
 
 
