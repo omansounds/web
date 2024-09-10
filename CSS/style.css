@@ -320,6 +320,7 @@ footer {
     padding: 1.5%;
     backdrop-filter: blur(20px);
     margin-top: auto; /* Ensure footer is at the bottom */
+    z-index: 100;
 }
 
 footer p {
