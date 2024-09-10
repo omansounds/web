@@ -6,9 +6,8 @@
     padding: 0;
     box-sizing: border-box;
     /*font-family: "Trebuchet MS", Arial, sans-serif;*/
-    font-family: "Overpass";
+    font-family: "Overpass", "Trebuchet MS", Arial, sans-serif;
 }
-
 body {
     min-height: 100vh;
     display: flex;
@@ -147,18 +146,19 @@ h1 {
 
 
 /* OMAN SOUNDS PAGE */
+.os-content {
+    flex: 1; /* Allow content to grow and take available space */
+    position: relative; /* Allows the video to be positioned correctly */
+}
+
 video {
     object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: -100;
-}
-section {
-    height: 100%;
-    width:100%
 }
 /* END OMAN SOUNDS PAGE */
 
@@ -239,8 +239,6 @@ section {
 
 
 
-
-
 /* Contact Page */
 .reach-out h2 {
     display: flex;
@@ -253,7 +251,6 @@ section {
 .contact-container {
     display: flex;
     justify-content: space-evenly;
-
     padding: 2%;;
 }
 .text-dings {
@@ -325,14 +322,13 @@ footer {
     background-color: rgba(103, 103, 103, 0.8);
     width: 100%;
     display: flex;
-    margin-top: auto;
-    justify-content: space-between; /* Center content horizontally */
+    justify-content: space-between; /* Keep content evenly spaced horizontally */
     align-items: center; /* Center content vertically */
-    gap: 20px; /* Add spacing between elements */
     padding: 1.5%;
-    z-index: 1;
     backdrop-filter: blur(20px);
+    margin-top: auto; /* Ensure footer is at the bottom */
 }
+
 footer p {
     font-size: 15px;
     font-style:italic; 
@@ -438,7 +434,9 @@ footer .icons a img {
     /* End Home Page */
 
 
-
+    .os-content {
+        min-height: 100vh;
+    }
 
 
     /* Pazangs stuff??? */
@@ -564,8 +562,6 @@ footer .icons a img {
 
 
     /* Footer */
-    footer {
-        display: flex;
-    }
+
     /* End Footer */
 }
