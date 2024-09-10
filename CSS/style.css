@@ -18,10 +18,74 @@ canvas {
     top: 0;
     left: 0;
     z-index: 0;
+    height: 100vh;
 }
 :root {
     --off-white: #edf0f1;
+    --green-border: #8ed19c;
 }
+:root {
+    --base-font-size: 16px;
+    --main-head-font: 100px;
+}
+
+
+
+
+
+/* Footer Styles */
+footer {
+    background-color: rgba(103, 103, 103, 0.8);
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Keep content evenly spaced horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 1.5%;
+    backdrop-filter: blur(20px);
+    margin-top: auto; /* Ensure footer is at the bottom */
+    z-index: 1;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    font-size: var(--base-font-size);
+    font-style:italic; 
+    font-weight: 500;
+    color: var(--off-white);
+}
+
+footer .icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .icons a img {
+    width: 100%;
+    max-width: 40px;
+    height: auto;
+    margin: 0;
+}
+.contact {
+    padding: 15px;
+    background: #2e2e2e;
+    color: var(--off-white);
+    font-size: var(--base-font-size);
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 150px;
+    margin: 2px auto 0;
+}
+.contact:hover {
+    background: #4a4a4a;
+    transition: all .5s;
+}
+/* End */
 
 
 
@@ -47,7 +111,7 @@ nav ul li{
 nav ul li a{
     color: var(--off-white);
     text-decoration: none;
-    font-size: 17px;
+    font-size: var(--base-font-size);
     text-transform: uppercase;
     padding: 7px 13px;
     border-radius: 5px;
@@ -74,9 +138,7 @@ ul a.active, ul a:hover {
 #check {
     display: none;
 }
-/* End Nav Bar */
-
-
+/* End */
 
 
 
@@ -86,15 +148,12 @@ ul a.active, ul a:hover {
     padding: 0.5%;
 }
 h1 { 
-    font-size: 100px; 
+    font-size: var(--main-head-font); 
     font-weight: 700;
     color: #b7babd;
-    border-left: .3vw solid #8ed19c;
+    border-left: .3vw solid var(--green-border);
 } 
-/* END TITLE */ 
-
-
-
+/* End */ 
 
 
 
@@ -118,7 +177,7 @@ h1 {
     color: #b7babd;
     padding: 0vh 1vw;
     text-decoration: none;
-    border-left: .278vw solid #8ed19c;
+    border-left: .278vw solid var(--green-border);
     background: unset;
     font-size: 4.96vw;
     font-weight: 600;
@@ -126,7 +185,7 @@ h1 {
     overflow: none;
 }
 .menu:hover {
-    color: rgb(152, 255, 152);
+    color: var(--green-border);
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
@@ -139,7 +198,7 @@ h1 {
     cursor: pointer;
     transition: .5s;
 }
-/* End Home Page */
+/* End */
 
 
 
@@ -154,7 +213,7 @@ video {
     left: 0;
     z-index: -100;
 }
-/* END OMAN SOUNDS PAGE */
+/* END  */
 
 
 
@@ -188,7 +247,7 @@ video {
     padding: 2% 5%;
     padding-bottom: 5%;
 }
-/* End Pazang Page */
+/* End */
 
 
 
@@ -208,7 +267,6 @@ video {
 .art-gallery img{
     width: 100%;
 }
-
 /*
 @keyframes appear {
     100% {
@@ -228,7 +286,7 @@ video {
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
 }
-/* End Art Page */
+/* End */
 
 
 
@@ -240,7 +298,7 @@ video {
     justify-content: center;
     padding-bottom: 2%;;
     font-size: 20px;
-    text-decoration: underline #8ed19c;
+    text-decoration: underline var(--green-border);
 }
 .contact-container {
     display: flex;
@@ -262,10 +320,10 @@ video {
     font-size: 24px; 
 }
 .text-dings h3 {
-    font-size: 18px; 
+    font-size: var(--base-font-size); 
 }
 .text-dings ul li {
-    font-size: 15px; 
+    font-size: var(--base-font-size); 
     margin: 0 20px;
 }
 form {
@@ -290,7 +348,7 @@ form input, form textarea {
     padding: 20px;
     outline: none;
     background: var(--off-white);
-    font-size: 16px;
+    font-size: var(--base-font-size);
     border-radius: 7px;
     max-width: 600px;
     resize: vertical;
@@ -299,7 +357,7 @@ form button {
     padding: 15px;
     background: #2e2e2e;
     color: var(--off-white);
-    font-size: 18px;
+    font-size: var(--base-font-size);
     border: 0;
     outline: none;
     cursor: pointer;
@@ -307,65 +365,16 @@ form button {
     width: 150px;
     margin: 20px auto 0;
 }
-/* End Form */
+/* End */
 
 
 
-/* Footer Styles */
-footer {
-    background-color: rgba(103, 103, 103, 0.8);
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* Keep content evenly spaced horizontally */
-    align-items: center; /* Center content vertically */
-    padding: 1.5%;
-    backdrop-filter: blur(20px);
-    margin-top: auto; /* Ensure footer is at the bottom */
-    z-index: 1;
-}
-
-footer p {
-    font-size: 15px;
-    font-style:italic; 
-    font-weight: 500;
-    color: var(--off-white);
-}
-
-footer .icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-footer .icons a img {
-    width: 100%;
-    max-width: 40px;
-    height: auto;
-    margin: 0;
-}
-.contact {
-    padding: 15px;
-    background: #2e2e2e;
-    color: var(--off-white);
-    font-size: 18px;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-    border-radius: 30px;
-    width: 150px;
-    margin: 2px auto 0;
-}
-.contact:hover {
-    background: #4a4a4a;
-    transition: all .5s;
-}
-/* End Footer */
 
 
 /* Responsive Styles */
 @media only screen and (max-width: 952px) {
 
-
+    /* Main Page */
     .header {
         padding: 0%;
     }
@@ -374,6 +383,8 @@ footer .icons a img {
         justify-content: center;
         border-left: none;
     }
+    /* End */
+
 
 
 
@@ -397,7 +408,7 @@ footer .icons a img {
     }
     ul a:hover, ul a.active {
         background-color: none;
-        color:rgb(30, 255, 169);
+        color:var(--green-border);
     }
     #check:checked ~ ul{
         left: 0;
@@ -408,7 +419,7 @@ footer .icons a img {
     nav ul li a {
         font-size: 40px;
     }
-    /* Nav Bar End */
+    /* End */
 
 
 
@@ -421,7 +432,7 @@ footer .icons a img {
     }
     .list-group a button, .menu {
         padding: 4vh  4vw;
-        border-left: 1vw solid #8ed19c;
+        border-left: 1vw solid var(--green-border);
         background: unset;
         line-height: 4.4vw;
         font-size: 10vw;
@@ -430,10 +441,14 @@ footer .icons a img {
 
 
 
+
     /* Oman Sounds Page*/
     .os-content {
         min-height: 100vh;
     }
+    /* End */
+
+
 
 
     /* Pazangs stuff??? */
@@ -443,7 +458,7 @@ footer .icons a img {
     .gallery{
         padding: 2% 10%;
     }
-    /* End Pazang Stuff */
+    /* End */
 
 
 
@@ -454,6 +469,8 @@ footer .icons a img {
         flex-direction: column;
         margin: 50px;
     }
+    /* End */
+
 
 
     /* Contact Page */
@@ -461,7 +478,7 @@ footer .icons a img {
         text-align: center;
         padding: 5%;;
         font-size: 15px;
-        text-decoration: underline #8ed19c;
+        text-decoration: underline var(--green-border);
     }
     .contact-container{
         display: flex;
@@ -481,7 +498,7 @@ footer .icons a img {
         padding: 2vw 4vw;
         width: 100%;
     }
-    /* End Contact Page */
+    /* End */
 
 
 
@@ -499,17 +516,18 @@ footer .icons a img {
     footer p {
         display: none;
     }
-    /* Footer End */
+    /* End */
 }
 
 
 
 @media only screen and (max-width: 650px) {
 
- 
+    /* Main Page */
     h1 { 
         font-size: 80px; 
     } 
+    /* End */
 
 
 
@@ -544,7 +562,9 @@ footer .icons a img {
     nav ul li a {
         font-size: 20px;
     }
-    /* Nav Bar End */
+    /* End */
+
+
 
 
      /* Oman Sounds Page*/
@@ -552,6 +572,8 @@ footer .icons a img {
         min-height: 100vh;
         min-width: 10vw;
     }
+    /* End */
+
 
 
 
@@ -559,7 +581,7 @@ footer .icons a img {
     .music-icons {
         gap: 15px;
     }
-    /* End Pazangs  Page*/
+    /* End */
 
 
 
@@ -568,5 +590,80 @@ footer .icons a img {
     footer {
         z-index: 1;
     }
-    /* End Footer */
+    /* End */
+}
+
+@media only screen and (max-width: 390px) {
+ 
+    /* Main Stuff */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    h1 { 
+        font-size: 80px; 
+    } 
+    /* End */
+
+
+
+    /* Nav Bar */
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #4a4a4a;
+        top: 80px;
+        left: -100%;
+        transition: all 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 15px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    ul a:hover, ul a.active {
+        background-color: none;
+        color:rgb(30, 255, 169);
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+    .checkbtn {
+        display: block;  
+    }
+    nav ul li a {
+        font-size: 20px;
+    }
+    /* End */
+
+
+
+     /* Oman Sounds Page*/
+     .os-content {
+        min-height: 100vh;
+        min-width: 10vw;
+    }
+    /* End */
+
+
+
+    /* Pazangs Page */
+    .music-icons {
+        gap: 15px;
+    }
+    /* End */
+
+
+
+
+    /* Footer */
+    footer {
+        z-index: 1;
+    }
+    /* End */
 }
