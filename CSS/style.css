@@ -466,8 +466,9 @@ form button {
     .music-icons {
         padding: 5%;
     }
-    .gallery{
-        padding: 2% 10%;
+    .pazang-gallery{
+        padding: 10%;
+        gap: 100px
     }
     /* End */
 
