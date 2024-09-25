@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - export REPO_PATH=/home/repositories/web
-    - export DEPLOY_PATH=/home/public_html
+    - export REPO_PATH=/home/omansoun/repositories/web/
+    - export DEPLOY_PATH=/home/omansoun/public_html/
     - echo "Deploying application from $REPO_PATH to $DEPLOY_PATH"
     - /bin/cp -r $REPO_PATH/* $DEPLOY_PATH
     - echo "Deployment completed successfully!"
