@@ -190,6 +190,19 @@ h1 {
     cursor: pointer;
     margin-bottom: 0px;
     width: auto; /* Ensure anchor only takes the width of the content */
+    
+}.restricted a {
+    display: inline-flex; /* Allow content to take up as much space as it needs */
+    flex-direction: column;
+    text-decoration: none;
+    padding: 0vh 1vw;
+    border-left: .278vw solid var(--green-border);
+    color: #b7babd;
+    font-size: 4.96vw;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0px;
+    width: auto; /* Ensure anchor only takes the width of the content */
 }
 .menu:hover {
     color: var(--green-border);
