@@ -32,10 +32,19 @@ canvas {
 :root {
     --off-white: #edf0f1;
     --green-border: #8ed19c;
+    --button-color: #2e2e2e;
+    --button-hover: #4a4a4a;
 }
 :root {
     --base-font-size: 16px;
     --main-head-font: 100px;
+}
+img{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 
@@ -53,25 +62,20 @@ footer {
     backdrop-filter: blur(20px);
     margin-top: auto; /* Ensure footer is at the bottom */
     z-index: 1;
-    position: relative;
     right: 0;
-    bottom: 0;
     left: 0;
 }
-
 footer p {
     font-size: var(--base-font-size);
     font-style:italic; 
     font-weight: 500;
     color: var(--off-white);
 }
-
 footer .icons {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
-
 footer .icons a img {
     width: 100%;
     max-width: 40px;
@@ -80,7 +84,7 @@ footer .icons a img {
 }
 .contact {
     padding: 15px;
-    background: #2e2e2e;
+    background: var(--button-color);
     color: var(--off-white);
     font-size: var(--base-font-size);
     border: 0;
@@ -91,7 +95,7 @@ footer .icons a img {
     margin: 2px auto 0;
 }
 .contact:hover {
-    background: #4a4a4a;
+    background: var(--button-hover);
     transition: all .5s;
 }
 /* End */
@@ -167,44 +171,33 @@ h1 {
 
 
 
-
 /* Home Page */
 .list-group {
-    display:flex;
-    flex-direction: column;
-    position: fixed;
+    display: inline-flex; /* This ensures that the list itself is not a full-width block */
+    flex-direction: column; /* Items stack in a column */
     height: 100vh;
+    align-items: flex-start; /* Ensure items align to the left */
 }
-.list-group a{
-    text-decoration: none;
-    overflow: none;
-}
-.list-group a button, .menu {
-    display: flex;
+.list-group a {
+    display: inline-flex; /* Allow content to take up as much space as it needs */
     flex-direction: column;
-    border: none;
-    color: #b7babd;
-    padding: 0vh 1vw;
     text-decoration: none;
+    padding: 0vh 1vw;
     border-left: .278vw solid var(--green-border);
-    background: unset;
+    color: #b7babd;
     font-size: 4.96vw;
     font-weight: 600;
-    text-decoration: none;
-    overflow: none;
+    cursor: pointer;
+    margin-bottom: 0px;
+    width: auto; /* Ensure anchor only takes the width of the content */
 }
 .menu:hover {
     color: var(--green-border);
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
     transition: .5s;
 }
 .restricted:hover {
     color: #ff0000;
     text-decoration: line-through #ff0000 5px;
-    overflow: hidden;
-    cursor: pointer;
     transition: .5s;
 }
 /* End */
@@ -215,11 +208,10 @@ h1 {
 
 /* OMAN SOUNDS PAGE */
 .video-container video{
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
     z-index: -1;
 }
@@ -366,7 +358,7 @@ form input, form textarea {
 }
 form button {
     padding: 15px;
-    background: #2e2e2e;
+    background: var(--button-color);
     color: var(--off-white);
     font-size: var(--base-font-size);
     border: 0;
@@ -375,6 +367,10 @@ form button {
     border-radius: 30px;
     width: 150px;
     margin: 20px auto 0;
+}
+form button:hover {
+    background: #4a4a4a;
+    transition: all .5s;
 }
 /* End */
 
@@ -441,7 +437,7 @@ form button {
         display: flex;
         flex-direction: column;
     }
-    .list-group a button, .menu {
+    .list-group a {
         padding: 4vh  4vw;
         border-left: 1vw solid var(--green-border);
         background: unset;

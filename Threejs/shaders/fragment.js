@@ -46,9 +46,9 @@ float pnoise(vec3 p) {
 }
 
 void main() {
-  float uDisplace = 1.4;
-  float uSpread = 1.1;
-  float uNoise = 10.; 
+  float uDisplace = 0.0;
+  float uSpread = 0.0;
+  float uNoise = 0.0; 
 
   vec3 a, q, p, gradient, dir;
   float b, dist;
@@ -66,7 +66,7 @@ void main() {
   vec3 newPosition = vPosition + vNormal * full; 
 
   vec3 patternColor = vec3(0.3, cos(uTime * 0.5) * 0.5 + 0.5, sin(uTime * 0.5) * 0.5 + 0.5) / vec3(0.1);
-  vec3 finalColor = -vec3(pnoise(vec3(1.0 - newPosition.z * 35.0)) * 40.0) * (0.01 - full) * patternColor;
+  vec3 finalColor = -vec3(pnoise(vec3(1.0 - newPosition.z * 100.0 + uTime)) * 80.0) * (0.01 - full) * patternColor;
 
   // Combine raymarch and pattern effects
   vec3 color = mix(raymarchColor, finalColor, 0.5);  // Mix both effects with 50% blend

@@ -38,7 +38,7 @@ textureLoader.load("../js/MATCAP.png", (matcapTexture) => {
     const objLoader = new OBJLoader();
     objLoader.load(
         // resource URL
-        "../OBJ/WEB_O_FINAL.obj",
+        "../Threejs/O_REMESHED.obj",
 
         // onLoad callback
         function (obj) {

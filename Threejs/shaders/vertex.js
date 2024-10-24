@@ -52,11 +52,11 @@ void main() {
     vPosition = position;
     vNormal = normal;
     
-    float uDisplace = 1.4;
-    float uSpread = 1.1;
-    float uNoise = 10.;
+    float uDisplace = 0.0;
+    float uSpread = 0.0;
+    float uNoise = 0.0;
 
-    float pat = pnoise(vec3(vUv * uNoise , sin(uTime) * 0.1 )) * uDisplace ;
+    float pat = pnoise(vec3(vUv * uNoise , sin(uTime) * 1.4 )) * uDisplace ;
     float proximity = abs(vUv.x - (.5 + sin(uTime)/(12. * uSpread ) ));
 
     vec3 full = pat * vec3(clamp(.23 * uSpread  - proximity , 0., 1.));

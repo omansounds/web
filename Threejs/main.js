@@ -42,7 +42,7 @@ const loader = new OBJLoader();
 // Load a resource
 loader.load(
     // Resource URL
-    "./Threejs/WEB_O_FINAL.obj",
+    "./Threejs/O_REMESHED.obj",
     // Called when resource is loaded
     function (object) {
         // Apply the custom shader material to the loaded object
@@ -73,7 +73,7 @@ composer.addPass(renderPass);
 
 const bokehPass = new BokehPass(scene, camera, {
     focus: 1.0,
-    aperture: 0.025,
+    aperture: 0.008,
     maxblur: 0.01,
 });
 composer.addPass(bokehPass);
