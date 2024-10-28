@@ -7,6 +7,7 @@
     box-sizing: border-box;
     /*font-family: "Trebuchet MS", Arial, sans-serif;*/
     font-family: "Overpass", "Trebuchet MS", Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 body {
     min-height: 100vh;
@@ -130,9 +131,13 @@ nav ul li a{
     border-radius: 5px;
 }
 ul a.active, ul a:hover {
-    background: #4a4a4a;
+    color: #36ff61;
     transition: .5s;
     z-index: 1;
+}
+ul a:hover {
+    color: #36ff61;
+    transition: .5s;
 }
 .nav-restricted:hover {
     background: #ff0000;
@@ -282,6 +287,30 @@ h1 {
 }
 .art-gallery img{
     width: 100%;
+}
+.to-top {
+    background: var(--button-color);
+    position: fixed;
+    bottom: 32px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--off-white);
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease-in-out;
+    z-index: 1000;
+}
+.to-top.active {
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
 }
 /*
 @keyframes appear {
@@ -478,6 +507,9 @@ form button:hover {
     .pazang-gallery{
         padding: 10%;
         gap: 100px
+    }
+    .to-top {
+        right: 10px;
     }
     /* End */
 
