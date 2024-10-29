@@ -30,7 +30,7 @@ renderer.render(scene, camera);
 
 // Load the Matcap texture
 const textureLoader = new THREE.TextureLoader();
-textureLoader.load("../js/MATCAP.png", (matcapTexture) => {
+textureLoader.load("../Threejs/PAZANGS/MATCAP.png", (matcapTexture) => {
     // Create MeshMatcapMaterial with the loaded texture
     const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
 

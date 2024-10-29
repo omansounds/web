@@ -239,27 +239,20 @@ h1 {
 
 
 
-
-
 /* PAZANGS PAGE */
 .pazang-container {
     display: flex;
     flex-direction: column;
-}
-#bg2 {
-    position: fixed; /* Fixed position to act as background */
-    top: 0;
-    left: 0;
+    justify-content: space-between;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
-    z-index: -1; /* Behind other content */
 }
 .music-icons {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
-.pazang-gallery{
+.pazang-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 30px;
@@ -268,6 +261,23 @@ h1 {
     padding: 2% 5%;
     padding-bottom: 5%;
 }
+.pazang-gallery iframe {
+    width: 100%;
+}
+/*
+.pazang-gallery{
+    display: grid;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 2% 5%;
+    padding-bottom: 5%;
+}
+*/
 /* End */
 
 
@@ -505,6 +515,7 @@ form button:hover {
         padding: 5%;
     }
     .pazang-gallery{
+        display: grid;
         padding: 10%;
         gap: 100px
     }
