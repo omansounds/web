@@ -1,0 +1,194 @@
+export default /*glsl*/`
+
+ precision mediump float;
+
+        uniform vec2 iResolution;
+        uniform float iTime;
+
+        #define MAX_STEPS 50
+        #define MAX_DIST 20.0
+        #define SURF_DIST 0.01
+
+        mat2 rot(float a) {
+            float s=sin(a), c=cos(a);
+            return mat2(c, -s, s, c);}
+        
+        // IQ the Goat https://iquilezles.org/
+        float smin( float d1, float d2, float k ) {
+            float h = clamp( 0.5 + 0.5 * (d2 - d1)/k, 0.0, 1.0 );
+            return mix( d2, d1, h ) - k * h * (1.0 - h); }
+            
+        float Smax( float d1, float d2, float k ) {
+            float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
+            return mix( d2, d1, h ) + k*h*(1.0-h); }
+        
+        float Sphere(vec3 p,float s){
+            return length(p)-s;
+        }
+        
+        // HG_SDF https://mercury.sexy/hg_sdf 
+        float fCapsule(vec3 p, float r, float c) {
+            return mix(length(p.xz) - r, length(vec3(p.x, abs(p.y) - c, p.z)) - r, step(c, abs(p.y)));
+        }
+        float fTorus(vec3 p, float smallRadius, float largeRadius) {
+            return length(vec2(length(p.xy) - largeRadius, p.z)) - smallRadius;
+        }
+        
+        // Oman Symbol SDF
+        float OS(vec3 p) {
+            const float k = - 0.5; // or some other amount
+            float c = cos(k*p.y);
+            float s = sin(k*p.y);
+            mat2  m = mat2(c,-s,s,c);
+            vec3  q = vec3(m*p.xy,p.z);
+        
+            float Capsule = fCapsule(vec3(q.x + 0.3, q.y, q.z), 0.14, 0.8);
+            float Torus = fTorus(p, 0.2, 0.9);
+        
+            return min(Torus, Capsule);
+        }
+        
+        
+        vec3 CastRay(vec2 uv, vec3 p, vec3 l, float z) {
+            vec3 
+                f = normalize(l-p),
+                r = normalize(cross(vec3(0,1,0), f)),
+                u = cross(f,r),
+                c = f*z,
+                i = c + uv.x*r + uv.y*u;
+            return normalize(i);
+        }  
+        
+        #define SHADE 1
+
+        #define iter 2.0
+        
+        float map(vec3 p){
+            
+            float t = iTime * 0.5;
+            t += sin(iTime * 0.7) * 0.3 + 0.5;
+
+            // OMAN SYMBOL
+            float symbol = 1e9;
+            float iter2_symb = 2.0;
+
+            vec3 pq = p;
+            float j = iter2_symb - iter * 0.5;
+            float s = sin(t + iter2_symb) * 0.2 + 0.7;
+
+            // Rotation 1
+            pq.x += sin(t*.15+iter2_symb*1.3)*3.;
+            pq.y += sin(t*.52+iter2_symb*1.2);
+            pq.z += sin(t*.32+iter2_symb*1.1)*2.;
+
+            // Rotation 2
+            pq.xz *= rot(t*.59-iter2_symb);
+            pq.xy *= rot(t*.62+iter2_symb);
+            pq.yz *= rot(t*.47-iter2_symb);
+
+            symbol = smin(symbol, OS(pq), 0.8);
+
+
+            // SPHERE
+            float sph = 1e9;
+            vec3 ps = p;
+            float iter2_sph = 2.0;
+
+            // Rotation
+            ps.x += sin(t*.33+iter2_sph*1.1)*3.;
+            ps.y += sin(t*.21+iter2_sph*1.4);
+            ps.z -= sin(t*.27+iter2_sph*1.5);
+
+            sph = smin(sph,Sphere(ps, 0.6),1.);
+            sph += (cos(t*.13+iter2_sph-ps.x*2.)+sin(t*.13-iter2_sph+ps.y*2.)+sin(t*.15+iter2_sph+ps.z*2.))*.1;
+            
+            // GYROID
+            vec3  pg = p;
+            float sg = 1.3;
+            float gyr = abs(dot(sin(pg*sg), cos(pg.zxy*sg)))/sg-.6;
+            
+            // COMPOSITION         
+            float d = Smax(sph, -symbol, 1.0); 
+            d = smin(d, symbol + 0.02, .1);      
+            gyr = Smax(gyr,d-.1,.2);   
+            d = min(d,gyr);   
+                
+            return d;
+        }
+        
+        float March(vec3 ro, vec3 rd){
+            float t = 0.;
+            for(int i = 0; i < MAX_STEPS; i++){
+                vec3 p = ro + rd * t;
+                float d = map(p);
+                t += d;
+                if(t > MAX_DIST || abs(d) < SURF_DIST) break;
+            }
+            return t;
+        }
+    
+        vec3 getNormal (vec3 p) {
+	        vec3 eps=vec3(.1,0,0);
+	        return normalize(vec3(map(p+eps.xyy) ,map(p+eps.yxy), map(p+eps.yyx)));
+        }
+
+        void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+            
+            // UV duhhhh
+            vec2 uv = (fragCoord / iResolution.xy) * 2.0 - 1.0; // Normalize to [-1, 1]
+            uv.x *= iResolution.x / iResolution.y; // Correct aspect ratio
+
+            // Initialize
+            vec3 ro = vec3(0,0,5);
+            vec3 rd = CastRay(uv, ro, vec3(0), 2.);
+            vec3 col = vec3(0);
+
+            // March the Ray
+            float d = March(ro, rd);
+            vec3 p = ro + rd * d;
+
+            // Time
+            float t = iTime * 0.5;
+    
+            // Normal
+            vec3 n = getNormal(p);
+            n.xz *= rot(sin(t) * 0.5);
+    
+            // Fresnal
+            float fresnel = pow(1.+dot(rd, n),2.);
+            col = vec3(fresnel)*(n.y*.5+.5);
+            col += n*.5+.5;
+            
+            // Edge 
+            float edge = pow( 1.0 - dot( -rd, n), 1.1 );
+            col += 0.2 * edge;
+            
+            // Fog
+            col = mix( col, vec3(1), 1.-exp(-pow(.12*d,6.)));
+            
+            // Gammma Correction
+            col = pow(col, vec3(.4545)); 
+        
+            // Spit that shit to tha screen
+            fragColor = vec4(col,1.0);
+        
+        #if SHADE == 1
+            fragColor= vec4(length(col)/1.8); //thanks to https://www.shadertoy.com/user/FabriceNeyret2
+        #endif
+        }
+
+        void main() {
+            mainImage(gl_FragColor, gl_FragCoord.xy);
+        }
+`;
+
+shaderWebBackground.shade({
+    shaders: {
+        image: {
+            uniforms: {
+                iTime:       (gl, loc) => gl.uniform1f(loc, performance.now() / 1000),
+                iResolution: (gl, loc, ctx) => gl.uniform2f(loc, ctx.width, ctx.height),
+            }
+        }
+    }
+});
