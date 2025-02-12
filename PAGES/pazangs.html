@@ -20,7 +20,6 @@
             </label>
             <ul>
                 <li><a href="../index.html">//HOME</a></li>
-                <li><a href="../PAGES/omansounds.html">//OMAN SOUNDS</a></li>
                 <li><a class="active" href="#">//PAZANGS</a></li>
                 <li><a href="../PAGES/contact.html">//CONTACT STUFF</a></li>
                 <li><a href="https://omansounds.gumroad.com/">//SHOP</a></li>
@@ -76,27 +75,35 @@
         #define MAX_DIST 20.
         #define SURF_DIST .01
 
+        const int STEPS = 16;
+
+
         mat2 Rot(float a) {
             float s=sin(a), c=cos(a);
-            return mat2(c, -s, s, c);}
+            return mat2(c, -s, s, c);
+        }
 
         //IQ WIZARD https://iquilezles.org/
         float smin( float d1, float d2, float k ) {
             float h = clamp( 0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
             return mix( d2, d1, h ) - k*h*(1.0-h); 
         }
+
         float Smax( float d1, float d2, float k ) {
             float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
-            return mix( d2, d1, h ) + k*h*(1.0-h); }
-
+            return mix( d2, d1, h ) + k*h*(1.0-h); 
+        }
 
         //HG_SDF https://mercury.sexy/hg_sdf 
         float fCapsule(vec3 p, float r, float c) {
             return mix(length(p.xz) - r, length(vec3(p.x, abs(p.y) - c, p.z)) - r, step(c, abs(p.y)));
         }
+
+
         float fTorus(vec3 p, float smallRadius, float largeRadius) {
             return length(vec2(length(p.xy) - largeRadius, p.z)) - smallRadius;
         }
+
 
         float OS(vec3 p) {
             const float k = - 0.5; // or some other amount
@@ -106,29 +113,17 @@
             vec3  q = vec3(m*p.xy,p.z);
 
             float Capsule = fCapsule(vec3(q.x + 0.3, q.y, q.z), 0.13, 0.8);
-            
+
             float Torus = fTorus(p, 0.18, 1.0);
 
             return smin(Torus, Capsule, 0.08);
         }
 
+        float map(vec3 p) {
 
-        vec3 CastRay(vec2 uv, vec3 p, vec3 l, float z) {
-            vec3 
-                f = normalize(l-p),
-                r = normalize(cross(vec3(0,1,0), f)),
-                u = cross(f,r),
-                c = f*z,
-                i = c + uv.x*r + uv.y*u;
-            return normalize(i);
-        }  
-
-        #define SHADE 1
-
-        float map(vec3 p){
             float t = iTime * 0.5;
             t += sin(iTime * 0.7) * 0.3 + 0.5;
-                
+
             // OS
             vec3 pt = p;
             float j = 1.0-1.0*.5;
@@ -143,67 +138,79 @@
             float sg = 1.3;
             pg.z += t;
             float gyr = abs(dot(sin(pg*sg), cos(pg.zxy*sg)))/sg-.6;
-            
-            // COMPOSITION         
-            //float d = Smax(sph, -symbol, 1.0); 
-            //d = smin(d, symbol + 0.02, .1);      
+
+            // COMPOSITION             
             gyr = Smax(gyr,symbol-.1,.2);   
             float d = min(symbol,gyr);  
-                
+
             return d;
         }
 
-        float March(vec3 ro, vec3 rd){
-            float t = 0.;
-            for(int i=0; i < MAX_STEPS; i++){
-                vec3 p = ro + rd * t;
-                float d = map(p);
-                t += d;
-                if(t > MAX_DIST||abs(d) < SURF_DIST) break;
-            }
-            return t;
-        }
 
-        vec3 CalcNormal(vec3 p) {
+        vec3 getNormal(vec3 p) {
             vec3 eps=vec3(.1,0,0);
             return normalize(vec3(map(p+eps.xyy) ,map(p+eps.yxy), map(p+eps.yyx)));
         }
 
-        void main() {
-
-            float t = iTime * 0.5;
-            vec2 uv = (2. * gl_FragCoord.xy - iResolution.xy) / iResolution.y;
-            vec3 ro = vec3(0,0,3);
-            vec3 rd = CastRay(uv, ro, vec3(0), 2.);
-            vec3 col = vec3(0);
-            float d = March(ro, rd);
-            vec3 p = ro + rd * d;
-
-            vec3 n = CalcNormal(p);
-            n *= n;
-            n=normalize(n);
-            col = vec3(n);
-
-            vec3 lt = normalize(vec3(1.0,1.0,1.5));
-            float df=clamp(dot(n,lt),0.5,1.0);
-            float sp=clamp(dot(reflect(lt,n),vec3(0,0,-1)),0.0,1.0);
-            sp=pow(sp,mix(64.0, 2.0, 0.0))*mix(2.5, 1.0, 0.0);
-            vec3 lts = vec3(df)+sp;
-
-            col = abs(abs(col * 2.0 - vec3(1.0)) - vec3(1.0));
-            col *= lts;
+        float getVal(vec2 uv)
+        {
+            return length(uv);
+        }
             
-            float edge = pow( 1.0 - dot( -rd, n), 1.1 );
-            col += 0.5 * edge;
+        vec2 gg(vec2 uv,float delta)
+        {
+            vec2 d=vec2(delta,0);
+            return vec2(
+                getVal(uv+d.xy)-getVal(uv-d.xy),
+                getVal(uv+d.yx)-getVal(uv-d.yx)
+            )/delta;
+        }
+
+
+        void main( ) {
             
-            col = mix( col, vec3(1), 1.-exp(-pow(.12*d,6.)));//fog    
-            col = pow(col, vec3(.4545)); //gamma correction
+            vec2 uv = (gl_FragCoord.xy * 2. - iResolution.xy) / iResolution.y;
 
-            gl_FragColor = vec4(col,1.0);
+            // Initialization
+            vec3 ro = vec3(0, 0.0, -2.0);       
+            vec3 rd = normalize(vec3(uv, 1));  
+            vec3 col = vec3(0);             
+            vec3 p = ro, pp;
+            float t = 0.;  
 
-        #if SHADE == 1
-            gl_FragColor = vec4(length(col)/1.8);//thanks to https://www.shadertoy.com/user/FabriceNeyret2
-        #endif
+            // Raymarching
+            for (int i = 0; i < STEPS; i++) {
+
+                float d = map(p);       // current distance to the scene
+
+                t += d; 
+                p += d * rd;                //march the ray 
+
+                if (t < .001 || t > 500.) break;
+            }
+            
+            vec3 normal = getNormal(p); // Surface normal
+            //normal = vec3(gg(uv,1.0/iResolution.y),20.25);
+            normal *= normal;
+            normal = normalize(normal);
+            
+            col = vec3(normal);
+            
+            vec3 lightDir = normalize(vec3(1.0, 1.0, 1.5));
+            
+            float diffuse = clamp(dot(normal, lightDir), 0.5, 1.0);
+            
+            float spec = clamp(dot(reflect(lightDir, normal),vec3(0,0,-1)),0.0,1.0);
+            spec = pow(spec, mix(150.0, 2.0, 0.0)) * mix(2.5, 1.0, 0.0);
+            
+            vec3 lights = vec3(diffuse) + 2.0 * spec;
+            
+            col = abs(abs(col * 1.0 - vec3(1.0)) - vec3(1.0));
+            col = (col*(diffuse + .65) + vec3(1.0, 1.0, 1.0) * spec);
+            col *= lights;
+            col = pow(col, vec3(1. / 2.2));
+            
+            gl_FragColor = vec4(length(col)/1.8);
         }
 
     </script>
