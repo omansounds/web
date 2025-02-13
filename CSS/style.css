@@ -457,22 +457,88 @@ form button:hover {
 
     /* Footer */
     footer {
+        max-width: 100%;
+    }
+    .footer-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        max-width: 100%;
         padding: 5%;
-        z-index: 1;
+        gap: 20px;
     }
-    footer p {
-        display: none;
+    .icons img {
+        max-width: 40px;
     }
-    /* End */
+    
 }
 
 
 
 @media only screen and (max-width: 650px) {
+
+    /* Main Page */
+    h1 { 
+        font-size: 80px; 
+    } 
+    /* End */
+
+
+    /* Nav Bar */
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #4a4a4a;
+        top: 80px;
+        left: -100%;
+        transition: all 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 15px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    ul a:hover, ul a.active {
+        background-color: none;
+        color:rgb(30, 255, 169);
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+    .checkbtn {
+        display: block;  
+    }
+    nav ul li a {
+        font-size: 20px;
+    }
+    /* End */
+
+    /* Pazangs Page */
+    .music-icons {
+        gap: 15px;
+    }
+    /* End */
+
+    /* Footer */
+    footer {
+        max-width: 100%;
+    }
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        padding: 5%;
+        gap: 20px;
+    }
+    .icons img {
+        max-width: 40px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
 
     /* Main Page */
     h1 { 
@@ -516,32 +582,26 @@ form button:hover {
     /* End */
 
 
-
-
-     /* Oman Sounds Page*/
-     .video-container video {
-        position: absolute;
-        object-fit: cover;
-    }
-    /* End */
-
-
-
-
     /* Pazangs Page */
     .music-icons {
         gap: 15px;
     }
     /* End */
 
-
-
-
     /* Footer */
     footer {
-        z-index: 1;
+        max-width: 100%;
     }
-    /* End */
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        padding: 5%;
+        gap: 20px;
+    }
+    .icons img {
+        max-width: 25px;
+    }
 }
 
 @media only screen and (max-width: 390px) {
@@ -612,7 +672,17 @@ form button:hover {
 
     /* Footer */
     footer {
-        z-index: 1;
+        max-width: 100%;
+    }
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        padding: 5%;
+        gap: 20px;
+    }
+    .icons img {
+        max-width: 20px;
     }
     /* End */
 }
