@@ -40,9 +40,9 @@ canvas {
 :root {
     --off-white: #edf0f1;
     --green-border: #8ed19c;
-    --button-color: #2e2e2e;
+    --button-color: #232323;
     --button-hover: #4a4a4a;
-    --text-color: #707070;
+    --text-color: #464646;
 }
 :root {
     --base-font-size: 16px;
@@ -64,32 +64,39 @@ img{
 footer {
     background-color: rgba(103, 103, 103, 0.8);
     width: 100%;
-    display: flex;
-    justify-content: space-between; /* Keep content evenly spaced horizontally */
-    align-items: center; /* Center content vertically */
-    padding: 1.5%;
-    backdrop-filter: blur(20px);
     margin-top: auto; /* Ensure footer is at the bottom */
+    backdrop-filter: blur(20px);
     z-index: 1;
     right: 0;
     left: 0;
 }
-footer p {
-    font-size: var(--base-font-size);
-    font-style:italic; 
-    font-weight: 500;
-    color: var(--off-white);
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.5%;
 }
-footer .icons {
+.footer-logo {
+    grid-column: 1;
+    justify-self: start;
+    width: 70px;
+    height: auto;
+}
+.icons {
+    grid-column: 2;
+    justify-self: center;
     display: flex;
-    justify-content: center;
     gap: 15px;
 }
-footer .icons a img {
-    width: 100%;
+.icons img {
     max-width: 40px;
     height: auto;
-    margin: 0;
+}
+.cta {
+    grid-column: 3;
+    justify-self: end;
 }
 .contact {
     padding: 15px;
@@ -101,7 +108,6 @@ footer .icons a img {
     cursor: pointer;
     border-radius: 30px;
     width: 150px;
-    margin: 2px auto 0;
 }
 .contact:hover {
     background: var(--button-hover);
@@ -213,11 +219,6 @@ h1 {
 
 
 
-/* OMAN SOUNDS PAGE */
-
-/* END  */
-
-
 
 /* PAZANGS PAGE */
 .pazang-container {
@@ -244,84 +245,7 @@ h1 {
 .pazang-gallery iframe {
     width: 100%;
 }
-/*
-.pazang-gallery{
-    display: grid;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 30px;
-    align-items: center;
-    justify-content: center;
-    padding: 2% 5%;
-    padding-bottom: 5%;
-}
-*/
 /* End */
-
-
-
-
-
-/* ART PAGE */
-.art-gallery{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 30px;
-    align-items: center;
-    justify-content: center;
-    padding: 2% 5%;
-    padding-bottom: 5%;
-}
-.art-gallery img{
-    width: 100%;
-}
-.to-top {
-    background: var(--button-color);
-    position: fixed;
-    bottom: 32px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: var(--off-white);
-    text-decoration: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s ease-in-out;
-    z-index: 1000;
-}
-.to-top.active {
-    bottom: 32px;
-    pointer-events: auto;
-    opacity: 1;
-}
-/*
-@keyframes appear {
-    100% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        transform: translate();
-    }
-    0% {
-        transform: translate();
-    }
-}
- /*
-.art-gallery img {
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40%;
-}
-/* End */
-
 
 
 
@@ -469,8 +393,6 @@ form button:hover {
 
 
 
-
-
     /* Home Page */
     .list-group {
         display: flex;
@@ -487,15 +409,6 @@ form button:hover {
 
 
 
-
-    /* Oman Sounds Page*/
-    .os-content {
-        min-height: 100vh;
-    }
-    /* End */
-
-
-
     /* Pazangs stuff??? */
     .music-icons {
         padding: 5%;
@@ -507,16 +420,6 @@ form button:hover {
     }
     .to-top {
         right: 10px;
-    }
-    /* End */
-
-
-
-    /* Art Page */
-    .art-gallery{
-        display: flex;
-        flex-direction: column;
-        margin: 50px;
     }
     /* End */
 
