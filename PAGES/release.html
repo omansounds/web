@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="../MEDIA/O_LOGO.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAZANGS</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
+</head>
+<body>
+    <canvas id="shader-web-background"></canvas>
+
+    <div class="release-container">
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <ul>
+                <li><a href="../index.html">//HOME</a></li>
+                <li><a href="../PAGES/pazangs.html">//PAZANGS</a></li>
+                <li><a href="../PAGES/contact.html">//CONTACT STUFF</a></li>
+                <li><a href="https://omansounds.gumroad.com/">//SHOP</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-release-container">
+
+            
+            <h1>Melodiva - Questions (Oman Sounds Remix)</h1>
+
+            
+            <img src="../MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="" width="300">
+            
+
+            <div class="release-music-icons">
+                <a href="https://soundcloud.com/omansounds/melodiva-questions-oman-sounds-remix" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/soundcloud.png" alt="" width="60"></a>
+                <a href="https://open.spotify.com/album/3VSH1xXYRN6BFSw34ryjVj?si=ivL0buUuRX-3jn4DQaWLvg" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/spotify.png" alt="" width="60"></a>
+                <a href="https://omansounds.bandcamp.com/track/melodiva-questions-oman-sounds-remix" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/bandcamp.png" alt="" width="60"></a>
+                <a href="https://music.apple.com/us/album/questions-oman-sounds-remix-single/1803606953" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/applemusic.png" alt="" width="60"></a>
+            </div>
+
+            
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/52iaBNL6x80xvq0hzGd3iY?utm_source=generator&theme=0" 
+                height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            
+
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <img src="../ICONS/OS_LOGO_DARK.png" alt="OS Logo" class="footer-logo">
+    
+                <div class="icons">
+                    <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/instagram.png" alt=""></a>
+                    <a href="https://www.facebook.com/omansound" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/facebook.png" alt=""></a>
+                    <a href="https://twitter.com/omansounds" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/x.png" alt=""></a>
+                    <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/soundcloud.png" alt=""></a>
+                    <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab?si=jHeUiwX2R36ZQYF9AEYytw&nd=1&dlsi=00208355bb8a4d9e" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/spotify.png" alt="" ></a>
+                    <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/bandcamp.png" alt=""></a>
+                    <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/tidal.png" alt=""></a>
+                    <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/applemusic.png" alt=""></a>
+                    <a href="https://www.twitch.tv/omansounds" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/twitch.png" alt=""></a>
+                    <a href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer"><img src="../ICONS/WHITE ICONS/youtube.png" alt=""></a>
+                </div>
+    
+                <a class="cta" href="../PAGES/contact.html".>
+                    <button class="contact">Contact</button>
+                </a> 
+    
+            </div>
+        </footer>
+        
+    </div>
+
+    <script type="x-shader/x-fragment" id="image">
+        precision mediump float;
+
+        uniform vec2 iResolution;
+        uniform float iTime;
+        uniform float iFrame;
+
+        #define MAX_STEPS 64
+        #define MAX_DIST 20.
+        #define SURF_DIST .01
+
+        const int STEPS = 16;
+
+
+        mat2 Rot(float a) {
+            float s=sin(a), c=cos(a);
+            return mat2(c, -s, s, c);
+        }
+
+        //IQ WIZARD https://iquilezles.org/
+        float smin( float d1, float d2, float k ) {
+            float h = clamp( 0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
+            return mix( d2, d1, h ) - k*h*(1.0-h); 
+        }
+
+        float Smax( float d1, float d2, float k ) {
+            float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
+            return mix( d2, d1, h ) + k*h*(1.0-h); 
+        }
+
+        //HG_SDF https://mercury.sexy/hg_sdf 
+        float fCapsule(vec3 p, float r, float c) {
+            return mix(length(p.xz) - r, length(vec3(p.x, abs(p.y) - c, p.z)) - r, step(c, abs(p.y)));
+        }
+
+
+        float fTorus(vec3 p, float smallRadius, float largeRadius) {
+            return length(vec2(length(p.xy) - largeRadius, p.z)) - smallRadius;
+        }
+
+
+        float OS(vec3 p) {
+            const float k = - 0.5; // or some other amount
+            float c = cos(k*p.y);
+            float s = sin(k*p.y);
+            mat2  m = mat2(c,-s,s,c);
+            vec3  q = vec3(m*p.xy,p.z);
+
+            float Capsule = fCapsule(vec3(q.x + 0.3, q.y, q.z), 0.13, 0.8);
+
+            float Torus = fTorus(p, 0.18, 1.0);
+
+            return smin(Torus, Capsule, 0.08);
+        }
+
+        float map(vec3 p) {
+
+            float t = iTime * 0.5;
+            t += sin(iTime * 0.7) * 0.3 + 0.5;
+
+            // OS
+            vec3 pt = p;
+            float j = 1.0-1.0*.5;
+            float s = sin(t+1.0)*.2+.7;
+            pt.xz *= Rot(t*.59-1.0);
+            pt.xy *= Rot(t*.62+1.0);
+            pt.yz *= Rot(t*.47-1.0);
+            float symbol = OS(pt);
+
+            // GYROID
+            vec3  pg = p;
+            float sg = 1.3;
+            pg.z += t;
+            float gyr = abs(dot(sin(pg*sg), cos(pg.zxy*sg)))/sg-.6;
+
+            // COMPOSITION             
+            gyr = Smax(gyr,symbol-.1,.2);   
+            float d = min(symbol,gyr);  
+
+            return d;
+        }
+
+
+        vec3 getNormal(vec3 p) {
+            vec3 eps=vec3(.1,0,0);
+            return normalize(vec3(map(p+eps.xyy) ,map(p+eps.yxy), map(p+eps.yyx)));
+        }
+
+        float getVal(vec2 uv)
+        {
+            return length(uv);
+        }
+            
+        vec2 gg(vec2 uv,float delta)
+        {
+            vec2 d=vec2(delta,0);
+            return vec2(
+                getVal(uv+d.xy)-getVal(uv-d.xy),
+                getVal(uv+d.yx)-getVal(uv-d.yx)
+            )/delta;
+        }
+
+
+        void main( ) {
+            
+            vec2 uv = (gl_FragCoord.xy * 2. - iResolution.xy) / iResolution.y;
+
+            // Initialization
+            vec3 ro = vec3(0, 0.0, -2.0);       
+            vec3 rd = normalize(vec3(uv, 1));  
+            vec3 col = vec3(0);             
+            vec3 p = ro, pp;
+            float t = 0.;  
+
+            // Raymarching
+            for (int i = 0; i < STEPS; i++) {
+
+                float d = map(p);       // current distance to the scene
+
+                t += d; 
+                p += d * rd;                //march the ray 
+
+                if (t < .001 || t > 500.) break;
+            }
+            
+            vec3 normal = getNormal(p); // Surface normal
+            //normal = vec3(gg(uv,1.0/iResolution.y),20.25);
+            normal *= normal;
+            normal = normalize(normal);
+            
+            col = vec3(normal);
+            
+            vec3 lightDir = normalize(vec3(1.0, 1.0, 1.5));
+            
+            float diffuse = clamp(dot(normal, lightDir), 0.5, 1.0);
+            
+            float spec = clamp(dot(reflect(lightDir, normal),vec3(0,0,-1)),0.0,1.0);
+            spec = pow(spec, mix(150.0, 2.0, 0.0)) * mix(2.5, 1.0, 0.0);
+            
+            vec3 lights = vec3(diffuse) + 2.0 * spec;
+            
+            col = abs(abs(col * 1.0 - vec3(1.0)) - vec3(1.0));
+            col = (col*(diffuse + .65) + vec3(1.0, 1.0, 1.0) * spec);
+            col *= lights;
+            col = pow(col, vec3(1. / 2.2));
+            
+            gl_FragColor = vec4(length(col)/1.8);
+        }
+
+    </script>
+
+    <script>
+        shaderWebBackground.shade({
+            shaders: {
+                image: {
+                    uniforms: {
+                        iTime:       (gl, loc) => gl.uniform1f(loc, performance.now() / 1000),
+                        iResolution: (gl, loc, ctx) => gl.uniform2f(loc, ctx.width, ctx.height),
+                    }
+                }
+            }
+        });
+
+    </script>
+  
+</body>
+</html>

@@ -247,6 +247,39 @@ h1 {
 }
 /* End */
 
+/* RELEASE PAGE */
+.release-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+}
+.main-release-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    gap: 20px;
+    padding-bottom: 10%;
+}
+.main-release-container h1{
+    font-size: 30px;
+    border-left: none;
+    text-align: center;
+}
+.main-release-container .release-music-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.main-release-container iframe {
+    width: 30%;
+}
+/* End */
+
 
 
 /* Contact Page */
@@ -420,6 +453,17 @@ form button:hover {
     }
     .to-top {
         right: 10px;
+    }
+    /* End */
+
+
+    /* RELEASE STUFF*/
+    .main-release-container iframe {
+        width: 100%;
+        padding: 0% 5%;
+    }
+    .main-release-container h1{
+        font-size: 25px;
     }
     /* End */
 
