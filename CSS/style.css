@@ -471,6 +471,9 @@ form button:hover {
     .main-release-container h1{
         font-size: 25px;
     }
+    .main-release-container .release-music-icons {
+        gap: 18px;
+    }
     /* End */
 
 
