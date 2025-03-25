@@ -198,6 +198,12 @@ h1 {
     align-items: flex-start; /* Ensure items align to the left */
     padding: 5px;
 }
+.list-group .latest-release {
+    animation: blinker 2s linear infinite;
+}
+@keyframes blinker {  
+    50% { opacity: 0; }
+  }
 .list-group a {
     display: inline-flex; /* Allow content to take up as much space as it needs */
     flex-direction: column;
