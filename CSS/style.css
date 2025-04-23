@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('./satoshi.css');
 
 /* Global Reset and Base Styles */
 * {
@@ -6,7 +7,7 @@
     padding: 0;
     box-sizing: border-box;
     /*font-family: "Trebuchet MS", Arial, sans-serif;*/
-    font-family: "Overpass", "Trebuchet MS", Arial, sans-serif;
+    /*font-family: "Overpass", "Trebuchet MS", Arial, sans-serif;*/
     scroll-behavior: smooth;
 }
 body {
@@ -54,6 +55,32 @@ img{
     -webkit-user-select: none;
     user-select: none;
 }
+/* Title */
+.header {
+    padding-left: 1%;
+    padding-top: 2%;
+}
+h1 {
+    font-family: 'Satoshi-Medium';
+    font-size: clamp(2rem, 20vw, 6rem); /* Grows between 2rem and 6rem based on screen size */
+    font-weight: 700;
+    color: var(--text-color);
+    border-left: .3vw solid var(--green-border);
+}
+h2 {
+    font-family: 'Satoshi-Medium';
+}
+h3 {
+    font-family: 'Satoshi-Regular';
+    font-size: clamp(0.2rem, 8vw, 1.0rem); 
+}
+p {
+    font-family: 'Satoshi-Regular';
+}
+a {
+    font-family: 'Satoshi-MediumItalic';
+}
+/* End */ 
 
 
 
@@ -81,20 +108,20 @@ footer {
     width: 70px;
     height: auto;
 }
-.icons {
+footer .icons {
     display: flex;
     flex-wrap: wrap; /* Allows icons to break into new lines on small screens */
     gap: 15px;
     justify-content: center;
     align-items: center;
 }
-.icons img {
+footer .icons img {
     width: 100%;
     max-width: 40px;
     height: auto;
     transition: transform 0.3s ease;
 }
-.icons img:hover {
+footer .icons img:hover {
     transform: scale(1.1);
 }
 .cta {
@@ -178,27 +205,6 @@ ul a:hover {
 /* End */
 
 
-
-/* Title */
-.header {
-    padding: 0.5%;
-}
-.header h1 {
-    font-size: clamp(2rem, 20vw, 6rem); /* Grows between 2rem and 6rem based on screen size */
-    font-weight: 700;
-    color: var(--text-color);
-    border-left: .3vw solid var(--green-border);
-}
-h1 {
-    font-size: clamp(2rem, 8vw, 6rem); /* Grows between 2rem and 6rem based on screen size */
-    font-weight: 700;
-    color: var(--text-color);
-    border-left: .3vw solid var(--green-border);
-}
-/* End */ 
-
-
-
 /* Home Page */
 .list-group {
     display: inline-flex; /* This ensures that the list itself is not a full-width block */
@@ -214,6 +220,7 @@ h1 {
     50% { opacity: 0; }
   }
 .list-group a {
+    font-family: 'Satoshi-Italic';
     display: inline-flex; /* Allow content to take up as much space as it needs */
     flex-direction: column;
     text-decoration: none;
@@ -238,7 +245,6 @@ h1 {
 .pazang-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
 }
@@ -247,7 +253,6 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 1% 5%;
 }
 .music-icons img {
     width: 100%;
@@ -259,16 +264,22 @@ h1 {
     transform: scale(1.1);
 }
 .pazang-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 30px;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    padding: 2% 5%;
-    padding-bottom: 5%;
+    gap: 50px;
+    padding: 3%;
+    padding-bottom: 7%;
 }
-.pazang-gallery iframe {
+.pazang-gallery img {
     width: 100%;
+    max-width: 380px;
+    height: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+.pazang-gallery img:hover {
+    transform: scale(1.1);
 }
 /* End */
 
@@ -287,7 +298,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3%;
+    padding: 5%;
 }
 .main-release-container {
     background-color: rgba(190, 190, 190, 0.5); /* translucent background */
@@ -307,15 +318,23 @@ h1 {
     box-sizing: border-box;
     z-index: 1;
 }
-.main-release-container h1 {
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
+.main-release-container h2 {
+    font-size: clamp(1.0rem, 5vw, 1.7rem);
     text-align: center;
-    padding: 0 5%;
 }
 .main-release-container img {
     width: 80%;
     max-width: 300px;
     height: auto;
+}
+.main-release-container img{
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+.main-release-container img:hover {
+    transform: scale(1.1);
 }
 .main-release-container .release-music-icons {
     display: flex;
@@ -348,26 +367,20 @@ h1 {
 
 
 /* Contact Page */
-.reach-out h2 {
+.reach-out h3 {
     display: flex;
-    color: var(--green-border); 
+    color: #232323; 
     justify-content: center;
-    padding: 15px;
-    font-size: 20px;
-    /*text-decoration: underline var(--green-border);*/
-    background-color: var(--button-color);
-    margin: 20px auto 0;
-    border: 0;
-    outline: none;
-    width: 60%;
+    padding: 1%;
+    outline: none; 
     border-radius: 30px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 .contact-container {
     display: flex;
     justify-content: space-evenly;
-    padding: 2%;;
+    padding: 2%;
+    padding-bottom: 7%;
 }
 .text-dings {
     display: flex;
@@ -442,16 +455,14 @@ form button:hover {
 /* Responsive Styles */
 @media only screen and (max-width: 952px) {
 
-    /* Main Page */
-    .header {
-        padding: 0%;
-    }
+    /* h1 TITLE ADJUSTMENTS */
     h1 {
         display: flex;
         justify-content: center;
         border-left: none;
     }
-    /* End */
+    /* End 
+    */
 
 
 
@@ -524,12 +535,6 @@ form button:hover {
 
 
     /* Contact Page */
-    .reach-out h2 {
-        text-align: center;
-        padding: 5%;;
-        font-size: 15px;
-        /*text-decoration: underline var(--green-border);*/
-    }
     .contact-container{
         display: flex;
         flex-direction: column;
@@ -572,14 +577,6 @@ form button:hover {
 
 
 @media only screen and (max-width: 650px) {
-
-    /* Main Page */
-    h1 { 
-        font-size: 80px; 
-    } 
-    /* End */
-
-
 
     /* Nav Bar */
     nav ul li {
@@ -648,14 +645,6 @@ form button:hover {
 
 @media only screen and (max-width: 550px) {
 
-    /* Main Page */
-    h1 { 
-        font-size: 80px; 
-    } 
-    /* End */
-
-
-
     /* Nav Bar */
     nav ul li {
         display: block;
@@ -682,6 +671,30 @@ form button:hover {
 
 
 
+    /* PAZANG */
+    .pazang-gallery {
+        padding: 14%;
+        padding-bottom: 30%;
+    }
+    /* END */
+
+
+    /* RELEASE PAGE */
+    .release-placement {
+        padding-bottom: 30%;
+        padding-top: 30%;
+    }
+    /* END */
+
+
+
+    /* CONTACT PAGE */
+    .contact-container {
+        padding-bottom: 30%;
+    }
+    /* END */
+
+
     /* Footer */
     footer {
         max-width: 100%;
@@ -699,21 +712,6 @@ form button:hover {
 
 }
 
-
-
-@media (max-width: 400px) {
-
-    .pazang-gallery {
-      grid-template-columns: 1fr;
-      padding: 5%;
-      gap: 20px;
-    }
-
-    .spotify-embed {
-      padding-top: 100%; /* still square */
-    }
-
-}
   
 
 @media only screen and (max-width: 390px) {
@@ -724,9 +722,6 @@ form button:hover {
         display: flex;
         flex-direction: column;
     }
-    h1 { 
-        font-size: 80px; 
-    } 
     /* End */
 
 
