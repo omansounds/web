@@ -220,7 +220,6 @@ ul a:hover {
     50% { opacity: 0; }
   }
 .list-group a {
-    font-family: 'Satoshi-Italic';
     display: inline-flex; /* Allow content to take up as much space as it needs */
     flex-direction: column;
     text-decoration: none;
