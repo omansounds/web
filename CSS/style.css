@@ -8,7 +8,7 @@
     box-sizing: border-box;
     /*font-family: "Trebuchet MS", Arial, sans-serif;*/
     /*font-family: "Overpass", "Trebuchet MS", Arial, sans-serif;*/
-    font-family: 'Satoshi-MediumItalic';
+    font-family: 'Satoshi-Medium';
     scroll-behavior: smooth;
 }
 body {
@@ -79,7 +79,7 @@ p {
     font-family: 'Satoshi-Regular';
 }
 a {
-    font-family: 'Satoshi-MediumItalic';
+    font-family: 'Satoshi-Regular';
 }
 /* End */ 
 
