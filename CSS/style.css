@@ -313,7 +313,7 @@ ul a:hover {
     width: 90%;
     max-width: 600px; /* Optional: cap the size */
     border-radius: 10px;
-    padding: 5%;
+    padding: 3%;
     height: auto; /* Let it grow with content */
     box-sizing: border-box;
     z-index: 1;
@@ -343,7 +343,7 @@ ul a:hover {
     gap: 20px;
 }
 .release-music-icons img {
-    width: 40px;
+    width: 50px;
     height: auto;
     max-width: 12vw;
     transition: transform 0.3s ease;
@@ -637,7 +637,7 @@ form button:hover {
         padding: 5%;
     }
     .release-music-icons img {
-        width: 30px;
+        width: 40px;
     }
 
 }
