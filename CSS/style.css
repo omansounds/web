@@ -88,12 +88,14 @@ a {
 /* Footer Styles */
 footer {
     background-color: rgba(103, 103, 103, 0.8);
+    flex-direction: column;
     width: 100%;
     margin-top: auto; /* Ensure footer is at the bottom */
     backdrop-filter: blur(20px);
     z-index: 1;
     right: 0;
     left: 0;
+    padding: 1.5%;
 }
 .footer-container {
     display: grid;
@@ -101,8 +103,8 @@ footer {
     align-items: center;
     max-width: 100%;
     margin: 0 auto;
-    padding: 1.5%;
 }
+
 .footer-logo {
     grid-column: 1;
     justify-self: start;
@@ -143,6 +145,20 @@ footer .icons img:hover {
 .contact:hover {
     background: var(--button-hover);
     transition: all .5s;
+}
+footer .impress {
+    text-align: center;
+}
+footer .impress a {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    color: #232323;
+}
+footer .impress a:hover {
+    color: #36ff61;
+    transform: scale(1.1);
+    transition: .5s;
 }
 /* End */
 
@@ -445,6 +461,40 @@ form button {
 form button:hover {
     background: #4a4a4a;
     transition: all .5s;
+}
+/* End */
+
+
+/* IMPRESSUM Page */
+.impressum-container {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+    padding-bottom: 7%;
+}
+.impressum-dings {
+    background-color: rgba(190, 190, 190, 0.5); /* translucent background */
+    backdrop-filter: blur(10px);                /* actual blur effect */
+    -webkit-backdrop-filter: blur(10px);        /* Safari support */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 40%;
+    max-width: 600px; /* Optional: cap the size */
+    border-radius: 10px;
+    padding: 3%;
+    height: auto; /* Let it grow with content */
+    box-sizing: border-box;
+    z-index: 1;
+}
+.impressum-dings h2 {
+    font-size: 28px; 
+}
+.impressum-dings h3 {
+    font-size: 20px; 
 }
 /* End */
 

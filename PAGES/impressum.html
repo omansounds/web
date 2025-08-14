@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="icon" href="../MEDIA/O_LOGO.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LATEST RELEASE</title>
-    <meta data-n-head="ssr" name="title" content="OMAN SOUNDS - LATEST RELEASE">
+    <title>CONTACT STUFF</title>
+    <meta data-n-head="ssr" name="title" content="OMAN SOUNDS - CONTACT">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
 </head>
+
 <body>
+
     <canvas id="shader-web-background"></canvas>
 
-    <div class="release-container">
-        <nav>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fas fa-bars"></i>
-            </label>
-            <ul>
-                <li><a href="../index.html">//HOME</a></li>
-                <li><a href="../PAGES/pazangs.html">//PAZANGS</a></li>
-                <li><a class="active" href="../PAGES/release.html">//LATEST RELEASE</a></li>
-                <li><a href="../PAGES/contact.html">//CONTACT/LESSONS</a></li>
-                <li><a href="https://omansounds.gumroad.com/">//SHOP</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+            <li><a href="../index.html">//HOME</a></li>
+            <li><a href="../PAGES/pazangs.html">//PAZANGS</a></li>
+            <li><a href="../PAGES/release.html">//LATEST RELEASE</a></li>
+            <li><a href="../PAGES/contact.html">//CONTACT/LESSONS</a></li>
+            <li><a href="https://omansounds.gumroad.com/">//SHOP</a></li>
+        </ul>
+    </nav>
 
-        <div class="release-placement">
-
-        <div class="main-release-container">
-
-            
-            <h2>OMAN SOUNDS - SPUNK FACE</h2>
-
-            
-            <a href="https://distrokid.com/hyperfollow/omansounds/spunk-face" target="_blank" rel="noopener noreferrer"><img src="../MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="" ></a>
-            
-
-            <div class="release-music-icons">
-                <a href="https://soundcloud.com/omansounds/spunk-face" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/soundcloud.png" alt="" width="50"></a>
-                <a href="https://omansounds.bandcamp.com/track/spunk-face" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/bandcamp.png" alt=""></a>
-                <a href="https://open.spotify.com/album/7y0Eqeza6Qi31RYO7aoi1l?si=zzk9Kl39RXOD--XodkAtxA" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/spotify.png" alt=""></a>
-                <a href="https://music.apple.com/us/album/spunk-face-single/1817188298" target="_blank" rel="noopener noreferrer"><img src="../ICONS/BLACK ICONS/applemusic.png" alt=""></a>
-            </div>
+    <div class="header">
+        <h1>IMPRESSUM</h1>
+    </div>
+    
+    <div class="impressum-container">
+        <div class="impressum-dings">
+            <h2>Oman Sounds</h2>
+            <h3>Name:</h3>
+            <p>Connor Oman</p>
+            <h3>Address:</h3>
+            <p>Dunckerstrasse 77, 10437 Berlin</p>
+            <h3>Email:</h3>
+            <p>connor@omansounds.com</p>
+            <h3>Phone Number:</h3>
+            <p>+1 (615)-351-2024</p>
+            <h3>USt-IdNr.:</h3>
+            <p>DE455055233</p>
 
         </div>
-        </div>
+           
+    </div>
 
-        <footer>
+    <footer>
         <div class="footer-container">
             <img src="../ICONS/OS_LOGO_DARK.png" alt="OS Logo" class="footer-logo">
 
@@ -72,11 +75,10 @@
         </div>
 
         <div class="impress">
-            <a href="../PAGES/impressum.html">Impressum</a>
+            <a href="impressum.html">Impressum</a>
         </div>
+
     </footer>
-        
-    </div>
 
     <script type="x-shader/x-fragment" id="image">
         precision mediump float;
@@ -84,6 +86,10 @@
         uniform vec2 iResolution;
         uniform float iTime;
         uniform float iFrame;
+
+        #define MAX_STEPS 64
+        #define MAX_DIST 20.
+        #define SURF_DIST .01
 
         const int STEPS = 16;
 
@@ -133,12 +139,11 @@
 
             float t = iTime * 0.5;
             t += sin(iTime * 0.7) * 0.3 + 0.5;
-            float sinT = sin(t + 1.0);
 
             // OS
             vec3 pt = p;
             float j = 1.0-1.0*.5;
-            float s = sinT * .2+.7;
+            float s = sin(t+1.0)*.2+.7;
             pt.xz *= Rot(t*.59-1.0);
             pt.xy *= Rot(t*.62+1.0);
             pt.yz *= Rot(t*.47-1.0);
@@ -152,7 +157,7 @@
 
             // COMPOSITION             
             gyr = Smax(gyr,symbol-.1,.2);   
-            float d = min(symbol,gyr);
+            float d = min(symbol,gyr);  
 
             return d;
         }
@@ -239,6 +244,6 @@
         });
 
     </script>
-  
+
 </body>
 </html>
