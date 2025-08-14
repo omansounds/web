@@ -63,7 +63,8 @@ img{
 }
 h1 {
     font-family: 'Satoshi-Medium';
-    font-size: clamp(2rem, 20vw, 6rem); /* Grows between 2rem and 6rem based on screen size */
+    font-size: clamp(1rem, 10vw, 6rem); /* Grows between 2rem and 6rem based on screen size */
+    
     font-weight: 700;
     color: var(--text-color);
     border-left: .3vw solid var(--green-border);
@@ -690,6 +691,11 @@ form button:hover {
         width: 50px;
     }
 
+    .impressum-dings {
+        width: 95%;
+        padding: 5%;
+    }
+
 }
 
 
@@ -723,8 +729,12 @@ form button:hover {
 
     /* PAZANG */
     .pazang-gallery {
-        padding: 14%;
+        padding-left: 10%;
+        padding-right: 10%;
         padding-bottom: 30%;
+    }
+    .music-icons {
+        padding: 3%;
     }
     /* END */
 
