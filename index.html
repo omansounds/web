@@ -5,30 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMAN SOUNDS</title>
     <meta name="title" content="OMAN SOUNDS">
-    <meta name="description" content="OMAN SOUNDS — producer &amp; sound designer. Pazangs, releases, visual work and lessons.">
+    <meta name="description" content="oman sounds — specimen archive. sound design, production, visual work, lessons.">
     <meta property="og:title" content="OMAN SOUNDS">
-    <meta property="og:description" content="Producer &amp; sound designer. Pazangs, releases, visual work and lessons.">
+    <meta property="og:description" content="specimen archive — sound design, production, visual work, lessons.">
     <meta property="og:image" content="MEDIA/ALBUM_ART/hell01101111_ART.png">
     <link rel="icon" href="MEDIA/O_LOGO.png">
     <link rel="stylesheet" href="CSS/os.css">
 </head>
 <body id="top">
 
+    <!-- sigil glyph set -->
+    <svg class="defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sg-o" viewBox="0 0 32 32">
+            <path d="M16 4 A12 12 0 1 0 28 16" fill="none"/>
+            <path d="M22 6 L26 10" fill="none"/>
+            <circle cx="16" cy="16" r="2.5" fill="none"/>
+        </symbol>
+        <symbol id="sg-sound" viewBox="0 0 32 32">
+            <path d="M16 2 V30" fill="none"/>
+            <circle cx="16" cy="16" r="6" fill="none"/>
+            <path d="M6 10 H12 M20 22 H26 M10 26 L14 22" fill="none"/>
+        </symbol>
+        <symbol id="sg-visual" viewBox="0 0 32 32">
+            <ellipse cx="16" cy="14" rx="10" ry="6" fill="none"/>
+            <circle cx="16" cy="14" r="2" fill="none"/>
+            <path d="M16 20 V28 M12 28 H20 M16 8 V2" fill="none"/>
+        </symbol>
+        <symbol id="sg-lessons" viewBox="0 0 32 32">
+            <path d="M16 4 L26 22 H6 Z" fill="none"/>
+            <circle cx="16" cy="27" r="3" fill="none"/>
+            <path d="M16 14 V18" fill="none"/>
+        </symbol>
+        <symbol id="sg-contact" viewBox="0 0 32 32">
+            <circle cx="14" cy="14" r="9" fill="none"/>
+            <path d="M20 20 L29 29 M25 29 H29 V25" fill="none"/>
+            <path d="M14 10 V18 M10 14 H18" fill="none"/>
+        </symbol>
+    </svg>
+
     <canvas id="bg" aria-hidden="true"></canvas>
-    <div class="scanlines" aria-hidden="true"></div>
-    <div class="cursor" aria-hidden="true"></div>
     <div class="cursor-dot" aria-hidden="true"></div>
+    <img class="preview" id="preview" src="" alt="" aria-hidden="true">
 
     <header class="nav">
-        <a href="#top" class="nav-logo" id="logo-glitch" aria-label="Oman Sounds — home">
-            <img src="MEDIA/O_LOGO.png" alt="" width="34" height="34">
-        </a>
-        <nav aria-label="Main">
-            <a href="#sound">//SOUND</a>
-            <a href="#visual">//VISUAL</a>
-            <a href="#lessons">//LESSONS</a>
-            <a href="#contact">//CONTACT</a>
-            <a href="https://omansounds.gumroad.com/" target="_blank" rel="noopener noreferrer">//SHOP&nbsp;↗</a>
+        <a href="#top" class="nav-name mono" data-glitch>oman.sounds</a>
+        <nav class="mono" aria-label="Main">
+            <a href="#sound" data-glitch>sound</a>
+            <a href="#visual" data-glitch>visual</a>
+            <a href="#lessons" data-glitch>lessons</a>
+            <a href="#contact" data-glitch>contact</a>
+            <a href="https://omansounds.gumroad.com/" target="_blank" rel="noopener noreferrer">shop&#8239;↗</a>
         </nav>
     </header>
 
@@ -36,197 +62,182 @@
 
         <!-- ============ HERO ============ -->
         <section class="hero">
-            <p class="hero-eyebrow mono" id="binary-line" aria-hidden="true">01101111 01101101 01100001 01101110</p>
+            <div class="hero-meta mono">
+                <span data-glitch>specimen archive</span>
+                <span class="dim">01101111 01101101 01100001 01101110</span>
+            </div>
             <h1 class="hero-title">
-                <span class="glitch" data-text="OMAN">OMAN</span>
-                <span class="glitch" data-text="SOUNDS">SOUNDS</span>
+                <svg class="hero-sigil sigil" aria-hidden="true"><use href="#sg-o"/></svg>
+                <span data-glitch>oman</span>
+                <em data-glitch>sounds</em>
             </h1>
-            <p class="hero-sub">producer&nbsp;&nbsp;//&nbsp;&nbsp;sound designer&nbsp;&nbsp;//&nbsp;&nbsp;pazangs</p>
-            <div class="hero-cta">
-                <a class="btn btn-solid" href="#sound">LISTEN</a>
-                <a class="btn" href="#contact">GET IN TOUCH</a>
-            </div>
-            <a class="scroll-cue mono" href="#sound" aria-hidden="true" tabindex="-1">▼</a>
+            <p class="hero-tag mono dim">sound design&nbsp;&nbsp;⌁&nbsp;&nbsp;production&nbsp;&nbsp;⌁&nbsp;&nbsp;visual work</p>
         </section>
-
-        <!-- ============ TICKER ============ -->
-        <div class="ticker" aria-hidden="true">
-            <div class="ticker-track">
-                <span>OMAN SOUNDS ░ PAZANGS ░ 01101111 ░ SOUND DESIGN ░ NEW RELEASE — hell01101111 ░ VISUALS ░ LESSONS ░&nbsp;</span><span>OMAN SOUNDS ░ PAZANGS ░ 01101111 ░ SOUND DESIGN ░ NEW RELEASE — hell01101111 ░ VISUALS ░ LESSONS ░&nbsp;</span>
-            </div>
-        </div>
 
         <!-- ============ SOUND ============ -->
         <section id="sound" class="section">
-            <div class="section-head">
-                <span class="section-index mono">01</span>
-                <h2 data-scramble>SOUND</h2>
-                <span class="section-path mono">OS://PAZANGS</span>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-label mono"><svg class="sigil" aria-hidden="true"><use href="#sg-sound"/></svg>&nbsp;01&nbsp;⌁&nbsp;<span data-glitch>sound</span></span>
+                <h2>releases</h2>
+            </header>
 
-            <!-- Featured / latest release -->
-            <article class="featured reveal">
-                <div class="featured-art art-glitch">
-                    <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="hell01101111 — album art" loading="lazy">
-                    <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="" class="ghost ghost-c" aria-hidden="true" loading="lazy">
-                    <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="" class="ghost ghost-m" aria-hidden="true" loading="lazy">
-                </div>
-                <div class="featured-info">
-                    <p class="tag mono">[ LATEST RELEASE ]</p>
-                    <h3 class="featured-title" data-scramble>hell01101111</h3>
-                    <p class="featured-note mono">// 01101111 = "o" — say hello.</p>
-                    <div class="featured-links">
-                        <a class="btn btn-solid" href="https://soundcloud.com/omansounds/hell01101111" target="_blank" rel="noopener noreferrer">SOUNDCLOUD&nbsp;↗</a>
-                        <a class="btn" href="https://omansounds.bandcamp.com/track/hell01101111" target="_blank" rel="noopener noreferrer">BANDCAMP&nbsp;↗</a>
-                    </div>
-                </div>
-            </article>
+            <ol class="index reveal">
+                <li>
+                    <a href="https://soundcloud.com/omansounds/hell01101111" target="_blank" rel="noopener noreferrer" data-preview="MEDIA/ALBUM_ART/hell01101111_ART.png">
+                        <span class="idx mono">001</span>
+                        <span class="ttl">hell01101111</span>
+                        <span class="note mono dim">latest&nbsp;⌁&nbsp;soundcloud</span>
+                        <span class="arw">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://distrokid.com/hyperfollow/omansounds/spunk-face" target="_blank" rel="noopener noreferrer" data-preview="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png">
+                        <span class="idx mono">002</span>
+                        <span class="ttl">spunk face</span>
+                        <span class="note mono dim">single</span>
+                        <span class="arw">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://distrokid.com/hyperfollow/melodiva1/questions-oman-sounds-remix" target="_blank" rel="noopener noreferrer" data-preview="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png">
+                        <span class="idx mono">003</span>
+                        <span class="ttl">questions <span class="thin">(oman sounds remix)</span></span>
+                        <span class="note mono dim">remix</span>
+                        <span class="arw">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://distrokid.com/hyperfollow/omansounds/spectral-complications" target="_blank" rel="noopener noreferrer" data-preview="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png">
+                        <span class="idx mono">004</span>
+                        <span class="ttl">spectral complications</span>
+                        <span class="note mono dim">single</span>
+                        <span class="arw">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://distrokid.com/hyperfollow/omansounds/nothing-is-what-it-seems-2" target="_blank" rel="noopener noreferrer" data-preview="MEDIA/ALBUM_ART/NIWIS.png">
+                        <span class="idx mono">005</span>
+                        <span class="ttl">nothing is what it seems</span>
+                        <span class="note mono dim">single</span>
+                        <span class="arw">↗</span>
+                    </a>
+                </li>
+            </ol>
 
-            <!-- Release grid -->
-            <div class="releases">
-                <a class="release reveal" href="https://distrokid.com/hyperfollow/omansounds/spunk-face" target="_blank" rel="noopener noreferrer">
-                    <div class="release-art"><img src="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="Spunk Face — album art" loading="lazy"></div>
-                    <div class="release-meta mono"><span>SPUNK FACE</span><span class="release-arrow">↗</span></div>
-                </a>
-                <a class="release reveal" href="https://distrokid.com/hyperfollow/melodiva1/questions-oman-sounds-remix" target="_blank" rel="noopener noreferrer">
-                    <div class="release-art"><img src="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="Questions (Oman Sounds remix) — album art" loading="lazy"></div>
-                    <div class="release-meta mono"><span>QUESTIONS — REMIX</span><span class="release-arrow">↗</span></div>
-                </a>
-                <a class="release reveal" href="https://distrokid.com/hyperfollow/omansounds/spectral-complications" target="_blank" rel="noopener noreferrer">
-                    <div class="release-art"><img src="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png" alt="Spectral Complications — album art" loading="lazy"></div>
-                    <div class="release-meta mono"><span>SPECTRAL COMPLICATIONS</span><span class="release-arrow">↗</span></div>
-                </a>
-                <a class="release reveal" href="https://distrokid.com/hyperfollow/omansounds/nothing-is-what-it-seems-2" target="_blank" rel="noopener noreferrer">
-                    <div class="release-art"><img src="MEDIA/ALBUM_ART/NIWIS.png" alt="Nothing Is What It Seems — album art" loading="lazy"></div>
-                    <div class="release-meta mono"><span>NOTHING IS WHAT IT SEEMS</span><span class="release-arrow">↗</span></div>
-                </a>
-            </div>
-
-            <!-- Platforms -->
-            <div class="platforms reveal">
-                <p class="mono platforms-label">STREAM EVERYWHERE:</p>
-                <div class="platform-row">
-                    <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="ICONS/WHITE ICONS/spotify.png" alt="Spotify"></a>
-                    <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><img src="ICONS/WHITE ICONS/soundcloud.png" alt="SoundCloud"></a>
-                    <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp"><img src="ICONS/WHITE ICONS/bandcamp.png" alt="Bandcamp"></a>
-                    <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="ICONS/WHITE ICONS/applemusic.png" alt="Apple Music"></a>
-                    <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer" aria-label="Tidal"><img src="ICONS/WHITE ICONS/tidal.png" alt="Tidal"></a>
-                </div>
-            </div>
+            <p class="stream mono dim reveal">stream&nbsp;⌁&nbsp;
+                <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer">spotify</a> ·
+                <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer">soundcloud</a> ·
+                <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer">bandcamp</a> ·
+                <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer">apple music</a> ·
+                <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer">tidal</a>
+            </p>
         </section>
 
         <!-- ============ VISUAL ============ -->
         <section id="visual" class="section">
-            <div class="section-head">
-                <span class="section-index mono">02</span>
-                <h2 data-scramble>VISUAL</h2>
-                <span class="section-path mono">OS://ARTWORK</span>
+            <header class="sec-head reveal">
+                <span class="sec-label mono"><svg class="sigil" aria-hidden="true"><use href="#sg-visual"/></svg>&nbsp;02&nbsp;⌁&nbsp;<span data-glitch>visual</span></span>
+                <h2>works</h2>
+            </header>
+
+            <div class="works">
+                <figure class="work reveal">
+                    <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="hell01101111 artwork" loading="lazy">
+                    <figcaption class="mono dim">SPEC.01&nbsp;⌁&nbsp;hell01101111</figcaption>
+                </figure>
+                <figure class="work reveal">
+                    <img src="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="Spunk Face artwork" loading="lazy">
+                    <figcaption class="mono dim">SPEC.02&nbsp;⌁&nbsp;spunk face</figcaption>
+                </figure>
+                <figure class="work reveal">
+                    <img src="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png" alt="Spectral Complications artwork" loading="lazy">
+                    <figcaption class="mono dim">SPEC.03&nbsp;⌁&nbsp;spectral complications</figcaption>
+                </figure>
+                <figure class="work reveal">
+                    <img src="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="Questions remix artwork" loading="lazy">
+                    <figcaption class="mono dim">SPEC.04&nbsp;⌁&nbsp;questions rmx</figcaption>
+                </figure>
+                <figure class="work reveal">
+                    <img src="MEDIA/ALBUM_ART/NIWIS.png" alt="Nothing Is What It Seems artwork" loading="lazy">
+                    <figcaption class="mono dim">SPEC.05&nbsp;⌁&nbsp;n.i.w.i.s</figcaption>
+                </figure>
             </div>
 
-            <p class="section-blurb reveal">Cover art, renders &amp; design — scroll through, or open the full portfolio.</p>
-
-            <div class="gallery reveal" tabindex="0" aria-label="Artwork gallery, scrolls horizontally">
-                <figure class="gallery-item"><img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="hell01101111 artwork" loading="lazy"><figcaption class="mono">hell01101111.png</figcaption></figure>
-                <figure class="gallery-item"><img src="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="Spunk Face artwork" loading="lazy"><figcaption class="mono">spunk_face.png</figcaption></figure>
-                <figure class="gallery-item"><img src="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png" alt="Spectral Complications artwork" loading="lazy"><figcaption class="mono">spectral_complications.png</figcaption></figure>
-                <figure class="gallery-item"><img src="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="Questions remix artwork" loading="lazy"><figcaption class="mono">questions_remix.png</figcaption></figure>
-                <figure class="gallery-item"><img src="MEDIA/ALBUM_ART/NIWIS.png" alt="Nothing Is What It Seems artwork" loading="lazy"><figcaption class="mono">niwis.png</figcaption></figure>
-                <a class="gallery-item gallery-more" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
-                    <span class="mono">MORE ON<br>INSTAGRAM&nbsp;↗</span>
-                </a>
-            </div>
-
-            <div class="visual-cta reveal">
-                <a class="btn btn-solid" href="PAGES/OS_PORTFOLIO.pdf" target="_blank" rel="noopener noreferrer">FULL PORTFOLIO&nbsp;(PDF)&nbsp;↗</a>
-                <a class="btn" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">INSTAGRAM&nbsp;↗</a>
-            </div>
+            <p class="text-links mono reveal">
+                <a href="PAGES/OS_PORTFOLIO.pdf" target="_blank" rel="noopener noreferrer">full portfolio (pdf)&#8239;↗</a>
+                <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">instagram&#8239;↗</a>
+            </p>
         </section>
 
         <!-- ============ LESSONS ============ -->
         <section id="lessons" class="section">
-            <div class="section-head">
-                <span class="section-index mono">03</span>
-                <h2 data-scramble>LESSONS</h2>
-                <span class="section-path mono">OS://TEACHING</span>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-label mono"><svg class="sigil" aria-hidden="true"><use href="#sg-lessons"/></svg>&nbsp;03&nbsp;⌁&nbsp;<span data-glitch>lessons</span></span>
+                <h2>lessons</h2>
+            </header>
 
-            <p class="section-blurb reveal">One-on-one production lessons — sound design, arrangement, mixing, workflow. Your project, your pace.</p>
-
-            <div class="lesson-cards">
-                <div class="lesson-card reveal">
-                    <p class="mono lesson-length">1 HOUR</p>
-                    <p class="lesson-price">50€</p>
-                    <p class="mono lesson-desc">private lesson<br>online or in person</p>
-                    <a class="btn" href="#contact">BOOK&nbsp;→</a>
-                </div>
-                <div class="lesson-card reveal">
-                    <p class="mono lesson-length">2 HOURS</p>
-                    <p class="lesson-price">80€</p>
-                    <p class="mono lesson-desc">private lesson<br>online or in person</p>
-                    <a class="btn" href="#contact">BOOK&nbsp;→</a>
-                </div>
+            <div class="lessons reveal">
+                <p class="lessons-line">1 hour — 50€&nbsp;&nbsp;<span class="dim">⌁</span>&nbsp;&nbsp;2 hours — 80€</p>
+                <p class="lessons-note">one-on-one production lessons — sound design, arrangement, mixing, workflow. online or in person.</p>
+                <p class="text-links mono"><a href="#contact">book a session&nbsp;→</a></p>
             </div>
         </section>
 
         <!-- ============ CONTACT ============ -->
         <section id="contact" class="section">
-            <div class="section-head">
-                <span class="section-index mono">04</span>
-                <h2 data-scramble>CONTACT</h2>
-                <span class="section-path mono">OS://TRANSMIT</span>
-            </div>
-
-            <p class="section-blurb reveal">Bookings, lessons, collabs, commissions — send a signal.</p>
+            <header class="sec-head reveal">
+                <span class="sec-label mono"><svg class="sigil" aria-hidden="true"><use href="#sg-contact"/></svg>&nbsp;04&nbsp;⌁&nbsp;<span data-glitch>contact</span></span>
+                <h2>transmit</h2>
+            </header>
 
             <form class="contact-form reveal" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="5800b473-8b00-4436-8b8a-6d17a38d0528">
                 <input type="hidden" name="from_name" value="omansounds.com">
-                <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
+                <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
 
                 <div class="form-row">
-                    <label class="mono" for="cf-name">NAME</label>
-                    <input id="cf-name" type="text" name="name" placeholder="your name" required autocomplete="name">
+                    <label class="mono dim" for="cf-name">name</label>
+                    <input id="cf-name" type="text" name="name" required autocomplete="name">
                 </div>
                 <div class="form-row">
-                    <label class="mono" for="cf-email">EMAIL</label>
-                    <input id="cf-email" type="email" name="email" placeholder="you@domain.com" required autocomplete="email">
+                    <label class="mono dim" for="cf-email">email</label>
+                    <input id="cf-email" type="email" name="email" required autocomplete="email">
                 </div>
                 <div class="form-row">
-                    <label class="mono" for="cf-subject">SUBJECT</label>
+                    <label class="mono dim" for="cf-subject">subject</label>
                     <select id="cf-subject" name="subject" required>
-                        <option value="Lessons">Lessons</option>
-                        <option value="Booking">Booking</option>
-                        <option value="Collaboration">Collaboration</option>
-                        <option value="Artwork / design">Artwork / design</option>
-                        <option value="Other">Other</option>
+                        <option value="Lessons">lessons</option>
+                        <option value="Booking">booking</option>
+                        <option value="Collaboration">collaboration</option>
+                        <option value="Artwork / design">artwork / design</option>
+                        <option value="Other">other</option>
                     </select>
                 </div>
                 <div class="form-row">
-                    <label class="mono" for="cf-message">MESSAGE</label>
-                    <textarea id="cf-message" name="message" rows="5" placeholder="…" required></textarea>
+                    <label class="mono dim" for="cf-message">message</label>
+                    <textarea id="cf-message" name="message" rows="4" required></textarea>
                 </div>
-                <button class="btn btn-solid btn-send" type="submit">TRANSMIT&nbsp;→</button>
-                <p class="form-status mono" id="form-status" role="status" aria-live="polite"></p>
+                <button class="send mono" type="submit">transmit&nbsp;→</button>
+                <p class="form-status mono dim" id="form-status" role="status" aria-live="polite"></p>
             </form>
         </section>
     </main>
 
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
-        <img src="ICONS/OS_LOGO_DARK.png" alt="Oman Sounds logo" class="footer-logo">
-        <div class="footer-icons">
-            <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="ICONS/WHITE ICONS/instagram.png" alt="Instagram"></a>
-            <a href="https://www.facebook.com/omansound" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="ICONS/WHITE ICONS/facebook.png" alt="Facebook"></a>
-            <a href="https://twitter.com/omansounds" target="_blank" rel="noopener noreferrer" aria-label="X"><img src="ICONS/WHITE ICONS/x.png" alt="X"></a>
-            <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><img src="ICONS/WHITE ICONS/soundcloud.png" alt="SoundCloud"></a>
-            <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="ICONS/WHITE ICONS/spotify.png" alt="Spotify"></a>
-            <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp"><img src="ICONS/WHITE ICONS/bandcamp.png" alt="Bandcamp"></a>
-            <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer" aria-label="Tidal"><img src="ICONS/WHITE ICONS/tidal.png" alt="Tidal"></a>
-            <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="ICONS/WHITE ICONS/applemusic.png" alt="Apple Music"></a>
-            <a href="https://www.twitch.tv/omansounds" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><img src="ICONS/WHITE ICONS/twitch.png" alt="Twitch"></a>
-            <a href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="ICONS/WHITE ICONS/youtube.png" alt="YouTube"></a>
-        </div>
-        <p class="footer-line mono">© <span id="year">2026</span> OMAN SOUNDS&nbsp;&nbsp;░&nbsp;&nbsp;<a href="PAGES/impressum.html">IMPRESSUM</a>&nbsp;&nbsp;░&nbsp;&nbsp;01101111</p>
+        <p class="foot-links mono dim">
+            <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">instagram</a> ·
+            <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer">soundcloud</a> ·
+            <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer">spotify</a> ·
+            <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer">bandcamp</a> ·
+            <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer">apple music</a> ·
+            <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer">tidal</a> ·
+            <a href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer">youtube</a> ·
+            <a href="https://www.twitch.tv/omansounds" target="_blank" rel="noopener noreferrer">twitch</a> ·
+            <a href="https://twitter.com/omansounds" target="_blank" rel="noopener noreferrer">x</a> ·
+            <a href="https://www.facebook.com/omansound" target="_blank" rel="noopener noreferrer">facebook</a>
+        </p>
+        <p class="foot-line mono dim">©&nbsp;<span id="year">2026</span>&nbsp;oman sounds&nbsp;&nbsp;⌁&nbsp;&nbsp;<a href="PAGES/impressum.html">impressum</a>&nbsp;&nbsp;⌁&nbsp;&nbsp;01101111</p>
     </footer>
 
     <script src="JS/bg.js"></script>

@@ -1,5 +1,5 @@
-/* OMAN SOUNDS — interactions.
-   Text scramble, binary decode, glitch bursts, custom cursor,
+/* OMAN SOUNDS — interactions (specimen archive).
+   Quiet homoglyph flickers, cursor-follow release previews,
    scroll reveals, nav state, contact form. No dependencies. */
 
 (function () {
@@ -7,57 +7,69 @@
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- text scramble ---------- */
+  /* ---------- unicode homoglyphs ---------- */
 
-  var GLITCH_CHARS = '01!<>-_\\/[]{}=+*^?#░▒▓█▄▀ØΞΔ∇×アオマンサウンド';
+  var HOMOGLYPHS = {
+    a: 'ａ∂α', b: 'ЬƄ', c: 'ϲс¢', d: 'ԁđ', e: 'ЄеΞ', g: 'ɡ9',
+    h: 'һЋ', i: 'ⅰɪ¡', l: 'ⅼŀ', m: 'ⅿʍ', n: 'ոπ', o: 'øΘ0σ',
+    p: 'ρр', r: 'ГЯ', s: 'ѕ§5', t: 'ϮŦ†', u: 'υսμ', v: 'νѵ',
+    w: 'ѡω', x: '×χ', y: 'уγ', z: 'ʐ'
+  };
 
-  function randChar() {
-    return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+  function glyphFor(ch) {
+    var pool = HOMOGLYPHS[ch.toLowerCase()];
+    if (!pool) return ch;
+    return pool[Math.floor(Math.random() * pool.length)];
   }
 
-  function scramble(el, finalText, duration) {
-    if (reducedMotion) { el.textContent = finalText; return; }
-    var frame = 0;
-    var totalFrames = Math.max(1, Math.round((duration || 700) / 30));
-    clearInterval(el._scrambleTimer);
-    el._scrambleTimer = setInterval(function () {
-      frame++;
-      var progress = frame / totalFrames;
-      var out = '';
-      for (var i = 0; i < finalText.length; i++) {
-        var charProgress = progress * finalText.length - i;
-        if (finalText[i] === ' ') { out += ' '; }
-        else if (charProgress > 0.9) { out += finalText[i]; }
-        else if (charProgress > -1.5) { out += randChar(); }
-        else { out += ' '; }
-      }
-      el.textContent = out;
-      if (frame >= totalFrames) {
-        clearInterval(el._scrambleTimer);
-        el.textContent = finalText;
-      }
-    }, 30);
+  /* rare, quiet: every few seconds one label flickers one character */
+
+  var glitchEls = Array.prototype.slice.call(document.querySelectorAll('[data-glitch]'));
+  glitchEls.forEach(function (el) { el.dataset.orig = el.textContent; });
+
+  function flicker() {
+    if (!glitchEls.length) return;
+    var el = glitchEls[Math.floor(Math.random() * glitchEls.length)];
+    var orig = el.dataset.orig;
+    var letters = [];
+    for (var i = 0; i < orig.length; i++) {
+      if (/[a-z]/i.test(orig[i])) letters.push(i);
+    }
+    if (!letters.length) return;
+    var pos = letters[Math.floor(Math.random() * letters.length)];
+    el.textContent = orig.slice(0, pos) + glyphFor(orig[pos]) + orig.slice(pos + 1);
+    setTimeout(function () { el.textContent = orig; }, 260 + Math.random() * 300);
   }
 
-  /* ---------- reveal + scramble headings on scroll ---------- */
+  if (!reducedMotion) {
+    setInterval(function () {
+      if (Math.random() < 0.5) flicker();
+    }, 3200);
+  }
 
-  var scrambleEls = document.querySelectorAll('[data-scramble]');
-  scrambleEls.forEach(function (el) {
-    el.setAttribute('aria-label', el.textContent.trim());
-    el.dataset.finalText = el.textContent.trim();
-  });
+  /* ---------- hero title: settle from glyphs once ---------- */
+
+  if (!reducedMotion) {
+    document.querySelectorAll('.hero-title [data-glitch]').forEach(function (el, idx) {
+      var orig = el.dataset.orig;
+      var steps = 5;
+      var step = 0;
+      setTimeout(function tick() {
+        step++;
+        if (step >= steps) { el.textContent = orig; return; }
+        var out = '';
+        for (var i = 0; i < orig.length; i++) {
+          out += (Math.random() < step / steps) ? orig[i] : glyphFor(orig[i]);
+        }
+        el.textContent = out;
+        setTimeout(tick, 130);
+      }, 250 + idx * 180);
+    });
+  }
+
+  /* ---------- scroll reveals ---------- */
 
   if ('IntersectionObserver' in window) {
-    var headObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          scramble(entry.target, entry.target.dataset.finalText, 800);
-          headObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.6 });
-    scrambleEls.forEach(function (el) { headObserver.observe(el); });
-
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -66,77 +78,48 @@
         }
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
-  } else {
-    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-  }
-
-  /* ---------- hero binary line: decode loop ---------- */
-  /* 01101111 01101101 01100001 01101110 = "oman" */
-
-  var binaryLine = document.getElementById('binary-line');
-  if (binaryLine && !reducedMotion) {
-    var states = [
-      '01101111 01101101 01100001 01101110',
-      '[ o        m        a        n ]',
-      '01101111 01101101 01100001 01101110',
-      '>> signal locked _'
-    ];
-    var stateIdx = 0;
-    setInterval(function () {
-      stateIdx = (stateIdx + 1) % states.length;
-      scramble(binaryLine, states[stateIdx], 600);
-    }, 3600);
-  }
-
-  /* ---------- periodic glitch bursts on hero title ---------- */
-
-  var glitchEls = document.querySelectorAll('.glitch');
-  if (!reducedMotion && glitchEls.length) {
-    setInterval(function () {
-      if (Math.random() < 0.55) return; // irregular rhythm
-      var el = glitchEls[Math.floor(Math.random() * glitchEls.length)];
-      el.classList.add('is-glitching');
-      setTimeout(function () { el.classList.remove('is-glitching'); }, 340);
-    }, 1900);
-  }
-
-  /* ---------- logo easter egg: full page burst ---------- */
-
-  var logo = document.getElementById('logo-glitch');
-  if (logo) {
-    logo.addEventListener('click', function () {
-      if (reducedMotion) return;
-      document.body.classList.remove('burst');
-      void document.body.offsetWidth; // restart animation
-      document.body.classList.add('burst');
-      glitchEls.forEach(function (el) {
-        el.classList.add('is-glitching');
-        setTimeout(function () { el.classList.remove('is-glitching'); }, 340);
-      });
+    document.querySelectorAll('.reveal, .sec-head').forEach(function (el) {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
     });
+  } else {
+    document.querySelectorAll('.reveal, .sec-head').forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---------- custom cursor ---------- */
+  /* ---------- cursor dot + release previews ---------- */
 
-  var cursor = document.querySelector('.cursor');
-  var cursorDot = document.querySelector('.cursor-dot');
-  if (cursor && cursorDot && window.matchMedia('(pointer: fine)').matches) {
-    var cx = -100, cy = -100, tx = -100, ty = -100;
+  var dot = document.querySelector('.cursor-dot');
+  var preview = document.getElementById('preview');
+  var fine = window.matchMedia('(pointer: fine)').matches;
+
+  if (fine && dot) {
+    var px = -100, py = -100, tx = -100, ty = -100;
     document.addEventListener('pointermove', function (e) {
       tx = e.clientX; ty = e.clientY;
-      cursorDot.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
+      dot.style.left = tx + 'px';
+      dot.style.top = ty + 'px';
     }, { passive: true });
-    (function cursorLoop() {
-      cx += (tx - cx) * 0.16;
-      cy += (ty - cy) * 0.16;
-      cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px)' + (cursor.classList.contains('is-hover') ? ' scale(1.7)' : '');
-      requestAnimationFrame(cursorLoop);
-    })();
-    document.querySelectorAll('a, button, input, select, textarea, .gallery').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { cursor.classList.add('is-hover'); });
-      el.addEventListener('mouseleave', function () { cursor.classList.remove('is-hover'); });
+
+    document.querySelectorAll('a, button, input, select, textarea').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { dot.classList.add('is-hover'); });
+      el.addEventListener('mouseleave', function () { dot.classList.remove('is-hover'); });
     });
+
+    if (preview) {
+      (function previewLoop() {
+        px += (tx - px) * 0.12;
+        py += (ty - py) * 0.12;
+        preview.style.transform = 'translate(' + (px + 26) + 'px,' + (py - 95) + 'px)';
+        requestAnimationFrame(previewLoop);
+      })();
+      document.querySelectorAll('[data-preview]').forEach(function (el) {
+        el.addEventListener('mouseenter', function () {
+          preview.src = el.dataset.preview;
+          preview.classList.add('on');
+        });
+        el.addEventListener('mouseleave', function () { preview.classList.remove('on'); });
+      });
+    }
   }
 
   /* ---------- nav active state ---------- */
@@ -162,17 +145,16 @@
     sections.forEach(function (s) { navObserver.observe(s.el); });
   }
 
-  /* ---------- contact form (AJAX with graceful fallback) ---------- */
+  /* ---------- contact form ---------- */
 
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
   if (form && status && window.fetch) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var btn = form.querySelector('.btn-send');
+      var btn = form.querySelector('.send');
       btn.disabled = true;
-      status.classList.remove('error');
-      status.textContent = '>> transmitting…';
+      status.textContent = 'transmitting…';
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -180,14 +162,12 @@
       }).then(function (res) { return res.json(); }).then(function (data) {
         if (data.success) {
           form.reset();
-          status.textContent = '>> transmission received. talk soon.';
+          status.textContent = 'transmission received — talk soon.';
         } else {
-          status.classList.add('error');
-          status.textContent = '>> error — try again or DM on instagram.';
+          status.textContent = 'error — try again, or reach out on instagram.';
         }
       }).catch(function () {
-        status.classList.add('error');
-        status.textContent = '>> connection lost — try again or DM on instagram.';
+        status.textContent = 'connection lost — try again, or reach out on instagram.';
       }).finally(function () {
         btn.disabled = false;
       });
