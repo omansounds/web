@@ -28,12 +28,20 @@
   font-weight: 400; font-style: italic; font-display: swap;
 }
 
+@font-face {
+  font-family: 'Arpon Display';
+  src: url('../FONTS/ArponDisplay.woff2') format('woff2'),
+       url('../FONTS/ArponDisplay.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
 :root {
   --paper: #ededea;
   --ink: #141416;
   --dim: #85857e;
   --hair: rgba(20, 20, 22, 0.16);
   --mono: 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --display: 'Arpon Display', 'Satoshi', 'Helvetica Neue', sans-serif;
   --pad: clamp(1.4rem, 5vw, 5rem);
 }
 
@@ -187,10 +195,11 @@ a { color: inherit; }
 }
 
 .hero-title {
-  font-weight: 300;
-  font-size: clamp(3.6rem, 13vw, 11.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 12vw, 10.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -230,9 +239,10 @@ a { color: inherit; }
 }
 
 .sec-head h2 {
-  font-weight: 300;
-  font-size: clamp(2.4rem, 6.5vw, 5rem);
-  letter-spacing: -0.03em;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  letter-spacing: -0.01em;
   line-height: 1;
   border-bottom: 1px solid var(--hair);
   padding-bottom: 1.2rem;
