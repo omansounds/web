@@ -7,6 +7,28 @@
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- lenis smooth scroll ---------- */
+
+  var lenis = null;
+  if (!reducedMotion && typeof Lenis === 'function') {
+    lenis = new Lenis({ lerp: 0.09, smoothWheel: true, anchors: false });
+    (function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    })(performance.now());
+  }
+
+  /* anchor links glide through lenis when it's active */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target && lenis) {
+        e.preventDefault();
+        lenis.scrollTo(target, { duration: 1.4, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+      }
+    });
+  });
+
   /* ---------- unicode homoglyphs ---------- */
 
   var HOMOGLYPHS = {
@@ -171,6 +193,22 @@
       }).finally(function () {
         btn.disabled = false;
       });
+    });
+  }
+
+  /* ---------- impressum glass overlay ---------- */
+
+  var impDialog = document.getElementById('impressum');
+  var impLink = document.getElementById('impressum-link');
+  var impClose = document.getElementById('impressum-close');
+  if (impDialog && impLink && typeof impDialog.showModal === 'function') {
+    impLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      impDialog.showModal();
+    });
+    impClose.addEventListener('click', function () { impDialog.close(); });
+    impDialog.addEventListener('click', function (e) {
+      if (e.target === impDialog) impDialog.close(); // backdrop click
     });
   }
 

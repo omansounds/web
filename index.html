@@ -248,9 +248,31 @@
             <a href="https://twitter.com/omansounds" target="_blank" rel="noopener noreferrer">x</a> ·
             <a href="https://www.facebook.com/omansound" target="_blank" rel="noopener noreferrer">facebook</a>
         </p>
-        <p class="foot-line mono dim">©&nbsp;<span id="year">2026</span>&nbsp;oman sounds&nbsp;&nbsp;⌁&nbsp;&nbsp;<a href="PAGES/impressum.html">impressum</a>&nbsp;&nbsp;⌁&nbsp;&nbsp;01101111</p>
+        <p class="foot-line mono dim">©&nbsp;<span id="year">2026</span>&nbsp;oman sounds&nbsp;&nbsp;⌁&nbsp;&nbsp;<a href="PAGES/impressum.html" id="impressum-link">impressum</a>&nbsp;&nbsp;⌁&nbsp;&nbsp;01101111</p>
     </footer>
 
+    <!-- ============ IMPRESSUM OVERLAY ============ -->
+    <dialog class="imp" id="impressum" aria-labelledby="imp-title">
+        <div class="imp-card">
+            <button class="imp-close mono" id="impressum-close" type="button" aria-label="Close">✕</button>
+            <p class="mono dim imp-label">⌁&nbsp;legal</p>
+            <h2 id="imp-title">impressum</h2>
+            <dl class="imp-list">
+                <dt class="mono dim">name</dt>
+                <dd>Connor Oman</dd>
+                <dt class="mono dim">address</dt>
+                <dd>Dunckerstrasse 77, 10437 Berlin</dd>
+                <dt class="mono dim">email</dt>
+                <dd><a href="mailto:connor@omansounds.com">connor@omansounds.com</a></dd>
+                <dt class="mono dim">phone</dt>
+                <dd>+1 (615) 351-2024</dd>
+                <dt class="mono dim">ust-idnr.</dt>
+                <dd>DE455055233</dd>
+            </dl>
+        </div>
+    </dialog>
+
+    <script src="JS/lenis.min.js"></script>
     <script src="JS/bg.js"></script>
     <script src="JS/os.js"></script>
 </body>

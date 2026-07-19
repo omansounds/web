@@ -63,17 +63,23 @@ body {
   color: var(--ink);
   font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 300;
-  line-height: 1.55;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+/* lenis smooth-scroll integration */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 
 ::selection { background: var(--ink); color: var(--paper); }
 
 .mono {
   font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
   text-transform: lowercase;
 }
 
@@ -270,13 +276,27 @@ a { color: inherit; }
   padding-bottom: 1.2rem;
 }
 
-/* reveal */
+/* reveal — long expo-out easing for a fluid settle */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transform: translateY(30px);
+  transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.in { opacity: 1; transform: none; }
+
+/* index rows cascade in one after another */
+.index li {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.index.in li { opacity: 1; transform: none; }
+.index.in li:nth-child(2) { transition-delay: 0.08s; }
+.index.in li:nth-child(3) { transition-delay: 0.16s; }
+.index.in li:nth-child(4) { transition-delay: 0.24s; }
+.index.in li:nth-child(5) { transition-delay: 0.32s; }
 
 /* ---------- release index ---------- */
 
@@ -431,13 +451,79 @@ a { color: inherit; }
 
 .foot-line { border-top: 1px solid var(--hair); padding-top: 1.4rem; }
 
+/* ---------- impressum glass overlay ---------- */
+
+.imp {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: min(520px, calc(100vw - 2.4rem));
+  width: 100%;
+  margin: auto;
+  color: var(--ink);
+}
+
+.imp::backdrop {
+  background: color-mix(in srgb, var(--paper) 30%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.imp-card {
+  position: relative;
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+  backdrop-filter: blur(26px) saturate(1.15);
+  -webkit-backdrop-filter: blur(26px) saturate(1.15);
+  border: 1px solid var(--hair);
+  padding: clamp(1.8rem, 5vw, 3rem);
+}
+
+.imp[open] .imp-card { animation: imp-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.imp[open]::backdrop { animation: imp-fade 0.4s ease both; }
+@keyframes imp-in {
+  from { opacity: 0; transform: translateY(26px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes imp-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.imp-label { margin-bottom: 0.9rem; }
+
+.imp h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.imp-list { display: grid; grid-template-columns: auto 1fr; gap: 0.85rem 1.6rem; align-items: baseline; }
+.imp-list dd a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+.imp-list dd a:hover { border-color: var(--ink); }
+
+.imp-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 0;
+  color: var(--dim);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.25s ease, transform 0.4s ease;
+}
+.imp-close:hover { color: var(--ink); transform: rotate(90deg); }
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 700px) {
   .nav { padding: 1rem 1.2rem; }
   .nav-name { display: none; }
   .nav nav { width: 100%; justify-content: space-between; gap: 0.5rem; }
-  .nav nav a { font-size: 0.62rem; letter-spacing: 0.1em; }
+  .nav nav a { font-size: 0.72rem; letter-spacing: 0.08em; }
   .note { display: none; }
   .hero-sigil { top: -2.6em; right: 0.5rem; }
 }
@@ -447,6 +533,8 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .index li { opacity: 1; transform: none; transition: none; }
+  .imp[open] .imp-card, .imp[open]::backdrop { animation: none; }
   .reveal .sigil path, .reveal .sigil circle, .reveal .sigil ellipse,
   .sec-head .sigil path, .sec-head .sigil circle, .sec-head .sigil ellipse {
     stroke-dashoffset: 0; animation: none;
