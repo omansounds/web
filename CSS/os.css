@@ -40,9 +40,18 @@
   --ink: #141416;
   --dim: #85857e;
   --hair: rgba(20, 20, 22, 0.16);
+  color-scheme: light;
   --mono: 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
   --display: 'Arpon Display', 'Satoshi', 'Helvetica Neue', sans-serif;
   --pad: clamp(1.4rem, 5vw, 5rem);
+}
+
+:root[data-theme="dark"] {
+  --paper: #0e0e10;
+  --ink: #e9e9e4;
+  --dim: #7b7b83;
+  --hair: rgba(233, 233, 228, 0.17);
+  color-scheme: dark;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -160,8 +169,9 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.2rem;
   padding: 1.3rem var(--pad);
-  background: linear-gradient(to bottom, rgba(237, 237, 234, 0.9), rgba(237, 237, 234, 0));
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 92%, transparent), transparent);
 }
 
 .nav-name { text-decoration: none; }
@@ -174,6 +184,18 @@ a { color: inherit; }
   transition: color 0.25s ease;
 }
 .nav nav a:hover, .nav nav a.active { color: var(--ink); }
+
+.theme-toggle {
+  background: none;
+  border: 0;
+  color: var(--dim);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.25s ease, transform 0.5s ease;
+}
+.theme-toggle:hover { color: var(--ink); transform: rotate(180deg); }
 
 /* ---------- hero ---------- */
 
@@ -413,8 +435,9 @@ a { color: inherit; }
 
 @media (max-width: 700px) {
   .nav { padding: 1rem 1.2rem; }
-  .nav nav { gap: 0.9rem; }
-  .nav nav a, .nav-name { font-size: 0.6rem; letter-spacing: 0.1em; }
+  .nav-name { display: none; }
+  .nav nav { width: 100%; justify-content: space-between; gap: 0.5rem; }
+  .nav nav a { font-size: 0.62rem; letter-spacing: 0.1em; }
   .note { display: none; }
   .hero-sigil { top: -2.6em; right: 0.5rem; }
 }

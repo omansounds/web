@@ -174,6 +174,17 @@
     });
   }
 
+  /* ---------- theme toggle ---------- */
+
+  var toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('os-theme', next); } catch (e) {}
+    });
+  }
+
   /* ---------- footer year ---------- */
 
   var year = document.getElementById('year');

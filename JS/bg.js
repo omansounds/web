@@ -24,6 +24,7 @@
     'uniform vec2 iResolution;',
     'uniform float iTime;',
     'uniform vec2 iMouse;',
+    'uniform float iDark;',
     '',
     'const int STEPS = 10;',
     '',
@@ -118,10 +119,12 @@
     '  col = pow(col, vec3(1.0/2.2));',
     '  float g = clamp(length(col)/1.8, 0.0, 1.0);',
     '',
-    '  // --- pale lab: faint dark specimen on paper ---',
-    '  vec3 paper = vec3(0.929, 0.929, 0.918);',
-    '  vec3 inkc = vec3(0.52, 0.53, 0.545);',
-    '  vec3 outCol = mix(inkc, paper, smoothstep(0.0, 0.95, g));',
+    '  // --- lab palettes: faint specimen on paper / on black ---',
+    '  float s = smoothstep(0.0, 0.95, g);',
+    '  s = mix(s, pow(s, 0.5), iDark); // dark mode: sink the haze into black',
+    '  vec3 paper = mix(vec3(0.929, 0.929, 0.918), vec3(0.055, 0.055, 0.063), iDark);',
+    '  vec3 inkc = mix(vec3(0.52, 0.53, 0.545), vec3(0.60, 0.61, 0.635), iDark);',
+    '  vec3 outCol = mix(inkc, paper, s);',
     '',
     '  // barely-there cool shift on glitched rows',
     '  outCol = mix(outCol, outCol*vec3(0.94, 0.98, 1.03), min(abs(shift)*30.0, 0.6));',
@@ -166,6 +169,12 @@
   var uRes = gl.getUniformLocation(prog, 'iResolution');
   var uTime = gl.getUniformLocation(prog, 'iTime');
   var uMouse = gl.getUniformLocation(prog, 'iMouse');
+  var uDark = gl.getUniformLocation(prog, 'iDark');
+
+  function darkTarget() {
+    return document.documentElement.dataset.theme === 'dark' ? 1 : 0;
+  }
+  var dark = darkTarget();
 
   // raymarching is per-pixel heavy — render at capped resolution
   function resize() {
@@ -194,9 +203,11 @@
   function draw(t) {
     mx += (mouseX - mx) * 0.04;
     my += (mouseY - my) * 0.04;
+    dark += (darkTarget() - dark) * 0.07;
     gl.uniform2f(uRes, canvas.width, canvas.height);
     gl.uniform1f(uTime, t);
     gl.uniform2f(uMouse, mx, my);
+    gl.uniform1f(uDark, dark);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
@@ -207,8 +218,12 @@
   }
 
   if (reducedMotion) {
-    draw(12.0); // single still frame
-    window.addEventListener('resize', function () { draw(12.0); });
+    var still = function () { dark = darkTarget(); draw(12.0); };
+    still();
+    window.addEventListener('resize', still);
+    new MutationObserver(still).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['data-theme']
+    });
   } else {
     requestAnimationFrame(frame);
   }

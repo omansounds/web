@@ -10,6 +10,16 @@
     <meta property="og:description" content="specimen archive — sound design, production, visual work, lessons.">
     <meta property="og:image" content="MEDIA/ALBUM_ART/hell01101111_ART.png">
     <link rel="icon" href="MEDIA/O_LOGO.png">
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('os-theme'); } catch (e) {}
+            if (t !== 'dark' && t !== 'light') {
+                t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
     <link rel="stylesheet" href="CSS/os.css">
 </head>
 <body id="top">
@@ -55,6 +65,7 @@
             <a href="#lessons" data-glitch>lessons</a>
             <a href="#contact" data-glitch>contact</a>
             <a href="https://omansounds.gumroad.com/" target="_blank" rel="noopener noreferrer">shop&#8239;↗</a>
+            <button class="theme-toggle mono" id="theme-toggle" type="button" aria-label="Toggle dark mode">◐</button>
         </nav>
     </header>
 
