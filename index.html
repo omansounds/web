@@ -57,7 +57,7 @@
     <div class="cursor-ring" aria-hidden="true">
         <svg viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="16.5"/>
-            <path d="M15 6.5 Q28 20 15 33.5"/>
+            <path d="M25 6.5 Q12 20 25 33.5"/>
         </svg>
     </div>
     <img class="preview" id="preview" src="" alt="" aria-hidden="true">
@@ -156,27 +156,38 @@
                 <h2>works</h2>
             </header>
 
-            <div class="works">
-                <figure class="work reveal">
-                    <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="hell01101111 artwork" loading="lazy">
-                    <figcaption class="mono dim">SPEC.01&nbsp;⌁&nbsp;hell01101111</figcaption>
-                </figure>
-                <figure class="work reveal">
-                    <img src="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="Spunk Face artwork" loading="lazy">
-                    <figcaption class="mono dim">SPEC.02&nbsp;⌁&nbsp;spunk face</figcaption>
-                </figure>
-                <figure class="work reveal">
-                    <img src="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png" alt="Spectral Complications artwork" loading="lazy">
-                    <figcaption class="mono dim">SPEC.03&nbsp;⌁&nbsp;spectral complications</figcaption>
-                </figure>
-                <figure class="work reveal">
-                    <img src="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="Questions remix artwork" loading="lazy">
-                    <figcaption class="mono dim">SPEC.04&nbsp;⌁&nbsp;questions rmx</figcaption>
-                </figure>
-                <figure class="work reveal">
-                    <img src="MEDIA/ALBUM_ART/NIWIS.png" alt="Nothing Is What It Seems artwork" loading="lazy">
-                    <figcaption class="mono dim">SPEC.05&nbsp;⌁&nbsp;n.i.w.i.s</figcaption>
-                </figure>
+            <!-- horizontal strip: 5 latest instagram posts.
+                 to update a post: swap the img src (drop new images in MEDIA/IG/)
+                 and point the surrounding <a> href at the post URL. -->
+            <div class="hscroll">
+                <div class="hscroll-sticky">
+                    <div class="htrack">
+                        <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <img src="MEDIA/ALBUM_ART/hell01101111_ART.png" alt="Instagram post 1" loading="lazy">
+                            <span class="mono dim">IG.01&nbsp;⌁&nbsp;hell01101111</span>
+                        </a>
+                        <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <img src="MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.png" alt="Instagram post 2" loading="lazy">
+                            <span class="mono dim">IG.02&nbsp;⌁&nbsp;spunk face</span>
+                        </a>
+                        <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <img src="MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.png" alt="Instagram post 3" loading="lazy">
+                            <span class="mono dim">IG.03&nbsp;⌁&nbsp;spectral complications</span>
+                        </a>
+                        <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <img src="MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.png" alt="Instagram post 4" loading="lazy">
+                            <span class="mono dim">IG.04&nbsp;⌁&nbsp;questions rmx</span>
+                        </a>
+                        <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <img src="MEDIA/ALBUM_ART/NIWIS.png" alt="Instagram post 5" loading="lazy">
+                            <span class="mono dim">IG.05&nbsp;⌁&nbsp;n.i.w.i.s</span>
+                        </a>
+                        <a class="hcard hcard-more" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
+                            <span class="mono">more on<br>instagram&#8239;↗</span>
+                        </a>
+                    </div>
+                    <div class="hprogress" aria-hidden="true"><span></span></div>
+                </div>
             </div>
 
             <p class="text-links mono reveal">

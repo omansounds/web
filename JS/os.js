@@ -120,15 +120,26 @@
 
   if (fine && ring) {
     var px = -100, py = -100, tx = -100, ty = -100;
+    var rx = -100, ry = -100, rs = 1, rsTarget = 1;
     document.addEventListener('pointermove', function (e) {
       tx = e.clientX; ty = e.clientY;
-      ring.style.left = tx + 'px';
-      ring.style.top = ty + 'px';
     }, { passive: true });
 
+    var ringPrev = performance.now();
+    (function ringLoop(now) {
+      var dt = Math.min(((now || performance.now()) - ringPrev) / 1000, 0.25);
+      ringPrev = now || performance.now();
+      var k = 1 - Math.pow(1 - 0.16, dt * 60); // frame-rate independent lag
+      rx += (tx - rx) * k;
+      ry += (ty - ry) * k;
+      rs += (rsTarget - rs) * k;
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) scale(' + rs + ')';
+      requestAnimationFrame(ringLoop);
+    })(performance.now());
+
     document.querySelectorAll('a, button, input, select, textarea').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('is-hover'); });
-      el.addEventListener('mouseleave', function () { ring.classList.remove('is-hover'); });
+      el.addEventListener('mouseenter', function () { ring.classList.add('is-hover'); rsTarget = 1.45; });
+      el.addEventListener('mouseleave', function () { ring.classList.remove('is-hover'); rsTarget = 1; });
     });
 
     if (preview) {
@@ -150,6 +161,28 @@
         el.addEventListener('mouseleave', function () { preview.classList.remove('on'); });
       });
     }
+  }
+
+  /* ---------- works: scroll-driven horizontal strip ---------- */
+
+  var hscroll = document.querySelector('.hscroll');
+  var htrack = document.querySelector('.htrack');
+  var hbar = document.querySelector('.hprogress span');
+
+  if (hscroll && htrack) {
+    var updateStrip = function () {
+      var total = hscroll.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      var top = hscroll.getBoundingClientRect().top;
+      var p = Math.min(Math.max(-top / total, 0), 1);
+      var max = htrack.scrollWidth - window.innerWidth;
+      if (max < 0) max = 0;
+      htrack.style.transform = 'translate3d(' + (-p * max) + 'px, 0, 0)';
+      if (hbar) hbar.style.transform = 'scaleX(' + p + ')';
+    };
+    window.addEventListener('scroll', updateStrip, { passive: true });
+    window.addEventListener('resize', updateStrip);
+    updateStrip();
   }
 
   /* ---------- nav active state ---------- */

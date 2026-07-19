@@ -133,19 +133,17 @@ a { color: inherit; }
 .cursor-ring { display: none; }
 
 @media (pointer: fine) {
-  /* the native cursor becomes the O logo */
-  html, body, a, button, input, select, textarea, label { cursor: none; }
-
+  /* the O logo trails the native cursor */
   .cursor-ring {
     display: block;
     position: fixed;
-    top: -100px; left: -100px;
-    width: 34px; height: 34px;
-    margin: -17px 0 0 -17px;
+    top: 0; left: 0;
+    width: 38px; height: 38px;
+    margin: -19px 0 0 -19px;
     z-index: 100;
     pointer-events: none;
     mix-blend-mode: difference;
-    transition: transform 0.22s ease;
+    transform: translate(-100px, -100px);
   }
   .cursor-ring svg {
     width: 100%; height: 100%;
@@ -155,7 +153,6 @@ a { color: inherit; }
     fill: none;
     transition: stroke-width 0.22s ease;
   }
-  .cursor-ring.is-hover { transform: scale(1.45); }
   .cursor-ring.is-hover svg { stroke-width: 5.4; }
 }
 
@@ -350,25 +347,79 @@ a { color: inherit; }
 .stream a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); transition: color 0.25s ease, border-color 0.25s ease; }
 .stream a:hover { color: var(--ink); border-color: var(--ink); }
 
-/* ---------- works ---------- */
+/* ---------- works: scroll-driven horizontal strip ---------- */
 
-.works { display: flex; flex-direction: column; gap: clamp(4rem, 12vh, 8rem); }
+.hscroll {
+  height: 320vh;
+  width: 100vw;
+  margin-left: calc(-1 * var(--pad));
+}
 
-.work { width: min(440px, 74vw); }
-.work:nth-child(even) { align-self: flex-end; }
-.work:nth-child(3n) { width: min(340px, 60vw); }
+.hscroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-.work img {
+.htrack {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  width: max-content;
+  padding: 0 var(--pad);
+  will-change: transform;
+}
+
+.hcard {
+  display: block;
+  width: min(58vh, 74vw);
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.hcard img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border: 1px solid var(--hair);
   filter: grayscale(0.15);
-  transition: filter 0.5s ease;
+  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.work:hover img { filter: none; }
+.hcard:hover img { filter: none; transform: scale(1.02); }
 
-.work figcaption { margin-top: 0.7rem; }
+.hcard > span { display: block; margin-top: 0.7rem; }
+
+.hcard-more {
+  width: min(38vh, 56vw);
+  aspect-ratio: 1;
+  border: 1px solid var(--hair);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--dim);
+  line-height: 2;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.hcard-more:hover { color: var(--ink); border-color: var(--ink); }
+
+.hprogress {
+  margin: clamp(1.5rem, 4vh, 3rem) var(--pad) 0;
+  height: 1px;
+  background: var(--hair);
+  width: min(320px, 50vw);
+}
+.hprogress span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
 
 .text-links { display: flex; gap: 2.2rem; flex-wrap: wrap; margin-top: clamp(3rem, 8vh, 5rem); }
 .text-links a {
