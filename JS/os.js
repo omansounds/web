@@ -11,7 +11,11 @@
 
   var lenis = null;
   if (!reducedMotion && typeof Lenis === 'function') {
-    lenis = new Lenis({ lerp: 0.09, smoothWheel: true, anchors: false });
+    lenis = new Lenis({
+      duration: 1.3,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true
+    });
     (function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
