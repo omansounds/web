@@ -114,26 +114,54 @@
   var preview = document.getElementById('preview');
   var fine = window.matchMedia('(pointer: fine)').matches;
 
+  var ring = document.querySelector('.cursor-ring');
+
   if (fine && dot) {
     var px = -100, py = -100, tx = -100, ty = -100;
+    var rx = -100, ry = -100, rs = 1, rsTarget = 1;
     document.addEventListener('pointermove', function (e) {
       tx = e.clientX; ty = e.clientY;
       dot.style.left = tx + 'px';
       dot.style.top = ty + 'px';
     }, { passive: true });
 
+    if (ring) {
+      var ringPrev = performance.now();
+      (function ringLoop(now) {
+        var dt = Math.min(((now || performance.now()) - ringPrev) / 1000, 0.25);
+        ringPrev = now || performance.now();
+        var k = 1 - Math.pow(1 - 0.13, dt * 60); // frame-rate independent lerp
+        var ks = 1 - Math.pow(1 - 0.16, dt * 60);
+        rx += (tx - rx) * k;
+        ry += (ty - ry) * k;
+        rs += (rsTarget - rs) * ks;
+        ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) scale(' + rs + ')';
+        requestAnimationFrame(ringLoop);
+      })(performance.now());
+    }
+
     document.querySelectorAll('a, button, input, select, textarea').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { dot.classList.add('is-hover'); });
-      el.addEventListener('mouseleave', function () { dot.classList.remove('is-hover'); });
+      el.addEventListener('mouseenter', function () {
+        dot.classList.add('is-hover');
+        rsTarget = 1.5;
+      });
+      el.addEventListener('mouseleave', function () {
+        dot.classList.remove('is-hover');
+        rsTarget = 1;
+      });
     });
 
     if (preview) {
-      (function previewLoop() {
-        px += (tx - px) * 0.12;
-        py += (ty - py) * 0.12;
+      var prevPrev = performance.now();
+      (function previewLoop(now) {
+        var dt = Math.min(((now || performance.now()) - prevPrev) / 1000, 0.25);
+        prevPrev = now || performance.now();
+        var kp = 1 - Math.pow(1 - 0.12, dt * 60);
+        px += (tx - px) * kp;
+        py += (ty - py) * kp;
         preview.style.transform = 'translate(' + (px + 26) + 'px,' + (py - 95) + 'px)';
         requestAnimationFrame(previewLoop);
-      })();
+      })(performance.now());
       document.querySelectorAll('[data-preview]').forEach(function (el) {
         el.addEventListener('mouseenter', function () {
           preview.src = el.dataset.preview;
