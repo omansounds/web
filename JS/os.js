@@ -54,7 +54,7 @@
   var GLITCH_POOL = '01?#%&<>/\\[]{}=+*ØΞΔ∇×†‡§▓▒░アオマンサ'.split('');
 
   // Hero header tuning:
-  var HERO_GLITCH_EVERY = 950;  // ms between glitch bursts (lower = more often)
+  var HERO_GLITCH_EVERY = 1950;  // ms between glitch bursts (lower = more often)
   var HERO_GLITCH_COUNT = 4;    // how many letters scramble per burst
   var HERO_GLITCH_HOLD  = 190;  // ms the scrambled letters hold before resetting
 
