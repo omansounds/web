@@ -35,13 +35,21 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
+/* Absans — Collletttivo (SIL OFL). UI / menu / label face. */
+@font-face {
+  font-family: 'Absans';
+  src: url('../FONTS/Absans-Regular.woff2') format('woff2'),
+       url('../FONTS/Absans-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
 :root {
   --paper: #ededea;
   --ink: #141416;
   --dim: #85857e;
   --hair: rgba(20, 20, 22, 0.16);
   color-scheme: light;
-  --mono: 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --mono: 'Absans', 'Satoshi', system-ui, sans-serif;
   --display: 'Arpon Display', 'Satoshi', 'Helvetica Neue', sans-serif;
   --pad: clamp(1.4rem, 5vw, 5rem);
 }
