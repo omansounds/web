@@ -45,29 +45,47 @@
     });
   });
 
-  /* ---------- unicode homoglyphs ---------- */
+  /* ============================================================
+     GLITCH TEXT — customise the "oman sounds" header effect here
+     ============================================================ */
 
+  // Characters the header can scramble into. Add / remove / reorder
+  // freely — anything you can type works (letters, symbols, unicode).
+  var GLITCH_POOL = '01?#%&<>/\\[]{}=+*ØΞΔ∇×†‡§▓▒░アオマンサ'.split('');
+
+  // Hero header tuning:
+  var HERO_GLITCH_EVERY = 950;  // ms between glitch bursts (lower = more often)
+  var HERO_GLITCH_COUNT = 4;    // how many letters scramble per burst
+  var HERO_GLITCH_HOLD  = 190;  // ms the scrambled letters hold before resetting
+
+  function poolChar() {
+    return GLITCH_POOL[Math.floor(Math.random() * GLITCH_POOL.length)];
+  }
+
+  /* per-letter homoglyphs — used only for the subtle ambient flicker */
   var HOMOGLYPHS = {
     a: 'ａ∂α', b: 'ЬƄ', c: 'ϲс¢', d: 'ԁđ', e: 'ЄеΞ', g: 'ɡ9',
     h: 'һЋ', i: 'ⅰɪ¡', l: 'ⅼŀ', m: 'ⅿʍ', n: 'ոπ', o: 'øΘ0σ',
     p: 'ρр', r: 'ГЯ', s: 'ѕ§5', t: 'ϮŦ†', u: 'υսμ', v: 'νѵ',
     w: 'ѡω', x: '×χ', y: 'уγ', z: 'ʐ'
   };
-
   function glyphFor(ch) {
     var pool = HOMOGLYPHS[ch.toLowerCase()];
     if (!pool) return ch;
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
-  /* rare, quiet: every few seconds one label flickers one character */
-
   var glitchEls = Array.prototype.slice.call(document.querySelectorAll('[data-glitch]'));
   glitchEls.forEach(function (el) { el.dataset.orig = el.textContent; });
 
+  var heroGlitchEls = Array.prototype.slice.call(document.querySelectorAll('.hero-title [data-glitch]'));
+  // ambient flicker touches everything except the hero title (handled below)
+  var ambientEls = glitchEls.filter(function (el) { return heroGlitchEls.indexOf(el) === -1; });
+
+  /* rare, quiet: every few seconds one label flickers one character */
   function flicker() {
-    if (!glitchEls.length) return;
-    var el = glitchEls[Math.floor(Math.random() * glitchEls.length)];
+    if (!ambientEls.length) return;
+    var el = ambientEls[Math.floor(Math.random() * ambientEls.length)];
     var orig = el.dataset.orig;
     var letters = [];
     for (var i = 0; i < orig.length; i++) {
@@ -85,10 +103,11 @@
     }, 3200);
   }
 
-  /* ---------- hero title: settle from glyphs once ---------- */
+  /* ---------- hero title: settle on load, then keep glitching ---------- */
 
   if (!reducedMotion) {
-    document.querySelectorAll('.hero-title [data-glitch]').forEach(function (el, idx) {
+    // one-time settle out of scrambled glyphs
+    heroGlitchEls.forEach(function (el, idx) {
       var orig = el.dataset.orig;
       var steps = 5;
       var step = 0;
@@ -97,12 +116,28 @@
         if (step >= steps) { el.textContent = orig; return; }
         var out = '';
         for (var i = 0; i < orig.length; i++) {
-          out += (Math.random() < step / steps) ? orig[i] : glyphFor(orig[i]);
+          out += (Math.random() < step / steps) ? orig[i] : poolChar();
         }
         el.textContent = out;
         setTimeout(tick, 130);
       }, 250 + idx * 180);
     });
+
+    // ongoing bursts — scramble several letters briefly, on a fast interval
+    setTimeout(function () {
+      setInterval(function () {
+        heroGlitchEls.forEach(function (el) {
+          var orig = el.dataset.orig;
+          var chars = orig.split('');
+          var n = Math.min(HERO_GLITCH_COUNT, chars.length);
+          for (var k = 0; k < n; k++) {
+            chars[Math.floor(Math.random() * chars.length)] = poolChar();
+          }
+          el.textContent = chars.join('');
+          setTimeout(function () { el.textContent = orig; }, HERO_GLITCH_HOLD);
+        });
+      }, HERO_GLITCH_EVERY);
+    }, 1600);
   }
 
   /* ---------- scroll reveals ---------- */
@@ -149,9 +184,19 @@
       requestAnimationFrame(ringLoop);
     })(performance.now());
 
-    document.querySelectorAll('a, button, input, select, textarea').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('is-hover'); rsTarget = 1.45; });
-      el.addEventListener('mouseleave', function () { ring.classList.remove('is-hover'); rsTarget = 1; });
+    // delegated so dynamically added cards (e.g. instagram) also enlarge it
+    var HOVER_SEL = 'a, button, input, select, textarea';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest && e.target.closest(HOVER_SEL)) {
+        ring.classList.add('is-hover'); rsTarget = 1.45;
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest && e.target.closest(HOVER_SEL)) {
+        var to = e.relatedTarget;
+        var stillInside = to && to.closest && to.closest(HOVER_SEL);
+        if (!stillInside) { ring.classList.remove('is-hover'); rsTarget = 1; }
+      }
     });
 
     if (preview) {
@@ -195,6 +240,51 @@
     window.addEventListener('scroll', updateStrip, { passive: true });
     window.addEventListener('resize', updateStrip);
     updateStrip();
+
+    /* ---- optional: auto-fill the strip from instagram ----
+       Instagram has no free "give me my latest posts" API for a plain
+       static site, so we use Behold (a tiny free bridge that keeps our
+       own design):
+         1. sign up at https://behold.so and connect your instagram
+         2. create a feed, copy its Feed ID
+         3. paste it below. leave '' to keep the hand-picked cards above.
+       When set, the newest posts replace the placeholder cards. */
+    var IG_FEED_ID = '';
+
+    if (IG_FEED_ID && window.fetch) {
+      fetch('https://feeds.behold.so/' + IG_FEED_ID)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var posts = Array.isArray(data) ? data : (data && data.posts) || [];
+          posts = posts.slice(0, 7);
+          if (!posts.length) return;
+          var moreCard = htrack.querySelector('.hcard-more');
+          Array.prototype.slice.call(htrack.querySelectorAll('.hcard:not(.hcard-more)'))
+            .forEach(function (c) { c.parentNode.removeChild(c); });
+          posts.forEach(function (post, i) {
+            var sz = post.sizes || {};
+            var img = (sz.medium || sz.small || sz.large || {}).mediaUrl ||
+                      post.thumbnailUrl || post.mediaUrl;
+            if (!img) return;
+            var a = document.createElement('a');
+            a.className = 'hcard';
+            a.href = post.permalink || 'https://www.instagram.com/omansounds/';
+            a.target = '_blank'; a.rel = 'noopener noreferrer';
+            var im = document.createElement('img');
+            im.src = img; im.loading = 'lazy'; im.alt = 'Instagram post ' + (i + 1);
+            var span = document.createElement('span');
+            span.className = 'mono dim';
+            var cap = (post.prunedCaption || post.caption || '').replace(/\s+/g, ' ').trim().slice(0, 32);
+            span.textContent = 'ig.' + ('0' + (i + 1)).slice(-2) + (cap ? ' ⌁ ' + cap : '');
+            a.appendChild(im); a.appendChild(span);
+            if (moreCard) htrack.insertBefore(a, moreCard); else htrack.appendChild(a);
+          });
+          updateStrip();
+          setTimeout(updateStrip, 500);
+          window.addEventListener('load', updateStrip);
+        })
+        .catch(function () { /* network/feed error — keep the manual cards */ });
+    }
   }
 
   /* ---------- nav active state ---------- */

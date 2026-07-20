@@ -350,6 +350,11 @@ a { color: inherit; }
 
 /* ---------- works: scroll-driven horizontal strip ---------- */
 
+.works-links {
+  margin-top: 0;
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+}
+
 .hscroll {
   height: 320vh;
   width: 100vw;

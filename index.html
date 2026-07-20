@@ -57,7 +57,7 @@
     <div class="cursor-ring" aria-hidden="true">
         <svg viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="16.5"/>
-            <path d="M25 6.5 Q12 20 25 33.5"/>
+            <path d="M19 8 Q5 20 19 33"/>
         </svg>
     </div>
     <img class="preview" id="preview" src="" alt="" aria-hidden="true">
@@ -156,10 +156,18 @@
                 <h2>works</h2>
             </header>
 
-            <!-- horizontal strip: 5 latest instagram posts.
-                 to update a post: swap the img src (drop new images in MEDIA/IG/)
-                 and point the surrounding <a> href at the post URL. -->
-            <div class="hscroll">
+            <p class="text-links mono reveal works-links">
+                <a href="PAGES/OS_PORTFOLIO.pdf" target="_blank" rel="noopener noreferrer">full portfolio (pdf)&#8239;↗</a>
+                <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">instagram&#8239;↗</a>
+            </p>
+
+            <!-- horizontal strip: latest instagram posts.
+                 AUTO MODE: put your Behold feed id in JS/os.js (IG_FEED_ID) and
+                 these cards fill themselves from instagram. See the note there.
+                 MANUAL MODE: leave IG_FEED_ID empty and edit the cards below —
+                 swap each img src (drop images in MEDIA/IG/) and point the
+                 surrounding <a> href at the instagram post URL. -->
+            <div class="hscroll" id="hscroll">
                 <div class="hscroll-sticky">
                     <div class="htrack">
                         <a class="hcard" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">
@@ -189,11 +197,6 @@
                     <div class="hprogress" aria-hidden="true"><span></span></div>
                 </div>
             </div>
-
-            <p class="text-links mono reveal">
-                <a href="PAGES/OS_PORTFOLIO.pdf" target="_blank" rel="noopener noreferrer">full portfolio (pdf)&#8239;↗</a>
-                <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">instagram&#8239;↗</a>
-            </p>
         </section>
 
         <!-- ============ LESSONS ============ -->
