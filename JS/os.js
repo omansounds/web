@@ -249,7 +249,7 @@
          2. create a feed, copy its Feed ID
          3. paste it below. leave '' to keep the hand-picked cards above.
        When set, the newest posts replace the placeholder cards. */
-    var IG_FEED_ID = '';
+    var IG_FEED_ID = 'ozX4ZARa8ownCDiXFchA';
 
     if (IG_FEED_ID && window.fetch) {
       fetch('https://feeds.behold.so/' + IG_FEED_ID)
