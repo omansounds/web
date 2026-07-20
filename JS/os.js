@@ -22,13 +22,25 @@
     })(performance.now());
   }
 
-  /* anchor links glide through lenis when it's active */
+  /* anchor links glide through lenis when it's active.
+     land past each section's top padding so the content sits just
+     below the nav instead of behind a big empty gap. */
+  var NAV_CLEARANCE = 96;
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var target = document.querySelector(a.getAttribute('href'));
       if (target && lenis) {
         e.preventDefault();
-        lenis.scrollTo(target, { duration: 1.4, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+        var offset = 0;
+        if (target.classList.contains('section')) {
+          var padTop = parseFloat(getComputedStyle(target).paddingTop) || 0;
+          offset = padTop - NAV_CLEARANCE;
+        }
+        lenis.scrollTo(target, {
+          offset: offset,
+          duration: 1.4,
+          easing: function (t) { return 1 - Math.pow(1 - t, 4); }
+        });
       }
     });
   });
