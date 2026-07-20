@@ -55,7 +55,7 @@
 
   // Hero header tuning:
   var HERO_GLITCH_EVERY = 8950;  // ms between glitch bursts (lower = more often)
-  var HERO_GLITCH_COUNT = 4;    // how many letters scramble per burst
+  var HERO_GLITCH_COUNT = 2;    // how many letters scramble per burst
   var HERO_GLITCH_HOLD  = 190;  // ms the scrambled letters hold before resetting
 
   function poolChar() {
