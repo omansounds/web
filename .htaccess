@@ -1,5 +1,8 @@
 # OMAN SOUNDS — performance
 
+# ---- Serve index.html as the homepage (was showing a file listing) ----
+DirectoryIndex index.html
+
 # ---- Compression ----
 <IfModule mod_brotli.c>
   AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css application/javascript application/json image/svg+xml
