@@ -1,8 +1,11 @@
 ---
 deployment:
   tasks:
-    - export REPO_PATH=/home/omansoun/repositories/web/
+    - export REPO_PATH=/home/omansoun/repositories/web
     - export DEPLOY_PATH=/home/omansoun/public_html/
-    - echo "Deploying application from $REPO_PATH to $DEPLOY_PATH"
-    - /bin/cp -r $REPO_PATH/* $DEPLOY_PATH
+    - echo "Deploying $REPO_PATH -> $DEPLOY_PATH (mirror)"
+    # rsync mirrors the repo into public_html and DELETES files no longer in
+    # the repo. Excludes keep git internals out of the web root and protect
+    # SSL/cgi files that live in public_html but aren't part of this repo.
+    - /usr/bin/rsync -a --delete --exclude='.git/' --exclude='.cpanel.yml' --exclude='cgi-bin/' --exclude='.well-known/' "$REPO_PATH/" "$DEPLOY_PATH"
     - echo "Deployment completed successfully!"

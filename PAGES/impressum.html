@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum — OMAN SOUNDS</title>
+    <meta name="description" content="Impressum — legal information for oman sounds.">
+    <link rel="icon" href="../MEDIA/OS_LOGO.png">
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('os-theme'); } catch (e) {}
+            if (t !== 'dark' && t !== 'light') {
+                t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+    <link rel="stylesheet" href="../CSS/os.css">
+    <style>
+        /* standalone page layout — the glass card centred on paper */
+        .imp-page {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--pad);
+        }
+        .imp-page .imp-card { width: min(520px, 100%); }
+        .imp-back {
+            display: inline-block;
+            margin-bottom: 1.4rem;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+        .imp-back:hover { color: var(--ink); }
+        /* mirror the overlay's heading style (os.css scopes it to .imp) */
+        .imp-page .imp-card h2 {
+            font-family: var(--display);
+            font-weight: 400;
+            font-size: clamp(1.9rem, 5vw, 2.8rem);
+            letter-spacing: -0.01em;
+            line-height: 1;
+            border-bottom: 1px solid var(--hair);
+            padding-bottom: 1rem;
+            margin-bottom: 1.6rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="imp-page">
+        <div class="imp-card">
+            <a href="../index.html" class="imp-back mono">← back</a>
+            <p class="mono dim imp-label">⌁&nbsp;legal</p>
+            <h2>impressum</h2>
+            <dl class="imp-list">
+                <dt class="mono dim">name</dt>
+                <dd>Connor Oman</dd>
+                <dt class="mono dim">address</dt>
+                <dd>Dunckerstrasse 77, 10437 Berlin</dd>
+                <dt class="mono dim">email</dt>
+                <dd><a href="mailto:connor@omansounds.com">connor@omansounds.com</a></dd>
+                <dt class="mono dim">phone</dt>
+                <dd>+1 (615) 351-2024</dd>
+                <dt class="mono dim">ust-idnr.</dt>
+                <dd>DE455055233</dd>
+            </dl>
+        </div>
+    </main>
+</body>
+</html>
