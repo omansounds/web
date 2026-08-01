@@ -1,0 +1,22 @@
+# OMAN SOUNDS — performance
+
+# ---- Compression ----
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Caching ----
+<IfModule mod_headers.c>
+  # Fonts, images, pdf rarely change — cache hard (filenames are stable)
+  <FilesMatch "\.(woff2?|ttf|otf|png|jpe?g|webp|gif|svg|ico|pdf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # HTML/CSS/JS change often — always revalidate so updates show immediately
+  # (browser keeps a copy but checks with the server; cheap 304 if unchanged)
+  <FilesMatch "\.(html|css|js)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
