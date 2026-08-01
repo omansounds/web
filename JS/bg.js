@@ -56,7 +56,7 @@
     '  mat2 m = mat2(c,-s,s,c);',
     '  vec3 q = vec3(m*p.xy, p.z);',
     '  float Capsule = fCapsule(vec3(q.x+0.3, q.y, q.z), 0.13, 0.8);',
-    '  float Torus = fTorus(p, 0.18, 1.0);',
+    '  float Torus = fTorus(p, 0.1, 1.0);',
     '  return smin(Torus, Capsule, 0.08);',
     '}',
     '',
