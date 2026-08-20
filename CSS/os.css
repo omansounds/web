@@ -364,7 +364,7 @@ a { color: inherit; }
 }
 
 .hscroll {
-  height: 320vh;
+  height: 300vh;
   width: 100vw;
   margin-left: calc(-1 * var(--pad));
 }
@@ -376,7 +376,8 @@ a { color: inherit; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: clamp(1.5rem, 6vh, 4rem);
 }
 
 .htrack {
@@ -593,6 +594,34 @@ a { color: inherit; }
 }
 .imp-close:hover { color: var(--ink); transform: rotate(90deg); }
 
+/* ---------- social / platform icons ---------- */
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.9rem, 2.2vw, 1.5rem);
+}
+.hero .socials { margin-top: clamp(1.6rem, 4vh, 2.6rem); }
+
+.soc { display: inline-flex; line-height: 0; }
+.soc img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.soc:hover img { opacity: 1; transform: translateY(-2px); }
+
+/* black icons on the light theme, white icons on dark */
+.ic-w { display: none; }
+:root[data-theme="dark"] .ic-b { display: none; }
+:root[data-theme="dark"] .ic-w { display: inline-block; }
+
+.footer .socials { justify-content: center; }
+.footer .foot-links { margin-top: 0.4rem; }
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 700px) {
@@ -602,6 +631,34 @@ a { color: inherit; }
   .nav nav a { font-size: 0.72rem; letter-spacing: 0.08em; }
   .note { display: none; }
   .hero-sigil { top: -2.6em; right: 0.5rem; }
+
+  /* works: swap the scroll-jacked pinned strip for a natural swipe row —
+     removes the mobile scroll jank around lessons/contact and the big gap */
+  .hscroll {
+    height: auto;
+    margin-left: 0;
+    width: 100%;
+  }
+  .hscroll-sticky {
+    position: static;
+    height: auto;
+    padding-top: 0;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    margin-left: calc(-1 * var(--pad));
+    width: 100vw;
+    padding-bottom: 0.5rem;
+  }
+  .htrack {
+    transform: none !important;
+    gap: 1rem;
+  }
+  .hcard { width: 72vw; scroll-snap-align: start; }
+  .hcard-more { width: 50vw; }
+  .hprogress { display: none; }
 }
 
 /* ---------- reduced motion ---------- */

@@ -15,7 +15,7 @@
             var t = null;
             try { t = localStorage.getItem('os-theme'); } catch (e) {}
             if (t !== 'dark' && t !== 'light') {
-                t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                t = 'light';
             }
             document.documentElement.dataset.theme = t;
         })();
@@ -92,6 +92,15 @@
                 <em data-glitch>sounds</em>
             </h1>
             <p class="hero-tag mono dim">vj&nbsp;&nbsp;⌁&nbsp;&nbsp;designer&nbsp;&nbsp;⌁&nbsp;&nbsp;sound artist</p>
+            <nav class="socials" aria-label="Streaming and platforms">
+                <a class="soc" href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="ic-b" src="ICONS/black/spotify.png" alt="Spotify" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/spotify.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="ic-b" src="ICONS/black/applemusic.png" alt="Apple Music" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/applemusic.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><img class="ic-b" src="ICONS/black/soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/soundcloud.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp"><img class="ic-b" src="ICONS/black/bandcamp.png" alt="Bandcamp" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/bandcamp.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer" aria-label="Tidal"><img class="ic-b" src="ICONS/black/tidal.png" alt="Tidal" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/tidal.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img class="ic-b" src="ICONS/black/youtube.png" alt="YouTube" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/youtube.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+                <a class="soc" href="https://ra.co/dj/omansounds" target="_blank" rel="noopener noreferrer" aria-label="Resident Advisor"><img class="ic-b" src="ICONS/black/ra.png" alt="Resident Advisor" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/ra.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            </nav>
         </section>
 
         <!-- ============ SOUND ============ -->
@@ -259,14 +268,17 @@
 
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
+        <nav class="socials" aria-label="Streaming and platforms">
+            <a class="soc" href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img class="ic-b" src="ICONS/black/spotify.png" alt="Spotify" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/spotify.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img class="ic-b" src="ICONS/black/applemusic.png" alt="Apple Music" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/applemusic.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><img class="ic-b" src="ICONS/black/soundcloud.png" alt="SoundCloud" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/soundcloud.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp"><img class="ic-b" src="ICONS/black/bandcamp.png" alt="Bandcamp" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/bandcamp.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer" aria-label="Tidal"><img class="ic-b" src="ICONS/black/tidal.png" alt="Tidal" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/tidal.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img class="ic-b" src="ICONS/black/youtube.png" alt="YouTube" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/youtube.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+            <a class="soc" href="https://ra.co/dj/omansounds" target="_blank" rel="noopener noreferrer" aria-label="Resident Advisor"><img class="ic-b" src="ICONS/black/ra.png" alt="Resident Advisor" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/ra.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
+        </nav>
         <p class="foot-links mono dim">
             <a href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer">instagram</a> ·
-            <a href="https://soundcloud.com/omansounds" target="_blank" rel="noopener noreferrer">soundcloud</a> ·
-            <a href="https://open.spotify.com/artist/5oAYGokIo17LPd5hSPGKab" target="_blank" rel="noopener noreferrer">spotify</a> ·
-            <a href="https://omansounds.bandcamp.com/" target="_blank" rel="noopener noreferrer">bandcamp</a> ·
-            <a href="https://music.apple.com/us/artist/oman/1530680207" target="_blank" rel="noopener noreferrer">apple music</a> ·
-            <a href="https://tidal.com/browse/artist/38208561" target="_blank" rel="noopener noreferrer">tidal</a> ·
-            <a href="https://www.youtube.com/@omansounds" target="_blank" rel="noopener noreferrer">youtube</a> ·
             <a href="https://www.twitch.tv/omansounds" target="_blank" rel="noopener noreferrer">twitch</a> ·
             <a href="https://twitter.com/omansounds" target="_blank" rel="noopener noreferrer">x</a> ·
             <a href="https://www.facebook.com/omansound" target="_blank" rel="noopener noreferrer">facebook</a>

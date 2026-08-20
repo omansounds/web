@@ -227,7 +227,10 @@
   var hbar = document.querySelector('.hprogress span');
 
   if (hscroll && htrack) {
+    var stripMobile = window.matchMedia('(max-width: 700px)');
     var updateStrip = function () {
+      // on mobile the strip is a native swipe row (CSS) — don't drive it
+      if (stripMobile.matches) { htrack.style.transform = ''; if (hbar) hbar.style.transform = ''; return; }
       var total = hscroll.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       var top = hscroll.getBoundingClientRect().top;
