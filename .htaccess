@@ -1,7 +1,10 @@
 # OMAN SOUNDS — performance
 
-# ---- Serve index.html as the homepage (was showing a file listing) ----
+# ---- Serve index.html as the homepage; never auto-list the directory ----
+# -Indexes stops the server ever generating a file listing (which LiteSpeed
+# was caching during deploys and serving until the cache expired).
 DirectoryIndex index.html
+Options -Indexes
 
 # ---- Compression ----
 <IfModule mod_brotli.c>
