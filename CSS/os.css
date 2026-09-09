@@ -43,6 +43,20 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
+/* Helvetica Now Display — PREVIEW ONLY (licensed; do not deploy to the
+   public site without a webfont licence). Loads from the .ttf files in
+   FONTS/ so the preview works whether or not the font is installed. */
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Light.ttf')   format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-LightIta.ttf') format('truetype'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Regular.ttf')  format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-RegIta.ttf')   format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Medium.ttf')   format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-MedIta.ttf')   format('truetype'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Bold.ttf')     format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-BoldIta.ttf')  format('truetype'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Black.ttf')    format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-BlackIta.ttf') format('truetype'); font-weight: 900; font-style: italic; font-display: swap; }
+
 :root {
   /* ---- type sources (installed families first, then graceful fallbacks) ---- */
   --f-arpon:       'Arpon Display', 'Helvetica Now Display', sans-serif;
