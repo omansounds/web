@@ -102,6 +102,14 @@
   --body-weight: 300;
 }
 
+/* Helvetica directions: section headings in Display Bold, normal caps
+   (a deliberate contrast against the all-lowercase labels & body). */
+:root[data-type="hybrid"] .sec-head h2,
+:root[data-type="full"] .sec-head h2 {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
