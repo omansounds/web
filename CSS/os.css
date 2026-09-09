@@ -43,9 +43,9 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
-/* Helvetica Now Display — PREVIEW ONLY (licensed; do not deploy to the
-   public site without a webfont licence). Loads from the .ttf files in
-   FONTS/ so the preview works whether or not the font is installed. */
+/* Helvetica Now Display — display & text face (hybrid type system).
+   NOTE: licensed font. A webfont licence is required before this is
+   served on the public site. Loads from the .ttf files in FONTS/. */
 @font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Light.ttf')   format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-LightIta.ttf') format('truetype'); font-weight: 300; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Helvetica Now Display'; src: url('../FONTS/HelveticaNowDisplay-Regular.ttf')  format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -65,10 +65,8 @@
   --f-hel-display: 'Helvetica Now Display', 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --f-hel-text:    'Helvetica Now Text', 'Helvetica Now Display', 'Neue Haas Grotesk Text Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  /* ---- role tokens · DEFAULT = full-Helvetica preview ----
-     The preview switch (bottom-left) flips these live between
-     original / hybrid / full — see the data-type blocks below. */
-  --wordmark: var(--f-hel-display);  /* the "oman sounds" logotype */
+  /* ---- type roles · hybrid system: Arpon logotype + Helvetica Now ---- */
+  --wordmark: var(--f-arpon);        /* the "oman sounds" logotype */
   --display:  var(--f-hel-display);  /* section headings */
   --mono:     var(--f-hel-text);     /* ui / labels */
   --body:     var(--f-hel-text);     /* running text */
@@ -76,7 +74,7 @@
 
   --paper: #ededea;
   --ink: #141416;
-  --dim: #63635d;
+  --dim: #4f4f49;
   --hair: rgba(20, 20, 22, 0.16);
   color-scheme: light;
   --pad: clamp(1.4rem, 5vw, 5rem);
@@ -88,26 +86,6 @@
   --dim: #7b7b83;
   --hair: rgba(233, 233, 228, 0.17);
   color-scheme: dark;
-}
-
-/* ---- type preview switch (PREVIEW BRANCH ONLY) ----
-   hybrid = Arpon logotype + Helvetica everywhere else;
-   original = the shipped Arpon / Absans / Satoshi system. */
-:root[data-type="hybrid"] { --wordmark: var(--f-arpon); }
-:root[data-type="original"] {
-  --wordmark: var(--f-arpon);
-  --display:  var(--f-arpon);
-  --mono:     var(--f-absans);
-  --body:     var(--f-satoshi);
-  --body-weight: 300;
-}
-
-/* Helvetica directions: section headings in Display Bold, normal caps
-   (a deliberate contrast against the all-lowercase labels & body). */
-:root[data-type="hybrid"] .sec-head h2,
-:root[data-type="full"] .sec-head h2 {
-  font-weight: 700;
-  text-transform: capitalize;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -332,7 +310,8 @@ a { color: inherit; }
 
 .sec-head h2 {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 700;
+  text-transform: capitalize;
   font-size: clamp(2.2rem, 6vw, 4.5rem);
   letter-spacing: -0.01em;
   line-height: 1;
@@ -652,8 +631,8 @@ a { color: inherit; }
 
 .soc { display: inline-flex; line-height: 0; }
 .soc img {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
   opacity: 0.5;
   transition: opacity 0.2s ease, transform 0.2s ease;
