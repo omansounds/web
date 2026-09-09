@@ -76,7 +76,7 @@
 
   --paper: #ededea;
   --ink: #141416;
-  --dim: #85857e;
+  --dim: #63635d;
   --hair: rgba(20, 20, 22, 0.16);
   color-scheme: light;
   --pad: clamp(1.4rem, 5vw, 5rem);
@@ -400,9 +400,8 @@ a { color: inherit; }
 }
 .index a:hover .arw { transform: translate(3px, -3px); color: var(--ink); }
 
-.stream { margin-top: 2rem; }
-.stream a { color: var(--dim); text-decoration: none; border-bottom: 1px solid var(--hair); transition: color 0.25s ease, border-color 0.25s ease; }
-.stream a:hover { color: var(--ink); border-color: var(--ink); }
+.stream { margin-top: 2rem; display: flex; align-items: center; flex-wrap: wrap; gap: clamp(0.9rem, 2.2vw, 1.5rem); }
+.stream-label { white-space: nowrap; }
 
 /* ---------- works: scroll-driven horizontal strip ---------- */
 
