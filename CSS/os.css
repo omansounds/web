@@ -136,7 +136,6 @@ html.lenis, html.lenis body { height: auto; }
   font-family: var(--mono);
   font-size: 0.82rem;
   letter-spacing: 0.12em;
-  text-transform: lowercase;
 }
 
 .dim { color: var(--dim); }
