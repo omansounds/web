@@ -49,8 +49,12 @@
   --dim: #85857e;
   --hair: rgba(20, 20, 22, 0.16);
   color-scheme: light;
-  --mono: 'Absans', 'Satoshi', system-ui, sans-serif;
-  --display: 'Arpon Display', 'Satoshi', 'Helvetica Neue', sans-serif;
+  /* --- Helvetica / Neue Haas Grotesk preview ---
+     Prefers Neue Haas Grotesk (renders where it's installed), then falls
+     back cleanly to Helvetica Neue / Helvetica / Arial. No licensed font
+     files are bundled — this is a system-font stack. */
+  --mono: 'Neue Haas Grotesk Text Pro', 'NHaasGroteskTXPro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --display: 'Neue Haas Grotesk Display Pro', 'NHaasGroteskDSPro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --pad: clamp(1.4rem, 5vw, 5rem);
 }
 
@@ -69,8 +73,8 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 300;
+  font-family: 'Neue Haas Grotesk Text Pro', 'NHaasGroteskTXPro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
   font-size: 1.0625rem;
   line-height: 1.6;
   overflow-x: hidden;
