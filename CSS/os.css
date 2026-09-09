@@ -43,6 +43,30 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
+/* Neue Haas Grotesk — preview only.
+   Uses a locally-installed copy first; otherwise loads files you drop into
+   FONTS/ with the names below (any ONE format per family is enough — .otf,
+   .ttf, .woff2 or .woff). If a family only has one weight, the browser
+   synthesises bold/italic, which is fine for a preview. */
+@font-face {
+  font-family: 'Neue Haas Grotesk Display Pro';
+  src: local('Neue Haas Grotesk Display Pro'),
+       local('NeueHaasGrotesk-Display'),
+       url('../FONTS/NeueHaasGrotesk-Display.woff2') format('woff2'),
+       url('../FONTS/NeueHaasGrotesk-Display.otf') format('opentype'),
+       url('../FONTS/NeueHaasGrotesk-Display.ttf') format('truetype');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Haas Grotesk Text Pro';
+  src: local('Neue Haas Grotesk Text Pro'),
+       local('NeueHaasGrotesk-Text'),
+       url('../FONTS/NeueHaasGrotesk-Text.woff2') format('woff2'),
+       url('../FONTS/NeueHaasGrotesk-Text.otf') format('opentype'),
+       url('../FONTS/NeueHaasGrotesk-Text.ttf') format('truetype');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
 :root {
   --paper: #ededea;
   --ink: #141416;
