@@ -18,6 +18,10 @@
                 t = 'light';
             }
             document.documentElement.dataset.theme = t;
+            /* preview-branch only: type-system switch (default full helvetica) */
+            var ty = null;
+            try { ty = localStorage.getItem('os-type'); } catch (e) {}
+            document.documentElement.dataset.type = (ty === 'original' || ty === 'hybrid') ? ty : 'full';
         })();
     </script>
     <link rel="preload" href="FONTS/Absans-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -27,6 +31,53 @@
     <link rel="stylesheet" href="CSS/os.css">
 </head>
 <body id="top">
+
+    <!-- ============ TYPE PREVIEW SWITCH (preview branch only) ============ -->
+    <style>
+        .typeswitch {
+            position: fixed; left: 14px; bottom: 14px; z-index: 9999;
+            display: flex; gap: 2px; padding: 4px;
+            background: color-mix(in srgb, var(--paper) 70%, transparent);
+            border: 1px solid var(--hair);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            font-family: var(--f-hel-text);
+        }
+        .typeswitch button {
+            font: inherit; font-size: 0.7rem; letter-spacing: 0.08em;
+            text-transform: lowercase; cursor: pointer;
+            padding: 0.4rem 0.7rem; border: 0; border-radius: 0;
+            background: transparent; color: var(--dim); transition: color 0.2s, background 0.2s;
+        }
+        .typeswitch button:hover { color: var(--ink); }
+        .typeswitch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+        .typeswitch .ts-label { color: var(--dim); font-size: 0.62rem; padding: 0.4rem 0.5rem 0.4rem 0.6rem; align-self: center; letter-spacing: 0.1em; }
+    </style>
+    <div class="typeswitch" role="group" aria-label="Type preview">
+        <span class="ts-label">type ⌁</span>
+        <button type="button" data-set-type="original">original</button>
+        <button type="button" data-set-type="hybrid">hybrid</button>
+        <button type="button" data-set-type="full">helvetica</button>
+    </div>
+    <script>
+        (function () {
+            var sw = document.querySelector('.typeswitch');
+            if (!sw) return;
+            function sync() {
+                var cur = document.documentElement.dataset.type || 'full';
+                sw.querySelectorAll('button[data-set-type]').forEach(function (b) {
+                    b.setAttribute('aria-pressed', String(b.dataset.setType === cur));
+                });
+            }
+            sw.addEventListener('click', function (e) {
+                var b = e.target.closest('button[data-set-type]');
+                if (!b) return;
+                document.documentElement.dataset.type = b.dataset.setType;
+                try { localStorage.setItem('os-type', b.dataset.setType); } catch (err) {}
+                sync();
+            });
+            sync();
+        })();
+    </script>
 
     <!-- sigil glyph set -->
     <svg class="defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
