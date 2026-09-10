@@ -63,7 +63,7 @@
 
   /* ---- type roles · hybrid system: Arpon logotype + Geist grotesk ---- */
   --wordmark: var(--f-arpon);    /* the "oman sounds" logotype */
-  --display:  var(--f-grotesk);  /* section headings */
+  --display:  var(--f-arpon);  /* section headings */
   --mono:     var(--f-grotesk);  /* ui / labels */
   --body:     var(--f-grotesk);  /* running text */
   --body-weight: 400;
@@ -306,8 +306,7 @@ a { color: inherit; }
 
 .sec-head h2 {
   font-family: var(--display);
-  font-weight: 700;
-  text-transform: capitalize;
+  font-weight: 400;
   font-size: clamp(2.2rem, 6vw, 4.5rem);
   letter-spacing: -0.01em;
   line-height: 1;
