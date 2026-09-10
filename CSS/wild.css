@@ -1,0 +1,64 @@
+/* ============================================================
+   OMAN SOUNDS — WILD branch
+   GSAP-driven motion layer: news ticker, scramble intro,
+   scroll reveals, velocity skew, parallax.
+   Loaded after os.css; only additive / override styles here.
+   ============================================================ */
+
+/* Hand reveals to GSAP: clear os.css's hidden states so nothing is
+   stuck invisible if a script fails, and so gsap.from() can drive it.
+   (.index li has its own CSS reveal in os.css — neutralize it too.) */
+.reveal { opacity: 1; transform: none; transition: none; }
+.index li { opacity: 1; transform: none; transition: none; }
+
+/* ---------- news ticker (box-logo broadcast bar) ---------- */
+
+.ticker {
+  position: relative;
+  margin: 0 calc(-1 * var(--pad)) clamp(2.5rem, 7vh, 5rem);
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  padding: 0.75rem 0;
+  overflow: hidden;
+  /* fade the two edges so items enter/leave softly */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.7rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.ti, .ti-sep {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--dim);
+  font-size: 0.8rem;
+}
+.ti b { color: var(--ink); font-weight: 500; }
+.ti-sep { color: var(--ink); opacity: 0.5; letter-spacing: 0; }
+
+/* the instagram handle: kill the mono tracking so the underscores
+   join into one solid rule instead of spaced dashes */
+.ti-handle {
+  letter-spacing: normal;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  transition: border-color 0.25s ease;
+}
+.ti-handle:hover { border-color: var(--ink); }
+
+/* ---------- helpers GSAP animates ---------- */
+
+/* keep skew/parallax from ever forcing a sideways scrollbar */
+.hero, .section { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { transform: none !important; }
+}

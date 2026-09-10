@@ -21,6 +21,7 @@
       requestAnimationFrame(raf);
     })(performance.now());
   }
+  window.__lenis = lenis; // exposed so wild.js can sync ScrollTrigger
 
   /* anchor links glide through lenis when it's active.
      land past each section's top padding so the content sits just
@@ -97,7 +98,7 @@
     setTimeout(function () { el.textContent = orig; }, 260 + Math.random() * 300);
   }
 
-  if (!reducedMotion) {
+  if (!reducedMotion && !window.__WILD) {
     setInterval(function () {
       if (Math.random() < 0.5) flicker();
     }, 3200);
@@ -105,7 +106,7 @@
 
   /* ---------- hero title: settle on load, then keep glitching ---------- */
 
-  if (!reducedMotion) {
+  if (!reducedMotion && !window.__WILD) {
     // one-time settle out of scrambled glyphs
     heroGlitchEls.forEach(function (el, idx) {
       var orig = el.dataset.orig;
@@ -142,7 +143,7 @@
 
   /* ---------- scroll reveals ---------- */
 
-  if ('IntersectionObserver' in window) {
+  if (!window.__WILD && 'IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -155,9 +156,10 @@
       el.classList.add('reveal');
       revealObserver.observe(el);
     });
-  } else {
+  } else if (!window.__WILD) {
     document.querySelectorAll('.reveal, .sec-head').forEach(function (el) { el.classList.add('in'); });
   }
+  /* when __WILD is set, wild.js (GSAP) owns all reveals & text effects */
 
   /* ---------- cursor dot + release previews ---------- */
 

@@ -23,6 +23,7 @@
     <link rel="preload" href="FONTS/ArponDisplay.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="FONTS/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="CSS/os.css">
+    <link rel="stylesheet" href="CSS/wild.css">
 </head>
 <body id="top">
 
@@ -80,9 +81,21 @@
 
         <!-- ============ HERO ============ -->
         <section class="hero">
-            <div class="hero-meta mono">
-                <span data-glitch>futur__________bio archive</span>
-                <span class="dim">01101111 01101101 01100001 01101110</span>
+            <div class="ticker mono" aria-label="Broadcast">
+                <div class="ticker-track" id="ticker-track">
+                    <span class="ti">latest&nbsp;⌁&nbsp;<b>hell01101111</b>&nbsp;— out now</span>
+                    <span class="ti-sep">◍</span>
+                    <span class="ti">booking&nbsp;2026</span>
+                    <span class="ti-sep">◍</span>
+                    <span class="ti">berlin&nbsp;·&nbsp;52.52°n&nbsp;13.40°e</span>
+                    <span class="ti-sep">◍</span>
+                    <span class="ti"><a class="ti-handle" href="https://www.instagram.com/futur__________bio/" target="_blank" rel="noopener noreferrer">@futur__________bio</a></span>
+                    <span class="ti-sep">◍</span>
+                    <span class="ti">sound&nbsp;/&nbsp;vj&nbsp;/&nbsp;design</span>
+                    <span class="ti-sep">◍</span>
+                    <span class="ti">specimen&nbsp;archive&nbsp;v1.0</span>
+                    <span class="ti-sep">◍</span>
+                </div>
             </div>
             <h1 class="hero-title">
                 <svg class="hero-sigil sigil" aria-hidden="true"><use href="#sg-o"/></svg>
@@ -310,6 +323,14 @@
 
     <script src="JS/lenis.min.js"></script>
     <script src="JS/bg.js"></script>
+    <script>window.__WILD = true; /* hand text effects + reveals to GSAP (wild.js) */</script>
     <script src="JS/os.js"></script>
+    <!-- GSAP (self-hosted, SIL-free plugins) -->
+    <script src="JS/gsap/gsap.min.js"></script>
+    <script src="JS/gsap/ScrollTrigger.min.js"></script>
+    <script src="JS/gsap/SplitText.min.js"></script>
+    <script src="JS/gsap/ScrambleTextPlugin.min.js"></script>
+    <script src="JS/gsap/DrawSVGPlugin.min.js"></script>
+    <script src="JS/wild.js"></script>
 </body>
 </html>
