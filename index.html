@@ -27,6 +27,17 @@
 </head>
 <body id="top">
 
+    <!-- ============ PRELOADER ============ -->
+    <div id="preloader" aria-hidden="true">
+        <div class="pre-inner">
+            <svg class="pre-o" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+                <path d="M16 4 A12 12 0 1 0 28 16"/><path d="M22 6 L26 10"/><circle cx="16" cy="16" r="2.5"/>
+            </svg>
+            <div class="pre-num mono">000</div>
+            <div class="pre-label mono">initialising specimen</div>
+        </div>
+    </div>
+
     <!-- sigil glyph set -->
     <svg class="defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <symbol id="sg-o" viewBox="0 0 32 32">
@@ -114,6 +125,15 @@
                 <a class="soc" href="https://www.instagram.com/omansounds/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img class="ic-b" src="ICONS/black/instagram.png" alt="Instagram" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/instagram.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
                 <a class="soc" href="https://www.twitch.tv/omansounds" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><img class="ic-b" src="ICONS/black/twitch.png" alt="Twitch" width="22" height="22" loading="lazy"><img class="ic-w" src="ICONS/white/twitch.png" alt="" aria-hidden="true" width="22" height="22" loading="lazy"></a>
             </nav>
+        </section>
+
+        <!-- ============ SPECIMEN JAR (physics) ============ -->
+        <section id="lab" class="lab" aria-label="Specimen jar">
+            <div class="lab-head reveal">
+                <span class="sec-label mono">⌁&nbsp;specimen&nbsp;jar</span>
+                <span class="lab-hint mono dim">drag&nbsp;·&nbsp;fling&nbsp;·&nbsp;drop</span>
+            </div>
+            <div class="lab-stage" id="lab-stage"><canvas id="lab-canvas"></canvas></div>
         </section>
 
         <!-- ============ SOUND ============ -->
@@ -331,6 +351,9 @@
     <script src="JS/gsap/SplitText.min.js"></script>
     <script src="JS/gsap/ScrambleTextPlugin.min.js"></script>
     <script src="JS/gsap/DrawSVGPlugin.min.js"></script>
+    <!-- extra libraries: physics + 3D tilt -->
+    <script src="JS/lib/matter.min.js"></script>
+    <script src="JS/lib/vanilla-tilt.min.js"></script>
     <script src="JS/wild.js"></script>
 </body>
 </html>

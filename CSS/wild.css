@@ -62,3 +62,47 @@
 @media (prefers-reduced-motion: reduce) {
   .ticker-track { transform: none !important; }
 }
+
+/* ---------- preloader ---------- */
+#preloader {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper); color: var(--ink);
+}
+.pre-inner { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+.pre-o { width: 54px; height: 54px; color: var(--ink); }
+.pre-num { font-size: clamp(2.4rem, 9vw, 4.5rem); font-family: var(--display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; line-height: 1; }
+.pre-label { color: var(--dim); font-size: 0.72rem; letter-spacing: 0.2em; }
+
+/* ---------- specimen jar (Matter.js) ---------- */
+.lab { padding: clamp(6rem, 14vh, 11rem) var(--pad) 0; max-width: 1200px; margin: 0 auto; }
+.lab-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.lab-hint { font-size: 0.72rem; }
+.lab-stage {
+  position: relative;
+  height: clamp(320px, 56vh, 540px);
+  border: 1px solid var(--hair);
+  overflow: hidden;
+  cursor: grab;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 39px, var(--hair) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, var(--hair) 39px 40px);
+  background-color: color-mix(in srgb, var(--paper) 70%, transparent);
+}
+.lab-stage:active { cursor: grabbing; }
+.lab-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ---------- 3D tilt (VanillaTilt) ---------- */
+.hcard { transform-style: preserve-3d; will-change: transform; }
+.tilt-glare {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--ink) 22%, transparent), transparent 55%);
+  opacity: 0; mix-blend-mode: overlay;
+}
+
+/* ---------- magnetic targets ---------- */
+.magnetic { display: inline-block; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  #preloader { display: none; }
+}
