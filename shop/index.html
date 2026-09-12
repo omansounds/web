@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonts — OMAN SOUNDS Type</title>
+    <meta name="description" content="Typefaces released by oman sounds. Desktop, web and app licences.">
+    <meta name="robots" content="noindex"><!-- PROTOTYPE: keep out of search until live -->
+    <link rel="icon" href="../MEDIA/OS_LOGO.png">
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('os-theme'); } catch (e) {}
+            if (t !== 'dark' && t !== 'light') { t = 'light'; }
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+    <link rel="stylesheet" href="../CSS/os.css">
+    <link rel="stylesheet" href="../CSS/shop.css">
+</head>
+<body class="shop">
+
+    <!-- ============================================================
+         PROTOTYPE NOTICE
+         This is a front-end prototype only. No payment is taken, no
+         personal data is stored or transmitted, no cart data leaves
+         the browser (localStorage only). Before going live this needs:
+           · a real payment/checkout provider (see the note in shop.js)
+           · a cookie/consent banner + privacy policy (Datenschutz)
+           · VAT handling for EU/DE (MwSt.), invoice + right-of-withdrawal
+             waiver for instant digital downloads
+         ============================================================ -->
+    <div class="proto-bar mono">◍&nbsp;prototype&nbsp;— demo only, no real payment is processed</div>
+
+    <header class="shop-nav">
+        <a href="../index.html" class="mono shop-back">←&nbsp;oman&nbsp;sounds</a>
+        <span class="mono dim shop-brand">type&nbsp;foundry</span>
+        <div class="shop-nav-r">
+            <button type="button" id="cart-btn" class="mono shop-cart-btn" aria-label="Open cart">
+                cart&nbsp;<span class="cart-count" id="cart-count">0</span>
+            </button>
+            <button type="button" id="theme-toggle" class="mono theme-toggle" aria-label="Toggle dark mode">◐</button>
+        </div>
+    </header>
+
+    <main class="shop-main">
+        <header class="shop-hero">
+            <p class="mono dim eyebrow">⌁&nbsp;oman&nbsp;sounds&nbsp;type</p>
+            <h1>fonts</h1>
+            <p class="shop-intro">
+                Typefaces drawn and released by oman sounds. Desktop, web and app
+                licences — instant download after purchase.
+                <a href="../eula/">Read the licence&nbsp;→</a>
+            </p>
+        </header>
+
+        <section class="grid" id="product-grid" aria-label="Fonts for sale">
+            <!-- product cards injected by shop.js -->
+        </section>
+
+        <section class="foundry-note">
+            <p class="mono dim eyebrow">⌁&nbsp;licensing</p>
+            <p>
+                Every purchase includes the styles shown and a licence for the use
+                you choose at checkout. Need a company-wide, broadcast or bespoke
+                licence? <a href="../index.html#contact">Get in touch</a>.
+            </p>
+        </section>
+    </main>
+
+    <!-- ============ PRODUCT DIALOG ============ -->
+    <dialog id="product-modal" class="pmodal" aria-labelledby="pm-name">
+        <div class="pmodal-inner">
+            <button type="button" class="pmodal-close mono" data-close aria-label="Close">✕</button>
+            <div class="pmodal-specimen" id="pm-specimen">Aa</div>
+            <div class="pmodal-body">
+                <p class="mono dim" id="pm-kind">display</p>
+                <h2 id="pm-name">Slanted Data</h2>
+                <p class="pm-blurb" id="pm-blurb"></p>
+                <dl class="pm-meta">
+                    <dt class="mono dim">styles</dt><dd id="pm-styles"></dd>
+                    <dt class="mono dim">formats</dt><dd>otf · woff2 · variable</dd>
+                    <dt class="mono dim">licence</dt><dd><a href="../eula/">EULA v1.0 →</a></dd>
+                </dl>
+                <label class="mono dim pm-label" for="pm-tier">licence type</label>
+                <select id="pm-tier" class="pm-tier"></select>
+                <div class="pm-buy">
+                    <span class="pm-price" id="pm-price">€39</span>
+                    <button type="button" class="pm-add" id="pm-add">add to cart</button>
+                </div>
+                <p class="mono dim pm-vat">prices incl. 19% VAT (DE) · instant download</p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ============ CART DRAWER ============ -->
+    <div id="cart-scrim" class="scrim" hidden></div>
+    <aside id="cart" class="cart" aria-label="Cart" aria-hidden="true">
+        <div class="cart-head">
+            <span class="mono">cart</span>
+            <button type="button" class="cart-close mono" data-close-cart aria-label="Close cart">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items"><!-- injected --></div>
+        <div class="cart-foot">
+            <div class="cart-row cart-total">
+                <span class="mono dim">total&nbsp;· incl. VAT</span>
+                <span id="cart-total">€0</span>
+            </div>
+            <button type="button" class="cart-checkout" id="cart-checkout" disabled>checkout</button>
+            <p class="mono dim cart-empty-note" id="cart-empty-note">your cart is empty.</p>
+        </div>
+    </aside>
+
+    <!-- ============ CHECKOUT (mock) ============ -->
+    <dialog id="checkout" class="checkout" aria-labelledby="co-title">
+        <form class="checkout-inner" id="checkout-form">
+            <button type="button" class="pmodal-close mono" data-close-checkout aria-label="Close">✕</button>
+            <p class="mono dim eyebrow">⌁&nbsp;checkout</p>
+            <h2 id="co-title">billing</h2>
+            <div class="co-grid">
+                <label class="co-field"><span class="mono dim">name</span><input name="name" required autocomplete="name"></label>
+                <label class="co-field"><span class="mono dim">email (for the download)</span><input type="email" name="email" required autocomplete="email"></label>
+                <label class="co-field"><span class="mono dim">country</span>
+                    <select name="country" id="co-country">
+                        <option value="DE" selected>Germany</option>
+                        <option value="AT">Austria</option>
+                        <option value="FR">France</option>
+                        <option value="NL">Netherlands</option>
+                        <option value="US">United States</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </label>
+                <label class="co-field"><span class="mono dim">VAT ID (optional, business)</span><input name="vatid" autocomplete="off" placeholder="DE…"></label>
+            </div>
+            <div class="co-summary" id="co-summary"><!-- injected --></div>
+            <label class="co-consent"><input type="checkbox" id="co-terms" required>
+                <span>I agree to the <a href="../eula/">licence</a> and understand the
+                download starts immediately, waiving the 14-day right of withdrawal.</span>
+            </label>
+            <button type="submit" class="co-pay" id="co-pay">pay <span id="co-pay-amt">€0</span></button>
+            <p class="mono dim co-note">◍&nbsp;prototype — clicking "pay" does not charge anything. Payment provider gets wired in next.</p>
+        </form>
+    </dialog>
+
+    <footer class="shop-foot mono">
+        <span>©&nbsp;<span id="y">2026</span>&nbsp;oman&nbsp;sounds&nbsp;type</span>
+        <span class="shop-foot-links">
+            <a href="../PAGES/impressum.html">impressum</a>&nbsp;·&nbsp;<a href="../eula/">eula</a>&nbsp;·&nbsp;<a href="#" id="privacy-link">privacy</a>
+        </span>
+    </footer>
+
+    <script src="../JS/shop.js"></script>
+</body>
+</html>
