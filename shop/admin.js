@@ -65,6 +65,33 @@
     return '<label class="af"><span>' + label + '</span><select data-k="' + key + '">' +
       opts.map(function (o) { return '<option value="' + o + '"' + (o === val ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></label>';
   }
+  function imageField(p) {
+    var src = p.image || '';
+    var isData = src.slice(0, 5) === 'data:';
+    var prev = src ? '<img src="' + esc(src) + '" alt="">' : '<span class="img-none">no image</span>';
+    return '<div class="af"><div class="img-ctrl">' +
+      '<div class="img-prev">' + prev + '</div>' +
+      '<div class="img-btns">' +
+        '<label class="vadd img-up">upload image<input id="af-img-file" type="file" accept="image/*" hidden></label>' +
+        (src ? '<button type="button" class="vadd" id="af-img-clear">remove</button>' : '') +
+      '</div></div>' +
+      '<input data-k="image" value="' + esc(isData ? '' : src) + '" placeholder="' +
+        (isData ? '(uploaded image) — or paste a path to replace' : 'or paste a path / URL (e.g. ../MEDIA/…)') + '"></div>';
+  }
+  // shrink a picked image so products.js stays light (thumbnails don't need to be huge)
+  function resizeToDataURL(file, max, cb) {
+    var img = new Image();
+    img.onload = function () {
+      var r = Math.min(1, max / Math.max(img.width, img.height));
+      var w = Math.round(img.width * r), h = Math.round(img.height * r);
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      try { cb(c.toDataURL('image/jpeg', 0.82)); } catch (e) { cb(null); }
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror = function () { cb(null); };
+    img.src = URL.createObjectURL(file);
+  }
 
   function renderForm() {
     var form = $('#adm-form');
@@ -82,13 +109,9 @@
     html += sel1('delivery', 'delivery', p.delivery || (isFont ? 'download' : 'ship'), ['download', 'ship']);
     html += '<label class="af af-check"><input data-k="soldOut" type="checkbox"' + (p.soldOut ? ' checked' : '') + '><span>sold out</span></label>';
 
-    html += '<div class="adm-sec">display</div>';
-    if (isFont) {
-      html += '<div class="af-row">' + sel1('specimen face', 'face', p.face || 'arpon', ['arpon', 'geist']) + field('specimen glyph', 'glyph', p.glyph) + '</div>';
-      html += field('deliverable file (uploaded in Lemon Squeezy)', 'file', p.file);
-    } else {
-      html += field('image path or URL', 'image', p.image);
-    }
+    html += '<div class="adm-sec">thumbnail image</div>';
+    html += imageField(p);
+    if (isFont) html += field('deliverable file (uploaded in Lemon Squeezy)', 'file', p.file);
 
     html += '<div class="adm-sec">variants · price (€) · checkout link (Lemon Squeezy / Paddle)</div>';
     html += '<div id="vrows">' + (p.variants || []).map(vrowHTML).join('') + '</div>';
@@ -131,6 +154,17 @@
       state[sel].variants.push({ label: '', price: 0, checkout: '' });
       saveDraft(); renderForm(); renderPreview();
     };
+    var imgFile = $('#af-img-file');
+    if (imgFile) imgFile.addEventListener('change', function () {
+      var f = imgFile.files && imgFile.files[0]; if (!f) return;
+      resizeToDataURL(f, 1000, function (durl) {
+        if (!durl) { alert('Could not read that image — try a JPG or PNG.'); return; }
+        state[sel].image = durl; saveDraft(); renderForm(); renderPreview();
+      });
+    });
+    if ($('#af-img-clear')) $('#af-img-clear').onclick = function () {
+      state[sel].image = ''; saveDraft(); renderForm(); renderPreview();
+    };
   }
 
   /* ---------- live preview (same look as the shop card) ---------- */
@@ -138,14 +172,13 @@
     var box = $('#adm-preview');
     if (sel < 0) { box.innerHTML = ''; return; }
     var p = state[sel];
-    var isFont = (p.type || 'font') === 'font';
     var prices = (p.variants || []).map(function (v) { return +v.price || 0; });
     var mn = prices.length ? Math.min.apply(null, prices) : 0;
     var mx = prices.length ? Math.max.apply(null, prices) : 0;
     var priceLabel = p.soldOut ? 'sold out' : (mn === mx ? money(mn) : money(mn) + ' – ' + money(mx));
-    var fig = isFont
-      ? '<div class="card-figure"><span class="card-specimen face-' + (p.face || 'arpon') + '">' + esc(p.glyph || 'Aa') + '</span></div>'
-      : '<div class="card-figure"><img class="card-media" src="' + esc(p.image) + '" alt=""></div>';
+    var fig = p.image
+      ? '<div class="card-figure"><img class="card-media" src="' + esc(p.image) + '" alt=""></div>'
+      : '<div class="card-figure"><span class="card-noimg mono">no image</span></div>';
     box.innerHTML =
       '<p class="prev-label">live preview</p>' +
       '<div class="card' + (p.soldOut ? ' is-sold' : '') + '" style="cursor:default">' + fig +
@@ -156,7 +189,7 @@
   /* ---------- toolbar ---------- */
   $('#adm-add').onclick = function () {
     state.push({ id: '', type: 'font', name: 'New product', kind: '', blurb: '', meta: '',
-      face: 'arpon', glyph: 'Aa', file: '', delivery: 'download', soldOut: false,
+      image: '', file: '', delivery: 'download', soldOut: false,
       variants: [{ label: 'Desktop — up to 5 devices', price: 39, checkout: '' }] });
     sel = state.length - 1; saveDraft(); renderList(); renderForm(); renderPreview();
     window.scrollTo(0, 0);

@@ -8,7 +8,7 @@
 window.OS_PRODUCTS = [
   {
     id: 'slanted-data', type: 'font', name: 'Slanted Data', kind: 'display typeface',
-    face: 'arpon', glyph: 'Aa', meta: '6 weights + italics · 12 styles',
+    image: '../MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.webp', meta: '6 weights + italics · 12 styles',
     delivery: 'download', file: 'slanted-data.zip', soldOut: false,
     blurb: 'The flagship display cut — sharp, off-axis letterforms drawn for covers, posters and the oman sounds identity.',
     variants: [
@@ -20,7 +20,7 @@ window.OS_PRODUCTS = [
   },
   {
     id: 'slanted-data-var', type: 'font', name: 'Slanted Data Variable', kind: 'variable typeface',
-    face: 'geist', glyph: 'Bb', meta: '1 variable file · wght + slnt',
+    image: '../MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.webp', meta: '1 variable file · wght + slnt',
     delivery: 'download', file: 'slanted-data-variable.zip', soldOut: false,
     blurb: 'One file, the full range. Animate weight and slant on the web, or pick any static instance for print.',
     variants: [

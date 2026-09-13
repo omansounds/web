@@ -206,3 +206,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 .card.is-sold .card-figure { opacity: 0.4; }
 .card.is-sold .card-price { color: var(--dim); }
 .pm-add[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* ---------- no-image placeholder ---------- */
+.card-noimg { color: var(--dim); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.card-figure:has(.card-noimg), .pmodal-specimen:has(.card-noimg) { background: color-mix(in srgb, var(--ink) 3%, var(--paper)); }

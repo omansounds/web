@@ -55,9 +55,9 @@
 
   /* ---------- grid ---------- */
   function media(p) {
-    return isFont(p)
-      ? '<div class="card-figure"><span class="card-specimen face-' + p.face + '">' + p.glyph + '</span></div>'
-      : '<div class="card-figure"><img class="card-media" src="' + p.image + '" alt="' + p.name + '" loading="lazy"></div>';
+    return p.image
+      ? '<div class="card-figure"><img class="card-media" src="' + p.image + '" alt="' + p.name + '" loading="lazy"></div>'
+      : '<div class="card-figure"><span class="card-noimg mono">no image</span></div>';
   }
   function renderGrid() {
     var grid = $('#product-grid'); if (!grid) return;
@@ -82,8 +82,8 @@
     var p = byId(id); if (!p || !modal) return;
     current = p;
     var spec = $('#pm-specimen');
-    if (isFont(p)) { spec.className = 'pmodal-specimen face-' + p.face; spec.innerHTML = p.glyph; }
-    else { spec.className = 'pmodal-specimen pmodal-media'; spec.innerHTML = '<img src="' + p.image + '" alt="' + p.name + '">'; }
+    spec.className = 'pmodal-specimen pmodal-media';
+    spec.innerHTML = p.image ? '<img src="' + p.image + '" alt="' + p.name + '">' : '<span class="card-noimg mono">no image</span>';
     $('#pm-kind').textContent = p.kind;
     $('#pm-name').textContent = p.name;
     $('#pm-blurb').textContent = p.blurb;
