@@ -37,39 +37,9 @@
   };
 
   /* ---------- catalogue ----------
-     A product has variants [{label, price}]. Fonts get licence tiers +
-     a `file`; merch gets an image + sizes/options and ships. Swap these
-     for the real catalogue — add merch freely. */
-  var LICENCE = [
-    { label: 'Desktop — up to 5 devices', price: 39 },
-    { label: 'Web (@font-face)', price: 59 },
-    { label: 'App / embedding', price: 120 },
-    { label: 'Complete — all uses', price: 199 }
-  ];
-  var sizes = function (price) { return ['S', 'M', 'L', 'XL'].map(function (s) { return { label: 'Size ' + s, price: price }; }); };
-
-  var PRODUCTS = [
-    { id: 'slanted-data', type: 'font', name: 'Slanted Data', kind: 'display typeface',
-      face: 'arpon', glyph: 'Aa', meta: '6 weights + italics · 12 styles', file: 'slanted-data.zip',
-      blurb: 'The flagship display cut — sharp, off-axis letterforms drawn for covers, posters and the oman sounds identity.',
-      variants: LICENCE },
-    { id: 'slanted-data-var', type: 'font', name: 'Slanted Data Variable', kind: 'variable typeface',
-      face: 'geist', glyph: 'Bb', meta: '1 variable file · wght + slnt', file: 'slanted-data-variable.zip',
-      blurb: 'One file, the full range. Animate weight and slant on the web, or pick any static instance for print.',
-      variants: LICENCE },
-    { id: 'hell-poster', type: 'merch', name: 'hell01101111 Poster', kind: 'A2 riso print',
-      image: '../MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.webp', meta: 'A2 · 200gsm · numbered edition',
-      blurb: 'A2 print of the hell01101111 artwork. Numbered, shipped rolled in a tube.',
-      variants: [{ label: 'A2 print', price: 35 }] },
-    { id: 'spectral-poster', type: 'merch', name: 'Spectral Complications Poster', kind: 'A2 riso print',
-      image: '../MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.webp', meta: 'A2 · 200gsm · numbered edition',
-      blurb: 'A2 print of the Spectral Complications cover. Numbered, shipped rolled.',
-      variants: [{ label: 'A2 print', price: 35 }] },
-    { id: 'sigil-tee', type: 'merch', name: 'Sigil Tee', kind: 'heavyweight shirt',
-      image: '../MEDIA/ALBUM_ART/NIWIS.webp', meta: 'heavyweight cotton · unisex',
-      blurb: 'Heavyweight tee screen-printed with the O sigil. Unisex fit — see the size guide before ordering.',
-      variants: sizes(40) }
-  ];
+     Loaded from shop/products.js (window.OS_PRODUCTS) — edit it with the
+     visual manager at shop/admin.html, or by hand. */
+  var PRODUCTS = (window.OS_PRODUCTS && window.OS_PRODUCTS.length) ? window.OS_PRODUCTS : [];
   var byId = function (id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null; };
   var minPrice = function (p) { return p.variants.reduce(function (m, v) { return Math.min(m, v.price); }, Infinity); };
   var maxPrice = function (p) { return p.variants.reduce(function (m, v) { return Math.max(m, v.price); }, 0); };
@@ -95,10 +65,10 @@
     grid.innerHTML = '';
     PRODUCTS.forEach(function (p) {
       var card = document.createElement('button');
-      card.className = 'card'; card.type = 'button'; card.setAttribute('aria-label', p.name);
+      card.className = 'card' + (p.soldOut ? ' is-sold' : ''); card.type = 'button'; card.setAttribute('aria-label', p.name);
       card.innerHTML = media(p) +
         '<div class="card-cap"><span class="card-name">' + p.name + '</span>' +
-        '<span class="card-price mono">' + priceLabel(p) + '</span></div>';
+        '<span class="card-price mono">' + (p.soldOut ? 'sold out' : priceLabel(p)) + '</span></div>';
       card.addEventListener('click', function () { openProduct(p.id); });
       grid.appendChild(card);
     });
@@ -136,6 +106,7 @@
     tier.style.display = p.variants.length > 1 ? '' : 'none';
     $('#pm-note').textContent = isFont(p) ? 'prices incl. 19% VAT (DE) · instant download' : 'prices incl. 19% VAT (DE) · shipped';
     updatePrice();
+    var addBtn = $('#pm-add'); addBtn.disabled = !!p.soldOut; addBtn.textContent = p.soldOut ? 'sold out' : 'add to cart';
     if (typeof modal.showModal === 'function') modal.showModal();
   }
   function curVariant() { return current.variants[+$('#pm-tier').value || 0]; }

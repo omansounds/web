@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Manager — OMAN SOUNDS</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="../MEDIA/OS_LOGO.png">
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('os-theme'); } catch (e) {}
+            document.documentElement.dataset.theme = (t === 'dark' || t === 'light') ? t : 'light';
+        })();
+    </script>
+    <link rel="stylesheet" href="../CSS/os.css">
+    <link rel="stylesheet" href="../CSS/shop.css">
+    <style>
+        body.admin { padding-bottom: 4rem; }
+        .adm-top { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+            padding: 1rem var(--pad); background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--hair); }
+        .adm-title { font-size: 0.85rem; letter-spacing: 0.12em; }
+        .adm-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .adm-btn { font: inherit; font-size: 0.8rem; letter-spacing: 0.04em; cursor: pointer; padding: 0.55rem 0.9rem; border-radius: 0;
+            background: transparent; color: var(--ink); border: 1px solid var(--hair); transition: border-color .2s, background .2s; }
+        .adm-btn:hover { border-color: var(--ink); }
+        .adm-btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+        .adm-hint { padding: 0.8rem var(--pad); font-size: 0.72rem; letter-spacing: 0.06em; border-bottom: 1px solid var(--hair); }
+        .adm-main { display: grid; grid-template-columns: 300px 1fr; gap: 0; align-items: start; }
+        .adm-list { border-right: 1px solid var(--hair); min-height: 70vh; }
+        .adm-li { display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem var(--pad); border-bottom: 1px solid var(--hair); cursor: pointer; }
+        .adm-li:hover { background: color-mix(in srgb, var(--ink) 3%, var(--paper)); }
+        .adm-li.sel { background: color-mix(in srgb, var(--ink) 6%, var(--paper)); }
+        .adm-li .ali-name { flex: 1; font-size: 0.9rem; }
+        .adm-li .ali-badge { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--hair); padding: 0.15rem 0.4rem; }
+        .adm-li .ali-move { display: flex; gap: 0.15rem; }
+        .adm-li .ali-move button, .ali-del { background: none; border: 0; color: var(--dim); cursor: pointer; font-size: 0.8rem; padding: 0.1rem 0.25rem; }
+        .adm-li .ali-move button:hover, .ali-del:hover { color: var(--ink); }
+        .adm-edit { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; }
+        .adm-form { padding: clamp(1.4rem, 3vw, 2.4rem); border-right: 1px solid var(--hair); }
+        .adm-preview { padding: clamp(1.4rem, 3vw, 2.4rem); position: sticky; top: 120px; }
+        .af { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.1rem; }
+        .af > span { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); font-family: var(--mono); }
+        .af input, .af textarea, .af select { width: 100%; font: inherit; font-size: 0.92rem; color: var(--ink); background: transparent;
+            border: 1px solid var(--hair); border-radius: 0; padding: 0.6rem 0.7rem; appearance: none; }
+        .af textarea { min-height: 5rem; resize: vertical; }
+        .af-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .af-check { flex-direction: row; align-items: center; gap: 0.6rem; }
+        .af-check input { width: auto; }
+        .vrow { display: grid; grid-template-columns: 1.4fr 0.6fr 1.6fr auto; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center; }
+        .vrow input { padding: 0.5rem 0.6rem; }
+        .vrow .vdel { background: none; border: 0; color: var(--dim); cursor: pointer; font-size: 0.85rem; }
+        .vrow .vdel:hover { color: var(--ink); }
+        .vadd { font: inherit; font-size: 0.78rem; letter-spacing: 0.04em; cursor: pointer; padding: 0.45rem 0.8rem; background: transparent; color: var(--ink); border: 1px dashed var(--hair); }
+        .vadd:hover { border-color: var(--ink); }
+        .adm-sec { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin: 1.6rem 0 0.8rem; padding-top: 1.2rem; border-top: 1px solid var(--hair); }
+        .adm-sec:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+        .prev-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; }
+        .adm-empty { padding: 3rem var(--pad); color: var(--dim); }
+        @media (max-width: 900px) { .adm-main { grid-template-columns: 1fr; } .adm-list { border-right: 0; border-bottom: 1px solid var(--hair); min-height: 0; } .adm-edit { grid-template-columns: 1fr; } .adm-form { border-right: 0; border-bottom: 1px solid var(--hair); } .adm-preview { position: static; } }
+    </style>
+</head>
+<body class="shop admin">
+    <header class="adm-top">
+        <div class="adm-title mono">◍&nbsp;shop manager&nbsp;<span class="dim">· local editor</span></div>
+        <div class="adm-actions">
+            <a class="adm-btn" href="index.html">view shop →</a>
+            <button type="button" class="adm-btn" id="adm-add">+ product</button>
+            <button type="button" class="adm-btn" id="adm-load">revert to file</button>
+            <button type="button" class="adm-btn primary" id="adm-export">export products.js</button>
+        </div>
+    </header>
+    <p class="adm-hint mono dim">
+        Edits autosave to this browser. <b>Export products.js</b> downloads the catalogue → drop it into <code>shop/</code> and commit.
+        Real payments, VAT, stock &amp; font downloads are managed in Lemon Squeezy / Paddle — paste each variant's checkout link below when ready.
+    </p>
+    <main class="adm-main">
+        <aside class="adm-list" id="adm-list"></aside>
+        <section class="adm-edit">
+            <div class="adm-form" id="adm-form"></div>
+            <div class="adm-preview" id="adm-preview"></div>
+        </section>
+    </main>
+
+    <script src="products.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

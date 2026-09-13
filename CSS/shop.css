@@ -201,3 +201,8 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
   transition: background 0.2s, color 0.2s;
 }
 .co-dl:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- sold out ---------- */
+.card.is-sold .card-figure { opacity: 0.4; }
+.card.is-sold .card-price { color: var(--dim); }
+.pm-add[disabled] { opacity: 0.4; cursor: not-allowed; }
