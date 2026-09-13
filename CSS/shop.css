@@ -1,7 +1,7 @@
 /* ============================================================
-   OMAN SOUNDS — type foundry shop (prototype)
-   Reuses os.css tokens (--paper/--ink/--dim/--hair, --display=Arpon,
-   --body=Geist, --mono). Front-end only; no payment wiring.
+   OMAN SOUNDS — shop (prototype)
+   Reuses os.css tokens. Arpon (--display) is used ONLY for the "shop"
+   title; everything else is Geist (--f-grotesk). Front-end only.
    ============================================================ */
 
 body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
@@ -48,7 +48,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 
 .shop-hero { margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .shop-hero h1 {
-  font-family: var(--display); font-weight: 700; text-transform: capitalize;
+  font-family: var(--display); font-weight: 400; text-transform: capitalize;
   font-size: clamp(3rem, 12vw, 8rem); line-height: 0.95; letter-spacing: -0.02em;
   margin: 0.4rem 0 1.2rem;
 }
@@ -70,7 +70,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
   border-bottom: 1px solid var(--hair); overflow: hidden;
 }
 .card-info { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.3rem 1.4rem; }
-.card-name { font-family: var(--display); font-size: 1.5rem; letter-spacing: -0.01em; }
+.card-name { font-family: var(--f-grotesk); font-size: 1.5rem; letter-spacing: -0.01em; }
 .card-kind { font-size: 0.72rem; letter-spacing: 0.12em; color: var(--dim); display: block; margin-top: 0.3rem; }
 .card-from { font-size: 0.82rem; color: var(--dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .card-from b { color: var(--ink); font-weight: 500; }
@@ -104,7 +104,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
   border-right: 1px solid var(--hair); min-height: 360px; overflow: hidden;
 }
 .pmodal-body { padding: clamp(1.6rem, 4vw, 2.6rem); }
-.pmodal-body h2 { font-family: var(--display); font-weight: 700; text-transform: capitalize; font-size: clamp(2rem, 5vw, 3rem); line-height: 1; letter-spacing: -0.01em; margin: 0.3rem 0 1rem; }
+.pmodal-body h2 { font-family: var(--f-grotesk); font-weight: 700; text-transform: capitalize; font-size: clamp(2rem, 5vw, 3rem); line-height: 1; letter-spacing: -0.01em; margin: 0.3rem 0 1rem; }
 .pm-blurb { font-size: 0.98rem; margin-bottom: 1.4rem; }
 .pm-meta { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.4rem; margin-bottom: 1.6rem; font-size: 0.9rem; }
 .pm-meta a { color: inherit; border-bottom: 1px solid var(--hair); text-decoration: none; }
@@ -116,7 +116,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 }
 .pm-tier { cursor: pointer; margin-bottom: 1.3rem; }
 .pm-buy { display: flex; align-items: center; gap: 1rem; }
-.pm-price { font-family: var(--display); font-size: 1.9rem; font-variant-numeric: tabular-nums; }
+.pm-price { font-family: var(--f-grotesk); font-size: 1.9rem; font-variant-numeric: tabular-nums; }
 .pm-add, .cart-checkout, .co-pay {
   flex: 1; font: inherit; cursor: pointer; letter-spacing: 0.04em;
   background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
@@ -139,7 +139,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 .cart-close:hover { color: var(--ink); }
 .cart-items { flex: 1; overflow-y: auto; padding: 0.5rem var(--pad); }
 .cart-line { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--hair); }
-.cart-line .cl-name { font-family: var(--display); font-size: 1.15rem; }
+.cart-line .cl-name { font-family: var(--f-grotesk); font-size: 1.15rem; }
 .cart-line .cl-tier { grid-column: 1; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--dim); }
 .cart-line .cl-price { grid-row: 1; grid-column: 2; font-variant-numeric: tabular-nums; }
 .cart-line .cl-remove { grid-row: 2; grid-column: 2; justify-self: end; background: none; border: 0; color: var(--dim); cursor: pointer; font-size: 0.72rem; letter-spacing: 0.1em; }
@@ -147,7 +147,7 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 .cart-foot { padding: 1.3rem var(--pad); border-top: 1px solid var(--hair); }
 .cart-row { display: flex; align-items: baseline; justify-content: space-between; }
 .cart-total { margin-bottom: 1rem; }
-.cart-total span:last-child { font-family: var(--display); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.cart-total span:last-child { font-family: var(--f-grotesk); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
 .cart-checkout { width: 100%; }
 .cart-checkout[disabled] { opacity: 0.35; cursor: not-allowed; }
 .cart-empty-note { text-align: center; margin-top: 0.9rem; font-size: 0.72rem; letter-spacing: 0.1em; }
@@ -156,14 +156,14 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 .checkout { border: 0; padding: 0; background: transparent; color: var(--ink); max-width: min(560px, calc(100vw - 2rem)); width: 100%; margin: auto; }
 .checkout::backdrop { background: color-mix(in srgb, var(--paper) 40%, transparent); backdrop-filter: blur(8px); }
 .checkout-inner { position: relative; border: 1px solid var(--hair); background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(24px); padding: clamp(1.8rem, 5vw, 3rem); }
-.checkout-inner h2 { font-family: var(--display); font-weight: 700; text-transform: capitalize; font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0.3rem 0 1.4rem; }
+.checkout-inner h2 { font-family: var(--f-grotesk); font-weight: 700; text-transform: capitalize; font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0.3rem 0 1.4rem; }
 .co-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.4rem; }
 .co-field { display: flex; flex-direction: column; gap: 0.4rem; }
 .co-field span { letter-spacing: 0.1em; }
 .co-field:nth-child(1), .co-field:nth-child(2) { grid-column: 1 / -1; }
 .co-summary { border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); padding: 1rem 0; margin-bottom: 1.2rem; display: grid; gap: 0.5rem; }
 .co-sum-row { display: flex; justify-content: space-between; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
-.co-sum-row.total { font-family: var(--display); font-size: 1.3rem; }
+.co-sum-row.total { font-family: var(--f-grotesk); font-size: 1.3rem; }
 .co-consent { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.85rem; margin-bottom: 1.3rem; }
 .co-consent a { color: inherit; }
 .co-pay { width: 100%; }
@@ -179,3 +179,20 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
   .pmodal-specimen { border-right: 0; border-bottom: 1px solid var(--hair); min-height: 220px; }
   .co-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- merch media (product images) ---------- */
+.card-media { height: 200px; border-bottom: 1px solid var(--hair); overflow: hidden; background: color-mix(in srgb, var(--ink) 3%, var(--paper)); }
+.card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pmodal-media { padding: 0; }
+.pmodal-media img { width: 100%; height: 100%; max-height: 460px; object-fit: cover; display: block; }
+
+/* ---------- shipping block + instant downloads ---------- */
+.co-ship { margin-bottom: 1.4rem; display: grid; gap: 1rem; }
+.co-dls { display: grid; gap: 0.6rem; }
+.co-dl {
+  font: inherit; text-align: left; cursor: pointer;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); padding: 0.7rem 0.9rem; border-radius: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.co-dl:hover { background: var(--ink); color: var(--paper); }

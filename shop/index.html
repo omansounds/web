@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fonts — OMAN SOUNDS Type</title>
-    <meta name="description" content="Typefaces released by oman sounds. Desktop, web and app licences.">
+    <title>Shop — OMAN SOUNDS</title>
+    <meta name="description" content="Shop — fonts, prints and merch from oman sounds.">
     <meta name="robots" content="noindex"><!-- PROTOTYPE: keep out of search until live -->
     <link rel="icon" href="../MEDIA/OS_LOGO.png">
     <script>
@@ -34,7 +34,6 @@
 
     <header class="shop-nav">
         <a href="../index.html" class="mono shop-back">←&nbsp;oman&nbsp;sounds</a>
-        <span class="mono dim shop-brand">type&nbsp;foundry</span>
         <div class="shop-nav-r">
             <button type="button" id="cart-btn" class="mono shop-cart-btn" aria-label="Open cart">
                 cart&nbsp;<span class="cart-count" id="cart-count">0</span>
@@ -45,12 +44,12 @@
 
     <main class="shop-main">
         <header class="shop-hero">
-            <p class="mono dim eyebrow">⌁&nbsp;oman&nbsp;sounds&nbsp;type</p>
-            <h1>fonts</h1>
+            <p class="mono dim eyebrow">⌁&nbsp;oman&nbsp;sounds</p>
+            <h1>shop</h1>
             <p class="shop-intro">
-                Typefaces drawn and released by oman sounds. Desktop, web and app
-                licences — instant download after purchase.
-                <a href="../eula/">Read the licence&nbsp;→</a>
+                Fonts, prints and merch from oman sounds. Digital goods download
+                instantly after purchase; prints &amp; apparel ship worldwide.
+                <a href="../eula/">Font licence&nbsp;→</a>
             </p>
         </header>
 
@@ -77,18 +76,14 @@
                 <p class="mono dim" id="pm-kind">display</p>
                 <h2 id="pm-name">Slanted Data</h2>
                 <p class="pm-blurb" id="pm-blurb"></p>
-                <dl class="pm-meta">
-                    <dt class="mono dim">styles</dt><dd id="pm-styles"></dd>
-                    <dt class="mono dim">formats</dt><dd>otf · woff2 · variable</dd>
-                    <dt class="mono dim">licence</dt><dd><a href="../eula/">EULA v1.0 →</a></dd>
-                </dl>
-                <label class="mono dim pm-label" for="pm-tier">licence type</label>
+                <dl class="pm-meta" id="pm-meta"></dl>
+                <label class="mono dim pm-label" id="pm-tier-label" for="pm-tier">licence type</label>
                 <select id="pm-tier" class="pm-tier"></select>
                 <div class="pm-buy">
                     <span class="pm-price" id="pm-price">€39</span>
                     <button type="button" class="pm-add" id="pm-add">add to cart</button>
                 </div>
-                <p class="mono dim pm-vat">prices incl. 19% VAT (DE) · instant download</p>
+                <p class="mono dim pm-vat" id="pm-note">prices incl. 19% VAT (DE) · instant download</p>
             </div>
         </div>
     </dialog>
@@ -131,6 +126,13 @@
                     </select>
                 </label>
                 <label class="co-field"><span class="mono dim">VAT ID (optional, business)</span><input name="vatid" autocomplete="off" placeholder="DE…"></label>
+            </div>
+            <div class="co-ship" id="co-ship" hidden>
+                <label class="co-field"><span class="mono dim">shipping address</span><input name="address" autocomplete="street-address" placeholder="street, no."></label>
+                <div class="co-grid">
+                    <label class="co-field"><span class="mono dim">postcode</span><input name="zip" autocomplete="postal-code"></label>
+                    <label class="co-field"><span class="mono dim">city</span><input name="city" autocomplete="address-level2"></label>
+                </div>
             </div>
             <div class="co-summary" id="co-summary"><!-- injected --></div>
             <label class="co-consent"><input type="checkbox" id="co-terms" required>
