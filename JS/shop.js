@@ -58,7 +58,7 @@
       blurb: 'One file, the full range. Animate weight and slant on the web, or pick any static instance for print.',
       variants: LICENCE },
     { id: 'hell-poster', type: 'merch', name: 'hell01101111 Poster', kind: 'A2 riso print',
-      image: '../MEDIA/ALBUM_ART/hell01101111_ART.webp', meta: 'A2 · 200gsm · numbered edition',
+      image: '../MEDIA/ALBUM_ART/QUESTIONS_REMIX_Small.webp', meta: 'A2 · 200gsm · numbered edition',
       blurb: 'A2 print of the hell01101111 artwork. Numbered, shipped rolled in a tube.',
       variants: [{ label: 'A2 print', price: 35 }] },
     { id: 'spectral-poster', type: 'merch', name: 'Spectral Complications Poster', kind: 'A2 riso print',
@@ -66,12 +66,14 @@
       blurb: 'A2 print of the Spectral Complications cover. Numbered, shipped rolled.',
       variants: [{ label: 'A2 print', price: 35 }] },
     { id: 'sigil-tee', type: 'merch', name: 'Sigil Tee', kind: 'heavyweight shirt',
-      image: '../MEDIA/OS_LOGO_BLACK.png', meta: 'heavyweight cotton · unisex',
+      image: '../MEDIA/ALBUM_ART/NIWIS.webp', meta: 'heavyweight cotton · unisex',
       blurb: 'Heavyweight tee screen-printed with the O sigil. Unisex fit — see the size guide before ordering.',
       variants: sizes(40) }
   ];
   var byId = function (id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null; };
   var minPrice = function (p) { return p.variants.reduce(function (m, v) { return Math.min(m, v.price); }, Infinity); };
+  var maxPrice = function (p) { return p.variants.reduce(function (m, v) { return Math.max(m, v.price); }, 0); };
+  var priceLabel = function (p) { var mn = minPrice(p), mx = maxPrice(p); return mn === mx ? money(mn) : money(mn) + ' – ' + money(mx); };
   var isFont = function (p) { return p.type === 'font'; };
 
   /* ---------- cart ---------- */
@@ -84,20 +86,19 @@
   /* ---------- grid ---------- */
   function media(p) {
     return isFont(p)
-      ? '<div class="card-specimen face-' + p.face + '">' + p.glyph + '</div>'
-      : '<div class="card-media"><img src="' + p.image + '" alt="' + p.name + '" loading="lazy"></div>';
+      ? '<div class="card-figure"><span class="card-specimen face-' + p.face + '">' + p.glyph + '</span></div>'
+      : '<div class="card-figure"><img class="card-media" src="' + p.image + '" alt="' + p.name + '" loading="lazy"></div>';
   }
   function renderGrid() {
     var grid = $('#product-grid'); if (!grid) return;
+    var rl = $('#results-line'); if (rl) rl.textContent = 'showing all ' + PRODUCTS.length + ' products';
     grid.innerHTML = '';
     PRODUCTS.forEach(function (p) {
-      var single = p.variants.length === 1;
       var card = document.createElement('button');
       card.className = 'card'; card.type = 'button'; card.setAttribute('aria-label', p.name);
       card.innerHTML = media(p) +
-        '<div class="card-info"><span><span class="card-name">' + p.name + '</span>' +
-        '<span class="card-kind">' + p.kind + '</span></span>' +
-        '<span class="card-from">' + (single ? '' : 'from&nbsp;') + '<b>' + money(minPrice(p)) + '</b></span></div>';
+        '<div class="card-cap"><span class="card-name">' + p.name + '</span>' +
+        '<span class="card-price mono">' + priceLabel(p) + '</span></div>';
       card.addEventListener('click', function () { openProduct(p.id); });
       grid.appendChild(card);
     });
