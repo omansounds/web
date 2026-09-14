@@ -29,12 +29,17 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
 
   /* ---------- payment provider (wire up later) ---------- */
-  var PAYMENTS = {
-    provider: null,            // 'lemonsqueezy' | 'paddle' — null keeps the mock
-    // Lemon Squeezy: 'productId|variantLabel' -> hosted checkout URL
-    // Paddle:        'productId|variantLabel' -> priceId
-    map: {}
-  };
+  var PAYMENTS = { provider: 'lemonsqueezy' }; // variants carry their own checkout URLs
+
+  // Open a Lemon Squeezy checkout as an overlay (falls back to a new tab).
+  function openBuy(url) {
+    var u = url + (url.indexOf('?') > -1 ? '&' : '?') + 'embed=1';
+    if (window.LemonSqueezy && window.LemonSqueezy.Url && window.LemonSqueezy.Url.Open) {
+      window.LemonSqueezy.Url.Open(u);
+    } else {
+      window.open(url, '_blank', 'noopener');
+    }
+  }
 
   /* ---------- catalogue ----------
      Loaded from shop/products.js (window.OS_PRODUCTS) — edit it with the
@@ -105,17 +110,23 @@
     });
     tier.style.display = p.variants.length > 1 ? '' : 'none';
     $('#pm-note').textContent = isFont(p) ? 'prices incl. 19% VAT (DE) · instant download' : 'prices incl. 19% VAT (DE) · shipped';
+    $('#pm-add').disabled = !!p.soldOut;
     updatePrice();
-    var addBtn = $('#pm-add'); addBtn.disabled = !!p.soldOut; addBtn.textContent = p.soldOut ? 'sold out' : 'add to cart';
     if (typeof modal.showModal === 'function') modal.showModal();
   }
   function curVariant() { return current.variants[+$('#pm-tier').value || 0]; }
-  function updatePrice() { $('#pm-price').textContent = money(curVariant().price); }
+  function updatePrice() {
+    var v = curVariant();
+    $('#pm-price').textContent = money(v.price);
+    var b = $('#pm-add');
+    b.textContent = (current && current.soldOut) ? 'sold out' : (v.checkout ? 'buy →' : 'add to cart');
+  }
 
   if (modal) {
     $('#pm-tier').addEventListener('change', updatePrice);
     $('#pm-add').addEventListener('click', function () {
       var v = curVariant();
+      if (v.checkout) { openBuy(v.checkout); return; }   // real Lemon Squeezy checkout
       cart.push({ id: current.id, name: current.name, type: current.type, variant: v.label, price: v.price, file: current.file || null });
       saveCart(cart); renderCart(); modal.close(); openCart();
     });
@@ -219,4 +230,5 @@
 
   renderGrid();
   renderCart();
+  window.addEventListener('load', function () { if (window.createLemonSqueezy) window.createLemonSqueezy(); });
 })();

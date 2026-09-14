@@ -7,27 +7,14 @@
    variant's checkout link in `checkout` when you wire that up. */
 window.OS_PRODUCTS = [
   {
-    id: 'slanted-data', type: 'font', name: 'Slanted Data', kind: 'display typeface',
-    image: '../MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.webp', meta: '6 weights + italics · 12 styles',
+    id: 'slanted-data', type: 'font', name: 'Slanted Data', kind: 'display + variable family',
+    image: '../MEDIA/ALBUM_ART/SPUNK_FACE_ART_SCREEN.webp', meta: 'all weights + italics · variable file',
     delivery: 'download', file: 'slanted-data.zip', soldOut: false,
-    blurb: 'The flagship display cut — sharp, off-axis letterforms drawn for covers, posters and the oman sounds identity.',
+    blurb: 'The flagship display cut — sharp, off-axis letterforms drawn for covers, posters and the oman sounds identity. The full family, including the variable file.',
     variants: [
-      { label: 'Desktop — up to 5 devices', price: 39, checkout: '' },
-      { label: 'Web (@font-face)', price: 59, checkout: '' },
-      { label: 'App / embedding', price: 120, checkout: '' },
-      { label: 'Complete — all uses', price: 199, checkout: '' }
-    ]
-  },
-  {
-    id: 'slanted-data-var', type: 'font', name: 'Slanted Data Variable', kind: 'variable typeface',
-    image: '../MEDIA/ALBUM_ART/SPECTRAL_COMPLICATIONS.webp', meta: '1 variable file · wght + slnt',
-    delivery: 'download', file: 'slanted-data-variable.zip', soldOut: false,
-    blurb: 'One file, the full range. Animate weight and slant on the web, or pick any static instance for print.',
-    variants: [
-      { label: 'Desktop — up to 5 devices', price: 39, checkout: '' },
-      { label: 'Web (@font-face)', price: 59, checkout: '' },
-      { label: 'App / embedding', price: 120, checkout: '' },
-      { label: 'Complete — all uses', price: 199, checkout: '' }
+      { label: 'Personal', price: 19, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/9544bffe-629a-4578-9e4b-36e706c91726' },
+      { label: 'Commercial', price: 39, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/b9d1eba8-3fa0-4599-9210-50dba198bf06' },
+      { label: 'Complete', price: 89, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/b9d1eba8-3fa0-4599-9210-50dba198bf06' }
     ]
   },
   {
