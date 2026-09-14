@@ -28,7 +28,9 @@
   var NAV_CLEARANCE = 96;
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      var target = document.querySelector(a.getAttribute('href'));
+      var href = a.getAttribute('href');
+      if (!href || href === '#') return; // e.g. the privacy overlay link
+      var target = document.querySelector(href);
       if (target && lenis) {
         e.preventDefault();
         var offset = 0;
@@ -356,6 +358,15 @@
     impDialog.addEventListener('click', function (e) {
       if (e.target === impDialog) impDialog.close(); // backdrop click
     });
+  }
+
+  var pvDialog = document.getElementById('privacy');
+  var pvLink = document.getElementById('privacy-link');
+  var pvClose = document.getElementById('privacy-close');
+  if (pvDialog && pvLink && typeof pvDialog.showModal === 'function') {
+    pvLink.addEventListener('click', function (e) { e.preventDefault(); pvDialog.showModal(); });
+    pvClose.addEventListener('click', function () { pvDialog.close(); });
+    pvDialog.addEventListener('click', function (e) { if (e.target === pvDialog) pvDialog.close(); });
   }
 
   /* ---------- theme toggle ---------- */

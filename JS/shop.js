@@ -217,11 +217,17 @@
     });
   }
 
-  /* ---------- misc ---------- */
-  if ($('#privacy-link')) $('#privacy-link').addEventListener('click', function (e) {
-    e.preventDefault();
-    alert('Datenschutzerklärung (privacy policy) — to be added before launch. This prototype keeps your cart only in your own browser and sends nothing to a server.');
-  });
+  /* ---------- legal overlays ---------- */
+  function wireDialog(linkSel, dlgSel) {
+    var link = $(linkSel), dlg = $(dlgSel);
+    if (!link || !dlg || typeof dlg.showModal !== 'function') return;
+    link.addEventListener('click', function (e) { e.preventDefault(); dlg.showModal(); });
+    var close = dlg.querySelector('.imp-close');
+    if (close) close.addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  }
+  wireDialog('#impressum-link', '#impressum');
+  wireDialog('#privacy-link', '#privacy');
   if ($('#theme-toggle')) $('#theme-toggle').addEventListener('click', function () {
     var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
