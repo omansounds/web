@@ -1,0 +1,36 @@
+name: Deploy to Hetzner
+
+# Pushes the site to Hetzner Webhosting over FTPS (into public_html).
+# TESTING: currently deploys the claude/font-shop branch so we can verify
+# on Hetzner before DNS is switched. At go-live, change the branch to `web`.
+on:
+  push:
+    branches: [ claude/font-shop ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HETZNER_FTP_SERVER }}
+          username: ${{ secrets.HETZNER_FTP_USER }}
+          password: ${{ secrets.HETZNER_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./
+          server-dir: ./public_html/
+          # never upload repo/dev files to the web root
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/*.md
+            .cpanel.yml
+            CNAME
