@@ -360,14 +360,6 @@
     });
   }
 
-  var pvDialog = document.getElementById('privacy');
-  var pvLink = document.getElementById('privacy-link');
-  var pvClose = document.getElementById('privacy-close');
-  if (pvDialog && pvLink && typeof pvDialog.showModal === 'function') {
-    pvLink.addEventListener('click', function (e) { e.preventDefault(); pvDialog.showModal(); });
-    pvClose.addEventListener('click', function () { pvDialog.close(); });
-    pvDialog.addEventListener('click', function (e) { if (e.target === pvDialog) pvDialog.close(); });
-  }
 
   /* ---------- theme toggle ---------- */
 

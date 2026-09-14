@@ -227,7 +227,6 @@
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   }
   wireDialog('#impressum-link', '#impressum');
-  wireDialog('#privacy-link', '#privacy');
   if ($('#theme-toggle')) $('#theme-toggle').addEventListener('click', function () {
     var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
