@@ -14,7 +14,7 @@ window.OS_PRODUCTS = [
     variants: [
       { label: 'Personal', price: 19, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/9544bffe-629a-4578-9e4b-36e706c91726' },
       { label: 'Commercial', price: 39, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/b9d1eba8-3fa0-4599-9210-50dba198bf06' },
-      { label: 'Complete', price: 89, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/b9d1eba8-3fa0-4599-9210-50dba198bf06' }
+      { label: 'Complete', price: 89, checkout: 'https://omansounds.lemonsqueezy.com/checkout/buy/f739224b-9c6f-4ff0-b2f1-ef11cd732be4' }
     ]
   },
   {
