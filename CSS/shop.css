@@ -122,8 +122,13 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
   padding: 0.7rem 0.8rem; appearance: none;
 }
 .pm-tier { cursor: pointer; margin-bottom: 1.3rem; }
-.pm-buy { display: flex; align-items: center; gap: 1rem; }
+.pm-buy { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.pm-btns { display: flex; gap: 0.6rem; flex: 1; min-width: 220px; }
 .pm-price { font-family: var(--f-grotesk); font-size: 1.9rem; font-variant-numeric: tabular-nums; }
+.pm-cart { flex: 1; font: inherit; cursor: pointer; letter-spacing: 0.04em; background: transparent;
+  color: var(--ink); border: 1px solid var(--hair); padding: 0.85rem 1rem; border-radius: 0; transition: border-color 0.2s; }
+.pm-cart:hover { border-color: var(--ink); }
+.pm-cart[disabled] { opacity: 0.4; cursor: not-allowed; }
 .pm-add, .cart-checkout, .co-pay {
   flex: 1; font: inherit; cursor: pointer; letter-spacing: 0.04em;
   background: var(--ink); color: var(--paper); border: 1px solid var(--ink);

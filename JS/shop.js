@@ -31,12 +31,8 @@
   /* ---------- payment provider (wire up later) ---------- */
   var PAYMENTS = { provider: 'lemonsqueezy' }; // variants carry their own checkout URLs
 
-  // Open the full hosted Lemon Squeezy checkout (proper desktop layout) in a
-  // new tab. Avoids the compact embed overlay and the top-layer <dialog> clash.
-  function openBuy(url) {
-    var w = window.open(url, '_blank', 'noopener');
-    if (!w) window.location.href = url; // popup blocked → same tab
-  }
+  // Send the buyer to the full hosted Lemon Squeezy checkout (same tab).
+  function openBuy(url) { window.location.href = url; }
 
   /* ---------- catalogue ----------
      Loaded from shop/products.js (window.OS_PRODUCTS) — edit it with the
@@ -108,24 +104,30 @@
     tier.style.display = p.variants.length > 1 ? '' : 'none';
     $('#pm-note').textContent = isFont(p) ? 'prices incl. 19% VAT (DE) · instant download' : 'prices incl. 19% VAT (DE) · shipped';
     $('#pm-add').disabled = !!p.soldOut;
+    $('#pm-cart').disabled = !!p.soldOut;
     updatePrice();
     if (typeof modal.showModal === 'function') modal.showModal();
   }
   function curVariant() { return current.variants[+$('#pm-tier').value || 0]; }
   function updatePrice() {
-    var v = curVariant();
-    $('#pm-price').textContent = money(v.price);
-    var b = $('#pm-add');
-    b.textContent = (current && current.soldOut) ? 'sold out' : (v.checkout ? 'buy →' : 'add to cart');
+    $('#pm-price').textContent = money(curVariant().price);
+    $('#pm-add').textContent = (current && current.soldOut) ? 'sold out' : 'buy now →';
   }
 
+  function addCurrentToCart() {
+    var v = curVariant();
+    cart.push({ id: current.id, name: current.name, type: current.type, variant: v.label, price: v.price, file: current.file || null, checkout: v.checkout || '' });
+    saveCart(cart); renderCart();
+  }
   if (modal) {
     $('#pm-tier').addEventListener('change', updatePrice);
+    $('#pm-cart').addEventListener('click', function () {
+      addCurrentToCart(); modal.close(); openCart();
+    });
     $('#pm-add').addEventListener('click', function () {
       var v = curVariant();
-      if (v.checkout) { modal.close(); openBuy(v.checkout); return; }   // real Lemon Squeezy checkout
-      cart.push({ id: current.id, name: current.name, type: current.type, variant: v.label, price: v.price, file: current.file || null });
-      saveCart(cart); renderCart(); modal.close(); openCart();
+      if (v.checkout) { modal.close(); openBuy(v.checkout); return; }  // straight to Lemon Squeezy
+      addCurrentToCart(); modal.close(); openCheckout();               // merch quick-buy (mock)
     });
     modal.querySelector('[data-close]').addEventListener('click', function () { modal.close(); });
     modal.addEventListener('click', function (e) { if (e.target === modal) modal.close(); });
@@ -166,6 +168,8 @@
   var checkout = $('#checkout');
   function openCheckout() {
     if (!checkout || !cart.length) return;
+    // a single Lemon Squeezy item → go straight to its real checkout
+    if (cart.length === 1 && cart[0].checkout) { openBuy(cart[0].checkout); return; }
     var gross = cartTotal(), net = gross / 1.19, vat = gross - net;
     var hasShip = cart.some(function (i) { return i.type !== 'font'; });
     $('#co-ship').hidden = !hasShip;   // show address only if merch in cart
