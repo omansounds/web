@@ -31,14 +31,11 @@
   /* ---------- payment provider (wire up later) ---------- */
   var PAYMENTS = { provider: 'lemonsqueezy' }; // variants carry their own checkout URLs
 
-  // Open a Lemon Squeezy checkout as an overlay (falls back to a new tab).
+  // Open the full hosted Lemon Squeezy checkout (proper desktop layout) in a
+  // new tab. Avoids the compact embed overlay and the top-layer <dialog> clash.
   function openBuy(url) {
-    var u = url + (url.indexOf('?') > -1 ? '&' : '?') + 'embed=1';
-    if (window.LemonSqueezy && window.LemonSqueezy.Url && window.LemonSqueezy.Url.Open) {
-      window.LemonSqueezy.Url.Open(u);
-    } else {
-      window.open(url, '_blank', 'noopener');
-    }
+    var w = window.open(url, '_blank', 'noopener');
+    if (!w) window.location.href = url; // popup blocked → same tab
   }
 
   /* ---------- catalogue ----------
@@ -126,7 +123,7 @@
     $('#pm-tier').addEventListener('change', updatePrice);
     $('#pm-add').addEventListener('click', function () {
       var v = curVariant();
-      if (v.checkout) { openBuy(v.checkout); return; }   // real Lemon Squeezy checkout
+      if (v.checkout) { modal.close(); openBuy(v.checkout); return; }   // real Lemon Squeezy checkout
       cart.push({ id: current.id, name: current.name, type: current.type, variant: v.label, price: v.price, file: current.file || null });
       saveCart(cart); renderCart(); modal.close(); openCart();
     });
@@ -230,5 +227,4 @@
 
   renderGrid();
   renderCart();
-  window.addEventListener('load', function () { if (window.createLemonSqueezy) window.createLemonSqueezy(); });
 })();
