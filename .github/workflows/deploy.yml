@@ -1,11 +1,10 @@
 name: Deploy to Hetzner
 
-# Pushes the site to Hetzner Webhosting over FTPS (into public_html).
-# TESTING: currently deploys the claude/font-shop branch so we can verify
-# on Hetzner before DNS is switched. At go-live, change the branch to `web`.
+# Deploys the production site to Hetzner Webhosting over FTPS (into public_html)
+# on every push to `web`. The shop is intentionally excluded until launch.
 on:
   push:
-    branches: [ claude/font-shop ]
+    branches: [ web ]
   workflow_dispatch:
 
 jobs:
@@ -32,8 +31,6 @@ jobs:
             **/.github/**
             **/node_modules/**
             **/*.md
-            .cpanel.yml
-            CNAME
             # shop is still in development — keep it out of the live server
             shop/**
             CSS/shop.css

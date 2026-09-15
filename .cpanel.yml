@@ -1,8 +1,0 @@
----
-deployment:
-  tasks:
-    - export SRC=/home/omansoun/repositories/web
-    - export DEST=/home/omansoun/public_html
-    - echo "Deploying $SRC to $DEST"
-    - if command -v rsync >/dev/null 2>&1; then rsync -a --delete --exclude=.git --exclude=.cpanel.yml --exclude=cgi-bin --exclude=.well-known "$SRC/" "$DEST/"; else tar -C "$SRC" --exclude=./.git --exclude=./.cpanel.yml -cf - . | tar -C "$DEST" -xf -; fi
-    - echo "Deployment completed successfully!"
