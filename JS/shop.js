@@ -95,11 +95,18 @@
     }).join('');
 
     $('#pm-tier-label').textContent = isFont(p) ? 'licence type' : (p.variants.length > 1 ? 'size' : 'option');
-    var tier = $('#pm-tier'); tier.innerHTML = '';
+    var tier = $('#pm-tier'); tier.innerHTML = ''; tier.dataset.sel = 0;
+    var showPrice = p.variants.length > 1 || isFont(p);
     p.variants.forEach(function (v, i) {
-      var o = document.createElement('option'); o.value = i;
-      o.textContent = v.label + (p.variants.length > 1 || isFont(p) ? '  ·  ' + money(v.price) : '');
-      tier.appendChild(o);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pm-tier-opt' + (i === 0 ? ' is-active' : '');
+      b.dataset.i = i;
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-checked', i === 0 ? 'true' : 'false');
+      b.innerHTML = '<span class="pm-tier-name">' + v.label + '</span>' +
+        (showPrice ? '<span class="pm-tier-price">' + money(v.price) + '</span>' : '');
+      tier.appendChild(b);
     });
     tier.style.display = p.variants.length > 1 ? '' : 'none';
     $('#pm-note').textContent = isFont(p) ? 'prices incl. 19% VAT (DE) · instant download' : 'prices incl. 19% VAT (DE) · shipped';
@@ -108,7 +115,7 @@
     updatePrice();
     if (typeof modal.showModal === 'function') modal.showModal();
   }
-  function curVariant() { return current.variants[+$('#pm-tier').value || 0]; }
+  function curVariant() { return current.variants[+$('#pm-tier').dataset.sel || 0]; }
   function updatePrice() {
     $('#pm-price').textContent = money(curVariant().price);
     $('#pm-add').textContent = (current && current.soldOut) ? 'sold out' : 'buy now →';
@@ -120,7 +127,16 @@
     saveCart(cart); renderCart();
   }
   if (modal) {
-    $('#pm-tier').addEventListener('change', updatePrice);
+    $('#pm-tier').addEventListener('click', function (e) {
+      var btn = e.target.closest('.pm-tier-opt'); if (!btn) return;
+      this.dataset.sel = btn.dataset.i;
+      Array.prototype.forEach.call(this.children, function (c) {
+        var on = c === btn;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      updatePrice();
+    });
     $('#pm-cart').addEventListener('click', function () {
       addCurrentToCart(); modal.close(); openCart();
     });

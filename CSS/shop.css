@@ -116,12 +116,26 @@ body.shop { background: var(--paper); color: var(--ink); min-height: 100svh; }
 .pm-meta { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.4rem; margin-bottom: 1.6rem; font-size: 0.9rem; }
 .pm-meta a { color: inherit; border-bottom: 1px solid var(--hair); text-decoration: none; }
 .pm-label { display: block; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
-.pm-tier, .co-field select, .co-field input {
+.co-field select, .co-field input {
   width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink);
   background: transparent; border: 1px solid var(--hair); border-radius: 0;
   padding: 0.7rem 0.8rem; appearance: none;
 }
-.pm-tier { cursor: pointer; margin-bottom: 1.3rem; }
+/* segmented licence / variant picker */
+.pm-tiers { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.3rem; }
+.pm-tier-opt {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  width: 100%; font: inherit; font-size: 0.95rem; text-align: left; cursor: pointer;
+  color: var(--ink); background: transparent;
+  border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent); border-radius: 0;
+  padding: 0.75rem 0.9rem;
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+.pm-tier-opt:hover { border-color: var(--ink); }
+.pm-tier-opt.is-active { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.pm-tier-name { letter-spacing: 0.01em; }
+.pm-tier-price { font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.pm-tier-opt.is-active .pm-tier-price { color: color-mix(in srgb, var(--paper) 78%, transparent); }
 .pm-buy { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .pm-btns { display: flex; gap: 0.6rem; flex: 1; min-width: 220px; }
 .pm-price { font-family: var(--f-grotesk); font-size: 1.9rem; font-variant-numeric: tabular-nums; }
