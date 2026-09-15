@@ -34,3 +34,7 @@ jobs:
             **/*.md
             .cpanel.yml
             CNAME
+            # shop is still in development — keep it out of the live server
+            shop/**
+            CSS/shop.css
+            JS/shop.js
